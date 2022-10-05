@@ -1,0 +1,247 @@
+<section class="page-header">
+  <div class="overly"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="content text-center">
+          <h1 class="mb-3">Cart</h1>
+          <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
+
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent justify-content-center">
+              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Cart</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cart shopping page-wrapper">
+  <div class="container">
+    <div class="row justify-content-center" >
+      <div class="col-lg-12">
+        <div class="product-list">
+          <form class="cart-form">
+            <table class="table shop_table shop_table_responsive cart" cellspacing="0">
+              <thead>
+                <tr>
+                  <th class="product-thumbnail"> </th>
+                  <th class="product-name">Product</th>
+                  <th class="product-price">Price</th>
+                  <th class="product-quantity">Quantity</th>
+                  <th class="product-subtotal">Total</th>
+                  <th class="product-remove"> </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="cart_item" *ngIf="!cart.selections.length">
+                  <td colspan="6" class="product-name text-center" data-title="Product">
+                    <label>Your cart is empty.  Check out our great <a routerLink="/shop">Products</a>!</label>
+                  </td>
+                </tr>
+                <tr class="cart_item" *ngFor="let selection of cart.selections let i = index">
+                  <td class="product-thumbnail" data-title="Thumbnail">
+                    <a [routerLink]="['/product-single', selection.product.product_id, selection.product.product_name]">
+                      <img [src]="image+selection.product.img_product" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">
+                    </a>
+                  </td>
+                  <td class="product-name" data-title="Product">
+                    <a [routerLink]="['/product-single', selection.product.product_id, selection.product.product_name]">{{selection.product.product_name}}</a>
+                  </td>
+                  <td class="product-price" data-title="Price">
+                    <span class="amount">
+                      <span class="currencySymbol">
+                        <pre wp-pre-tag-3=""></pre>
+                        <p>{{selection.product.product_price | currency}}</p>
+                      </span>
+                    </span>
+                  </td>
+                  <td class="product-quantity" data-title="Quantity">
+                    <div class="quantity">
+                      <label class="sr-only">Quantity</label>
+                      <p>
+                        <input #quantity type="number" step="1" min="1" [max]="selection.product.product_quantity" [value]="selection.quantity" title="Qty" size="4" (change)="onQuantityChange(selection, + quantity.value)" />
+                        <!-- <input #quantity type="number" step="1" min=1 max="9" [value]="selection.quantity" title="Qty" size="4" (change)="onQuantityChange(selection, + quantity.value)" /> -->
+                        <!-- <input type="number" step="1" min=1 [max]="item.product_quantity" title="Qty" size="4" name="cart_quantity" [(ngModel)]="item.cart_quantity" (change)="onChange(item)" > -->
+                      </p>
+                    </div>
+                  </td>
+                  <td class="product-subtotal" data-title="Total">
+                    <span class="amount">
+                      <span class="currencySymbol">
+                        <pre wp-pre-tag-3=""></pre>
+                        <p>{{selection.product.product_price * +quantity.value | currency}}</p>
+                      </span>
+                    </span>
+                  </td>
+                  <td class="product-remove" data-title="Remove">
+                    <a (click)="remove(selection.product)" routerLink="/cart" class="remove" aria-label="Remove this item" data-product_id="30" data-product_sku="">×</a>
+                  </td>
+                </tr>
+
+                <!-- <tr class="cart_item">
+                  <td class="product-thumbnail" data-title="Thumbnail">
+                    <a routerLink="/product-single"><img src="assets/images/cart-1.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""></a>
+                  </td>
+                  <td class="product-name" data-title="Product">
+                    <a href="#">Trendy Cloth</a>
+                  </td>
+                  <td class="product-price" data-title="Price">
+                    <span class="amount">
+                      <span class="currencySymbol">
+                        <pre wp-pre-tag-3=""></pre>
+                        <p>90.00</p>
+                      </span>
+                    </span>
+                  </td>
+                  <td class="product-quantity" data-title="Quantity"><br>
+                    <div class="quantity"><br>
+                      <label class="sr-only">Quantity</label>
+                      <p><input type="number" id="qty" class="input-text qty text" step="1" min="0" max="9" value="1" title="Qty" size="4"><br></p>
+                    </div><br>
+                  </td>
+                  <td class="product-subtotal" data-title="Total">
+                    <span class="amount">
+                      <span class="currencySymbol">
+                        <pre wp-pre-tag-3=""></pre>
+                        <p>90.00</p>
+                      </span>
+                    </span>
+                  </td>
+                  <td class="product-remove" data-title="Remove">
+                    <a href="#" class="remove" aria-label="Remove this item" data-product_id="30" data-product_sku="">×</a>
+                  </td>
+                </tr>
+                <tr class="cart_item">
+                  <td class="product-thumbnail" data-title="Thumbnail">
+                    <a routerLink="/product-single"><img src="assets/images/cart-2.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""></a>
+                  </td>
+                  <td class="product-name" data-title="Product">
+                    <a href="#">Sunglasses</a>
+                  </td>
+                  <td class="product-price" data-title="Price">
+                    <span class="amount">
+                      <span class="currencySymbol">
+                        <pre wp-pre-tag-3=""></pre>
+                        <p>90.00</p>
+                      </span>
+                    </span>
+                  </td>
+                  <td class="product-quantity" data-title="Quantity">
+                    <div class="quantity"><br>
+                      <label class="sr-only">Quantity</label>
+                      <p><input type="number" id="qty" class="input-text qty text" step="1" min="0" max="9" value="1" title="Qty" size="4"><br></p>
+                    </div><br>
+                  </td>
+                  <td class="product-subtotal" data-title="Total">
+                    <span class="amount">
+                      <span class="currencySymbol">
+                        <pre wp-pre-tag-3=""></pre>
+                        <p>90.00</p>
+                      </span>
+                    </span>
+                  </td> -->
+                  <!-- <td class="product-subtotal" data-title="Total">
+                    <span class="amount">
+                      <span class="currencySymbol">
+                        <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+                  <!-- BIGGER SIDEBAR -->
+                  <!-- <ins class="adsbygoogle" style="display: block; height: 280px;" data-ad-client="ca-pub-3852177646988840" data-ad-slot="5987063047" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done"><ins id="aswift_3_expand" style="border: none; height: 280px; width: 510px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-table;"><ins id="aswift_3_anchor" style="border: none; height: 280px; width: 510px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: block;"></ins></ins></ins>
+                        <script>
+                          (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                        <pre wp-pre-tag-3=""></pre>
+                        <p>90.00</p>
+                      </span>
+                    </span>
+                  </td> -->
+                  <!-- <td class="product-remove" data-title="Remove">
+                    <a href="#" class="remove" aria-label="Remove this item" data-product_id="30" data-product_sku="">×</a>
+                  </td>
+                </tr> -->
+                <tr>
+                  <td colspan="6" class="actions">
+                    <div class="coupon">
+                      <input type="text" name="coupon_code" class="input-text form-control" id="coupon_code" value="" placeholder="Coupon code" style="float: left !important;">
+                      <button type="button" class="btn btn-black btn-small" name="apply_coupon" value="Apply coupon">Apply coupon</button>
+                      <span class="float-right mt-3 mt-lg-0">
+                        <button type="button" class="btn btn-dark btn-small" name="update_cart" value="Update cart" disabled="">Update cart</button>
+                      </span>
+                    </div>
+                    <input type="hidden" id="woocommerce-cart-nonce" name="woocommerce-cart-nonce" value="27da9ce3e8">
+                    <input type="hidden" name="_wp_http_referer" value="/cart/">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- <table class="table shop_table shop_table_responsive cart" cellspacing="0" *ngIf="!cart.selections.length">
+              <thead>
+                <tr>
+                  <th class="product-thumbnail"> </th>
+                  <th class="product-name">Product</th>
+                  <th class="product-price">Price</th>
+                  <th class="product-quantity">Quantity</th>
+                  <th class="product-subtotal">Total</th>
+                  <th class="product-remove"> </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="cart_item">
+                  <td colspan="6" class="product-name text-center" data-title="Product">
+                    <label>Your cart is empty.  Check out our great <a routerLink="/products">Products</a>!</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="6" class="actions">
+                    <div class="coupon">
+                      <input type="text" name="coupon_code" class="input-text form-control" id="coupon_code" value="" placeholder="Coupon code">
+                      <button type="button" class="btn btn-black btn-small" name="apply_coupon" value="Apply coupon">Apply coupon</button>
+                      <span class="float-right mt-3 mt-lg-0">
+                        <button type="button" class="btn btn-dark btn-small" name="update_cart" value="Update cart" disabled="">Update cart</button>
+                      </span>
+                    </div>
+                    <input type="hidden" id="woocommerce-cart-nonce" name="woocommerce-cart-nonce" value="27da9ce3e8">
+                    <input type="hidden" name="_wp_http_referer" value="/cart/">
+                  </td>
+                </tr>
+              </tbody>
+            </table> -->
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- </p> -->
+
+    <div class="row justify-content-end">
+      <div class="col-lg-4">
+        <div class="cart-info card p-4 mt-4">
+          <h4 class="mb-4">Cart totals</h4>
+          <!-- </p> -->
+
+          <ul class="list-unstyled mb-4">
+
+            <li class="d-flex justify-content-between pb-2 mb-3">
+              <h5>Subtotal</h5>
+              <span>${{subTotal() | currency}}</span>
+            </li>
+
+            <li class="d-flex justify-content-between pb-2 mb-3">
+              <h5>Shipping</h5>
+              <span>Free</span>
+            </li>
+
+            <li class="d-flex justify-content-between pb-2">
+              <h5>Total</h5>
+              <!-- <span>{{grandTotal}}</span> -->
+            </li>
+          </ul>
+          <!-- <a routerLink="/checkout" class="btn btn-main btn-small">Proceed to checkout</a> -->
+          <button [disabled]="!cart.selections.length" routerLink="/checkout" class="btn btn-main btn-small">Proceed to checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

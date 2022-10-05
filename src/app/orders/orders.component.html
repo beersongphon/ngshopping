@@ -1,0 +1,88 @@
+<section class="page-header">
+  <div class="overly"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="content text-center">
+          <h1 class="mb-3">Order</h1>
+          <p>Order</p>
+
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent justify-content-center">
+              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Order</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="user-dashboard page-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-5 col-sm-12 col-lg-3">
+        <app-sidebar></app-sidebar>
+      </div>
+
+      <div class="col-12 col-md-7 col-sm-12 col-lg-9">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Order</th>
+              <th scope="col">Date</th>
+              <th scope="col">Status</th>
+              <th scope="col">Total</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let o of order;">
+              <th scope="row">#{{ o.order_id }}</th>
+              <td>{{ o.order_date }}</td>
+              <td>{{ o.status_name }}</td>
+              <td>{{ o.order_total }}</td>
+              <td>
+                <a *ngIf="o.status_name == 'รอการชำระ'" routerLink="/order" class="btn btn-dark btn-small">Payment</a>
+                <a *ngIf="o.status_name == 'ชำระเงินแล้ว'" routerLink="/order" class="btn btn-dark btn-small">View</a>
+              </td>
+            </tr>
+            <tr *ngIf="!order.length">
+              <td colspan="5">No data to display.</td>
+            </tr>
+            <!-- <tr>
+              <th scope="row">#1012</th>
+              <td>June 11, 2019 </td>
+              <td>Completed</td>
+              <td>30</td>
+              <td><a routerLink="/order" class="btn btn-dark btn-small">View</a></td>
+            </tr>
+            <tr>
+              <th scope="row">#2214</th>
+              <td>March 10, 2019</td>
+              <td>Completed</td>
+              <td>50</td>
+              <td><a routerLink="/order" class="btn btn-dark btn-small">View</a></td>
+            </tr>
+            <tr>
+              <th scope="row">#3434</th>
+              <td>February 11, 2019</td>
+              <td>Pending</td>
+              <td>25</td>
+              <td><a routerLink="/order" class="btn btn-dark btn-small">View</a></td>
+            </tr>
+            <tr>
+              <th scope="row">#5312</th>
+              <td>July 11, 2019</td>
+              <td>Processsing</td>
+              <td>56</td>
+              <td><a routerLink="/order" class="btn btn-dark btn-small">View</a></td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
