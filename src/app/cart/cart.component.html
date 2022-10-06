@@ -55,7 +55,7 @@
                     <span class="amount">
                       <span class="currencySymbol">
                         <pre wp-pre-tag-3=""></pre>
-                        <p>{{selection.product.product_price | currency}}</p>
+                        <p>{{selection.product.product_price | currency:'':''}}</p>
                       </span>
                     </span>
                   </td>
@@ -73,7 +73,7 @@
                     <span class="amount">
                       <span class="currencySymbol">
                         <pre wp-pre-tag-3=""></pre>
-                        <p>{{selection.product.product_price * +quantity.value | currency}}</p>
+                        <p>{{selection.product.product_price * +quantity.value | currency:'':''}}</p>
                       </span>
                     </span>
                   </td>
@@ -225,7 +225,7 @@
 
             <li class="d-flex justify-content-between pb-2 mb-3">
               <h5>Subtotal</h5>
-              <span>${{subTotal() | currency}}</span>
+              <span>${{subTotal() | currency:'':''}}</span>
             </li>
 
             <li class="d-flex justify-content-between pb-2 mb-3">

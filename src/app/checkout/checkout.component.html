@@ -181,14 +181,14 @@
             <div class="media product-card" *ngFor="let selection of cart.selections let i = index">
               <p>{{selection.product.product_name}}</p>
               <div class="media-body text-right">
-                <p class="h5">{{ selection.quantity }} x ${{selection.product.product_price * +selection.quantity | currency}}</p>
+                <p class="h5">{{ selection.quantity }} x ${{selection.product.product_price * +selection.quantity | currency:'':''}}</p>
               </div>
             </div>
 
             <ul class="summary-prices list-unstyled mb-4">
               <li class="d-flex justify-content-between">
                 <span>Subtotal:</span>
-                <span class="h5">${{subTotal() | currency}}</span>
+                <span class="h5">${{subTotal() | currency:'':''}}</span>
               </li>
               <!-- <li class="d-flex justify-content-between">
                 <span>Shipping:</span>

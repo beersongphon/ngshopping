@@ -117,7 +117,7 @@
           <div class="product-info">
             <h2 class="product-title h5 mb-0"><a [routerLink]="['/product-single', p.product_id, p.product_name]">{{p.product_name}}</a></h2>
             <span class="price">
-              ${{p.product_price}}
+              ${{p.product_price | currency:'':''}}
             </span>
           </div>
         </div>

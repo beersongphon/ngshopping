@@ -92,7 +92,7 @@
               <h6>{{selection.product.product_name}}</h6>
               <div class="cart-price">
                 <span>{{selection.quantity}} x</span>
-                <span>{{selection.product.product_price * selection.quantity | currency}}</span>
+                <span>{{selection.product.product_price * selection.quantity | currency:'':''}}</span>
               </div>
             </div>
             <a (click)="remove(selection.product)" class="remove">
