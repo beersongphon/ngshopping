@@ -6,7 +6,6 @@
         <div class="content text-center">
           <h1 class="mb-3">Cart</h1>
           <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
-
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent justify-content-center">
               <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
@@ -21,7 +20,7 @@
 
 <section class="cart shopping page-wrapper">
   <div class="container">
-    <div class="row justify-content-center" >
+    <div class="row justify-content-center">
       <div class="col-lg-12">
         <div class="product-list">
           <form class="cart-form">
@@ -55,26 +54,25 @@
                     <span class="amount">
                       <span class="currencySymbol">
                         <pre wp-pre-tag-3=""></pre>
-                        <p>{{selection.product.product_price | currency:'':''}}</p>
+                        <!-- <p>{{selection.product.product_price | currency:'':''}}</p> -->
                       </span>
+                      {{selection.product.product_price | currency:'':''}}
                     </span>
                   </td>
                   <td class="product-quantity" data-title="Quantity">
                     <div class="quantity">
                       <label class="sr-only">Quantity</label>
-                      <p>
-                        <input #quantity type="number" step="1" min="1" [max]="selection.product.product_quantity" [value]="selection.quantity" title="Qty" size="4" (change)="onQuantityChange(selection, + quantity.value)" />
-                        <!-- <input #quantity type="number" step="1" min=1 max="9" [value]="selection.quantity" title="Qty" size="4" (change)="onQuantityChange(selection, + quantity.value)" /> -->
-                        <!-- <input type="number" step="1" min=1 [max]="item.product_quantity" title="Qty" size="4" name="cart_quantity" [(ngModel)]="item.cart_quantity" (change)="onChange(item)" > -->
-                      </p>
+                      <input #quantity type="number" step="1" min="1" [max]="selection.product.product_quantity" [value]="selection.quantity" title="Qty" size="4" (change)="onQuantityChange(selection, + quantity.value)" />
+                      <!-- <input type="number" id="qty" class="input-text qty text" step="1" min="0" max="9" value="1" title="Qty" size="4"> -->
                     </div>
                   </td>
                   <td class="product-subtotal" data-title="Total">
                     <span class="amount">
                       <span class="currencySymbol">
                         <pre wp-pre-tag-3=""></pre>
-                        <p>{{selection.product.product_price * +quantity.value | currency:'':''}}</p>
+                        <!-- <p>{{selection.product.product_price * +quantity.value | currency:'':''}}</p> -->
                       </span>
+                      {{selection.product.product_price * +quantity.value | currency:'':''}}
                     </span>
                   </td>
                   <td class="product-remove" data-title="Remove">
@@ -126,30 +124,34 @@
                     <span class="amount">
                       <span class="currencySymbol">
                         <pre wp-pre-tag-3=""></pre>
-                        <p>90.00</p>
                       </span>
+                      90.00
                     </span>
                   </td>
                   <td class="product-quantity" data-title="Quantity">
-                    <div class="quantity"><br>
+                    <div class="quantity">
                       <label class="sr-only">Quantity</label>
-                      <p><input type="number" id="qty" class="input-text qty text" step="1" min="0" max="9" value="1" title="Qty" size="4"><br></p>
-                    </div><br>
+                      <input type="number" id="qty" class="input-text qty text" step="1" min="0" max="9" name="#" value="1" title="Qty" size="4">
+                    </div>
                   </td>
                   <td class="product-subtotal" data-title="Total">
                     <span class="amount">
                       <span class="currencySymbol">
                         <pre wp-pre-tag-3=""></pre>
-                        <p>90.00</p>
                       </span>
+                      90.00
                     </span>
                   </td> -->
                   <!-- <td class="product-subtotal" data-title="Total">
                     <span class="amount">
                       <span class="currencySymbol">
                         <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
-                  <!-- BIGGER SIDEBAR -->
-                  <!-- <ins class="adsbygoogle" style="display: block; height: 280px;" data-ad-client="ca-pub-3852177646988840" data-ad-slot="5987063047" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done"><ins id="aswift_3_expand" style="border: none; height: 280px; width: 510px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-table;"><ins id="aswift_3_anchor" style="border: none; height: 280px; width: 510px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: block;"></ins></ins></ins>
+                        <!-- BIGGER SIDEBAR -->
+                        <!-- <ins class="adsbygoogle" style="display: block; height: 280px;" data-ad-client="ca-pub-3852177646988840" data-ad-slot="5987063047" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done">
+                          <ins id="aswift_3_expand" style="border: none; height: 280px; width: 510px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-table;">
+                            <ins id="aswift_3_anchor" style="border: none; height: 280px; width: 510px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: block;"></ins>
+                          </ins>
+                        </ins>
                         <script>
                           (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
@@ -166,6 +168,7 @@
                   <td colspan="6" class="actions">
                     <div class="coupon">
                       <input type="text" name="coupon_code" class="input-text form-control" id="coupon_code" value="" placeholder="Coupon code" style="float: left !important;">
+                      <!-- <input type="text" name="coupon_code" class="input-text form-control" id="coupon_code" value="" placeholder="Coupon code"> -->
                       <button type="button" class="btn btn-black btn-small" name="apply_coupon" value="Apply coupon">Apply coupon</button>
                       <span class="float-right mt-3 mt-lg-0">
                         <button type="button" class="btn btn-dark btn-small" name="update_cart" value="Update cart" disabled="">Update cart</button>
@@ -213,29 +216,22 @@
         </div>
       </div>
     </div>
-    <!-- </p> -->
-
     <div class="row justify-content-end">
       <div class="col-lg-4">
         <div class="cart-info card p-4 mt-4">
           <h4 class="mb-4">Cart totals</h4>
-          <!-- </p> -->
-
           <ul class="list-unstyled mb-4">
-
             <li class="d-flex justify-content-between pb-2 mb-3">
               <h5>Subtotal</h5>
               <span>${{subTotal() | currency:'':''}}</span>
             </li>
-
             <li class="d-flex justify-content-between pb-2 mb-3">
               <h5>Shipping</h5>
               <span>Free</span>
             </li>
-
             <li class="d-flex justify-content-between pb-2">
               <h5>Total</h5>
-              <!-- <span>{{grandTotal}}</span> -->
+              <!-- <span>${{grandTotal}}</span> -->
             </li>
           </ul>
           <!-- <a routerLink="/checkout" class="btn btn-main btn-small">Proceed to checkout</a> -->

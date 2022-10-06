@@ -17,6 +17,7 @@
     </div>
   </div>
 </section>
+
 <section class="single-product">
   <div class="container">
     <div class="row">
@@ -24,21 +25,20 @@
         <div class="single-product-slider">
           <div class="carousel slide" data-ride="carousel" id="single-product-slider">
             <div class="carousel-inner">
-              <div class="carousel-inner">
-                <div *ngFor="let img of images; let i = index; first as isFirst" [ngClass]="isFirst ? 'carousel-item active' : 'carousel-item' ">
-                  <img [src]="image+img.img_product" alt="" class="img-fluid">
-                </div>
-                <!-- <div class="carousel-item active">
-                  <img src="assets/images/product-3.jpg" alt="" class="img-fluid">
-                </div>
-                <div class="carousel-item">
-                  <img src="assets/images/product-2.jpg" alt="" class="img-fluid">
-                </div>
-                <div class="carousel-item ">
-                  <img src="assets/images/product-1.jpg" alt="" class="img-fluid">
-                </div> -->
+              <div *ngFor="let img of images; let i = index; first as isFirst" [ngClass]="isFirst ? 'carousel-item active' : 'carousel-item' ">
+                <img [src]="image+img.img_product" alt="" class="img-fluid">
               </div>
+              <!-- <div class="carousel-item active">
+                <img src="assets/images/product-3.jpg" alt="" class="img-fluid">
+              </div>
+              <div class="carousel-item">
+                <img src="assets/images/product-2.jpg" alt="" class="img-fluid">
+              </div>
+              <div class="carousel-item ">
+                <img src="assets/images/product-1.jpg" alt="" class="img-fluid">
+              </div> -->
             </div>
+
             <ol class="carousel-indicators">
               <li *ngFor="let img of images; let i = index; let isFirst = first" data-target="#single-product-slider" [attr.data-slide-to]="i" [ngClass]="{'active': i == 0}">
                 <img [src]="image+img.img_product" alt="" class="img-fluid">
@@ -64,6 +64,7 @@
           <div class="sku_wrapper mb-4">
             SKU: <span class="text-muted">{{product.product_id}} </span>
           </div>
+
           <hr>
 
           <h3 class="product-price">${{product.product_price | currency:'':''}}
@@ -73,7 +74,8 @@
           <p class="product-description my-4 ">
             {{product.product_description}}
           </p>
-          <form class="cart" action="#" method="post" name="form" #cartForm="ngForm">
+
+          <form class="cart" action="#" method="post" #cartForm="ngForm">
             <div class="quantity d-flex align-items-center">
               <input type="hidden" [(ngModel)]="product.product_id" name="product_id">
               <input type="hidden" [(ngModel)]="product.product_price" name="cart_price">
@@ -98,6 +100,7 @@
               </li>
             </ul>
           </div>
+
           <div class="product-size d-flex align-items-center mt-4">
             <span class="font-weight-bold text-capitalize product-meta-title">Size:</span>
             <select class="form-control">
@@ -107,12 +110,14 @@
               <option>XL</option>
             </select>
           </div>
+
           <div class="products-meta mt-4">
             <div class="product-category d-flex align-items-center">
               <span class="font-weight-bold text-capitalize product-meta-title">Categories :</span>
               <a href="#">Products , </a>
               <a href="#">Soap</a>
             </div>
+
             <div class="product-share mt-5">
               <ul class="list-inline">
                 <li class="list-inline-item">
@@ -143,15 +148,19 @@
             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Reviews(2)</a>
           </div>
         </nav>
+
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
             <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+
             <h4>Product Features</h4>
+
             <ul class="">
               <li>Mapped with 3M™ Thinsulate™ Insulation [40G Body / Sleeves / Hood]</li>
               <li>Embossed Taffeta Lining</li>
               <li>DRYRIDE Durashell™ 2-Layer Oxford Fabric [10,000MM, 5,000G]</li>
             </ul>
+
           </div>
           <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
@@ -195,6 +204,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum suscipit consequuntur in, perspiciatis laudantium ipsa fugit. Iure esse saepe error dolore quod.</p>
                   </div>
                 </div>
+
                 <div class="media review-block">
                   <img src="assets/images/avater-2.jpg" alt="reviewimg" class="img-fluid mr-4">
                   <div class="media-body">
@@ -210,9 +220,11 @@
                   </div>
                 </div>
               </div>
+
               <div class="col-lg-5">
                 <div class="review-comment mt-5 mt-lg-0">
                   <h4 class="mb-3">Add a Review</h4>
+
                   <form action="#">
                     <div class="starrr"></div>
                     <div class="form-group">
@@ -224,6 +236,7 @@
                     <div class="form-group">
                       <textarea name="comment" id="comment" class="form-control" cols="30" rows="4" placeholder="Your Review"></textarea>
                     </div>
+
                     <a routerLink="/product-single" class="btn btn-main btn-small">Submit Review</a>
                   </form>
                 </div>
@@ -235,6 +248,8 @@
     </div>
   </div>
 </section>
+
+
 <section class="products related-products section">
   <div class="container">
     <div class="row justify-content-center">
@@ -252,11 +267,13 @@
             <a routerLink="/product-single"><img class="img-fluid w-100 mb-3 img-first" src="assets/images/322.jpg" alt="product-img" /></a>
             <a routerLink="/product-single"><img class="img-fluid w-100 mb-3 img-second" src="assets/images/444.jpg" alt="product-img" /></a>
           </div>
+
           <span class="onsale">Sale</span>
           <div class="product-hover-overlay">
             <a href="#"><i class="tf-ion-android-cart"></i></a>
             <a href="#"><i class="tf-ion-ios-heart"></i></a>
           </div>
+
           <div class="product-info">
             <h2 class="product-title h5 mb-0"><a routerLink="/product-single">Kirby Shirt</a></h2>
             <span class="price">
@@ -265,17 +282,20 @@
           </div>
         </div>
       </div>
+
       <div class="col-lg-3 col-6">
         <div class="product">
           <div class="product-wrap">
             <a routerLink="/product-single"><img class="img-fluid w-100 mb-3 img-first" src="assets/images/111.jpg" alt="product-img" /></a>
             <a routerLink="/product-single"><img class="img-fluid w-100 mb-3 img-second" src="assets/images/222.jpg" alt="product-img" /></a>
           </div>
+
           <span class="onsale">Sale</span>
           <div class="product-hover-overlay">
             <a href="#"><i class="tf-ion-android-cart"></i></a>
             <a href="#"><i class="tf-ion-ios-heart"></i></a>
           </div>
+
           <div class="product-info">
             <h2 class="product-title h5 mb-0"><a routerLink="/product-single">Kirby Shirt</a></h2>
             <span class="price">
@@ -284,17 +304,21 @@
           </div>
         </div>
       </div>
+
+
       <div class="col-lg-3 col-6">
         <div class="product">
           <div class="product-wrap">
             <a routerLink="/product-single"><img class="img-fluid w-100 mb-3 img-first" src="assets/images/111.jpg" alt="product-img" /></a>
             <a routerLink="/product-single"><img class="img-fluid w-100 mb-3 img-second" src="assets/images/322.jpg" alt="product-img" /></a>
           </div>
+
           <span class="onsale">Sale</span>
           <div class="product-hover-overlay">
             <a href="#"><i class="tf-ion-android-cart"></i></a>
             <a href="#"><i class="tf-ion-ios-heart"></i></a>
           </div>
+
           <div class="product-info">
             <h2 class="product-title h5 mb-0"><a routerLink="/product-single">Kirby Shirt</a></h2>
             <span class="price">
@@ -303,17 +327,20 @@
           </div>
         </div>
       </div>
+
       <div class="col-lg-3 col-6">
         <div class="product">
           <div class="product-wrap">
             <a routerLink="/product-single"><img class="img-fluid w-100 mb-3 img-first" src="assets/images/444.jpg" alt="product-img" /></a>
             <a routerLink="/product-single"><img class="img-fluid w-100 mb-3 img-second" src="assets/images/222.jpg" alt="product-img" /></a>
           </div>
+
           <span class="onsale">Sale</span>
           <div class="product-hover-overlay">
             <a href="#"><i class="tf-ion-android-cart"></i></a>
             <a href="#"><i class="tf-ion-ios-heart"></i></a>
           </div>
+
           <div class="product-info">
             <h2 class="product-title h5 mb-0"><a routerLink="/product-single">Kirby Shirt</a></h2>
             <span class="price">

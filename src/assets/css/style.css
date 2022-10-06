@@ -2161,19 +2161,16 @@ table.shop_table_responsive {
   -webkit-transition: all .25s ease-in-out!important;
   transition: all .25s ease-in-out!important;
 }
-.slick-prev:before, .slick-next:before
-{
-
+.slick-prev:before, .slick-next:before {
   font-size: 20px;
-    width: 60px;
-    height: 60px;
-    background: #fb5c42;
-    color: #fff;
-    display: inline-block;
-    text-align: center;
-    padding-top: 20px;
-    border-radius: 100%;
-
+  width: 60px;
+  height: 60px;
+  background: #fb5c42;
+  color: #fff;
+  display: inline-block;
+  text-align: center;
+  padding-top: 20px;
+  border-radius: 100%;
 }
 .slick-next {
   right: 85px!important;

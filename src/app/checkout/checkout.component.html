@@ -6,7 +6,6 @@
         <div class="content text-center">
           <h1 class="mb-3">Checkout</h1>
           <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
-
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent justify-content-center">
               <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
@@ -178,6 +177,7 @@
         <div class="col-md-6 col-lg-4">
           <div class="product-checkout-details mt-5 mt-lg-0">
             <h4 class="mb-4 border-bottom pb-4">Order Summary</h4>
+
             <div class="media product-card" *ngFor="let selection of cart.selections let i = index">
               <p>{{selection.product.product_name}}</p>
               <div class="media-body text-right">
@@ -249,6 +249,7 @@
             <div class="info mt-4 border-top pt-4 mb-5">
               Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#">privacy policy</a>.
             </div> -->
+            <!-- <a routerLink="/checkout" class="btn btn-main btn-small">Place Order</a> -->
             <button type="submit" class="btn btn-main btn-small" [disabled]="!cart.selections.length" (click)="insertOrder(cart.selections)">Place Order</button>
           </div>
         </div>

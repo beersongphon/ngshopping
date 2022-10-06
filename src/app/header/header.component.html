@@ -52,7 +52,6 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown5">
             <li><a routerLink="/dashboard">Dahsboard</a></li>
             <li><a routerLink="/order">Orders</a></li>
-            <li><a href="#">Downloads</a></li>
             <li><a routerLink="/address">Address</a></li>
             <li><a routerLink="/profile-details">Profile Details</a></li>
             <li><a routerLink="/login">Login Page</a></li>
@@ -61,9 +60,9 @@
           </ul>
         </li><!-- / Account -->
 
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="#">Contact Us</a>
-        </li>
+        </li> -->
       </ul>
     </div>
     <!-- Navbar-collapse -->
@@ -86,7 +85,8 @@
           <!-- Cart Item -->
           <div class="media" *ngFor="let selection of cart.selections | slice:0:4; let i = index">
             <a routerLink="/product-single">
-              <img class="media-object img-fluid mr-3" [src]="image+selection.product.img_product" alt="image" />
+              <!-- <img class="media-object img-fluid mr-3" [src]="image+selection.product.img_product" alt="image" /> -->
+              <img class="media-object img- mr-3" [src]="image+selection.product.img_product" alt="image" />
             </a>
             <div class="media-body">
               <h6>{{selection.product.product_name}}</h6>
@@ -98,7 +98,7 @@
             <a (click)="remove(selection.product)" class="remove">
               <i class="tf-ion-close"></i>
             </a>
-            <!-- <a (click)="remove(selection.product)" href="#" class="remove">
+            <!-- <a href="#" class="remove">
               <i class="tf-ion-close"></i>
             </a> -->
           </div>
@@ -116,7 +116,7 @@
           <!-- <div class="media">
             <a routerLink="/product-single">
               <img class="media-object img- mr-3" src="assets/images/cart-1.jpg" alt="image" />
-            </a>
+              </a>
             <div class="media-body">
               <h6>Ladies Bag</h6>
               <div class="cart-price">
@@ -146,7 +146,7 @@
 
           <div class="cart-summary">
             <span class="h6">Total</span>
-            <span class="total-price h6">{{subTotal() | currency}}</span>
+            <span class="total-price h6">${{subTotal() | currency:'':''}}</span>
 
             <div class="text-center cart-buttons mt-3">
               <a routerLink="/cart" class="btn btn-small btn-transparent btn-block">View Cart</a>
@@ -178,6 +178,11 @@
           <i class="tf-ion-ios-person mr-3"></i>
         </a> -->
       </li>
+      <!-- <li class="list-inline-item">
+        <a href="#">
+          <i class="tf-ion-ios-person mr-3"></i>
+        </a>
+      </li> -->
     </ul>
   </div>
 </nav>

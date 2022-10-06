@@ -13,13 +13,14 @@ export class HomeComponent implements OnInit {
   product: any[] = [];
   image: String = "http://localhost/api_shopping/upload/";
 
+  //Slider settings
+  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1} ;
+
   constructor(private title: Title, private apiService: ApiService, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.getProduct();
   }
-  //Slider settings
-  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1} ;
 
   getProduct(): void {
     this.productService.getShop().subscribe(
