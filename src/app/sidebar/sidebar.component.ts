@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from '../shared/api.service';
+import { ApiService } from './../shared/api.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,6 +16,8 @@ export class SidebarComponent implements OnInit {
 
   logout(): void {
     this.apiService.logout();
-    this.router.navigate(['/']);
+    this.router.navigate(['/']).then(() => {
+      window.location.reload();
+    });
   }
 }

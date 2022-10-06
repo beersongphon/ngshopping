@@ -57,6 +57,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 import { MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SignupComponent,
     SidebarComponent,
     ContactComponent,
-    ProductComponent
+    ProductComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

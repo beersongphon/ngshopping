@@ -12,11 +12,11 @@
           <a class="nav-link" routerLink="/">Home </a>
         </li>
 
-        <li class="nav-item" *ngIf="(isAdmin())">
+        <li class="nav-item" *ngIf="permission_id == 1">
           <a class="nav-link" href="#">About Us</a>
         </li>
         <!-- Pages -->
-        <li class="nav-item dropdown dropdown-slide" *ngIf="(isAdmin())">
+        <li class="nav-item dropdown dropdown-slide" *ngIf="permission_id == 1">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-delay="350" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Pages.
           </a>
@@ -28,9 +28,10 @@
             <li><a href="#">404 Page</a></li>
             <li><a href="#">FAQ</a></li>
           </ul>
-        </li><!-- /Pages -->
-        <!-- / Blog -->
+        </li>
+        <!-- / Pages -->
 
+        <!-- Blog -->
         <li class="nav-item dropdown dropdown-slide">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-delay="350" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Shop.
@@ -42,7 +43,8 @@
             <li><a routerLink="/cart">Cart</a></li>
             <li><a href="#">Confirmation</a></li>
           </ul>
-        </li><!-- / Blog -->
+        </li>
+        <!-- / Blog -->
 
         <!-- Account -->
         <li class="nav-item dropdown dropdown-slide">
@@ -58,15 +60,16 @@
             <li><a routerLink="/signup">SignUp Page</a></li>
             <li><a routerLink="/forgot-password">Forgot Password</a></li>
           </ul>
-        </li><!-- / Account -->
+        </li>
+        <!-- / Account -->
 
         <!-- <li class="nav-item">
           <a class="nav-link" href="#">Contact Us</a>
         </li> -->
       </ul>
     </div>
-    <!-- Navbar-collapse -->
 
+    <!-- Navbar-collapse -->
     <ul class="top-menu list-inline mb-0 d-none d-lg-block" id="top-menu">
       <li class="list-inline-item">
         <a href="#" class="search_toggle" id="search-icon"><i class="tf-ion-android-search"></i></a>
@@ -77,7 +80,7 @@
           <i class="tf-ion-android-cart"></i>
         </a>
       </li>
-      <li *ngIf="logoutbtn" class="dropdown cart-nav dropdown-slide list-inline-item">
+      <li *ngIf="permission_id == 3"class="dropdown cart-nav dropdown-slide list-inline-item">
         <a href="#" class="dropdown-toggle cart-icon" data-toggle="dropdown" data-hover="dropdown">
           <i class="tf-ion-android-cart"></i>
         </a>
@@ -150,8 +153,9 @@
 
             <div class="text-center cart-buttons mt-3">
               <a routerLink="/cart" class="btn btn-small btn-transparent btn-block">View Cart</a>
-              <a *ngIf="!cart.selections.length" class="btn btn-small btn-main btn-block">Checkout</a>
-              <a *ngIf="cart.selections.length" routerLink="/checkout" class="btn btn-small btn-main btn-block">Checkout</a>
+              <!-- <a *ngIf="cart.selections.length" routerLink="/checkout" class="btn btn-small btn-main btn-block">Checkout</a> -->
+              <!-- <a *ngIf="!cart.selections.length" class="btn btn-small btn-main btn-block">Checkout</a> -->
+              <button [disabled]="!cart.selections.length" routerLink="/checkout" class="btn btn-small btn-main btn-block">Checkout</button>
             </div>
           </div>
         </div>

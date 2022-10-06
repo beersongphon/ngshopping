@@ -24,13 +24,6 @@ export class LoginComponent implements OnInit {
   loginbtn: boolean | undefined;
   logoutbtn: boolean | undefined;
 
-  //โลโก้
-  logo = './assets/image/IS.png';
-  //ความกว้างของโลโก้
-  logoWidth = 72;
-  //ความสูงของโลโก้
-  logoHeight = 72;
-
   //ใน constructor กำหนดให้ apiService เป็นตัวแปรแบบ private และ เรียกใช้งาน ApiService
   constructor(private title: Title,
     private fb: FormBuilder,
@@ -88,76 +81,6 @@ export class LoginComponent implements OnInit {
         // alert(error.name);
       }
     );
-  }
-
-  // login(): void {
-  //   console.log(this.loginForm.value);
-  //   this.subLogin = this.apiService.userlogin(this.loginForm.value).subscribe(
-  //     (token) => {
-  //       Swal.fire({
-  //         icon: 'success',
-  //         title: 'เข้าสู่ระบบเรียบร้อย',
-  //         showConfirmButton: false,
-  //         timer: 1500
-  //       }).then((result) => {
-  //         if (result.isDismissed) {
-  //           const redirect = this.apiService.redirectUrl ? this.apiService.redirectUrl : '/home';
-  //           this.router.navigate([redirect]);
-  //         }
-  //       });
-  //     },
-  //     (error) => {
-  //       Swal.fire({
-  //         icon: 'error',
-  //         title: 'Email หรือ Password ไม่ถูกต้อง',
-  //         showConfirmButton: false,
-  //         timer: 1500
-  //       })
-  //       console.log(error)
-  //     }
-  //   );
-  // }
-
-  // login(angForm1: { value: { email: any; password: any; }; }) {
-  //   this.apiService.userlogin(angForm1.value.email, angForm1.value.password).pipe(first()).subscribe(
-  //     (data) => {
-  //       Swal.fire({
-  //         icon: 'success',
-  //         title: 'เข้าสู่ระบบเรียบร้อย',
-  //         showConfirmButton: false,
-  //         timer: 1500
-  //       }).then((result) => {
-  //         if (result.isDismissed) {
-  //           const redirect = this.apiService.redirectUrl ? this.apiService.redirectUrl : '/home';
-  //           this.router.navigate([redirect]);
-  //         }
-  //       });
-  //     },
-  //     (error) => {
-  //       Swal.fire({
-  //         icon: 'error',
-  //         title: 'Email หรือ Password ไม่ถูกต้อง',
-  //         showConfirmButton: false,
-  //         timer: 1500
-  //       })
-  //       console.log(error)
-  //     }
-  //   );
-  // }
-
-  setToken(data: string, UserLevel_ID: string): void {
-    localStorage.setItem('data', JSON.stringify(data));
-    localStorage.setItem('userlevel_id', JSON.stringify(UserLevel_ID));
-  }
-
-  //รับค่า email
-  get email() {
-    return this.loginForm.get('email');
-  }
-
-  //รับค่า password
-  get password() {
-    return this.loginForm.get('password');
   }
 }
 

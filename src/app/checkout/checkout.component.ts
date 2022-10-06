@@ -123,10 +123,8 @@ export class CheckoutComponent implements OnInit {
                         timer: 1500
                       }).then((result) => {
                         if (result.isDismissed) {
-                          // เรียก function getStudents เพื่อแสดงข้อมูลล่าสุด
-                          this.router.navigate(['/']).then(() => {
-                            window.location.reload();
-                          });
+                          this.cart.empty();
+                          this.router.navigate(['/']);
                         }
                       });
                     } else {

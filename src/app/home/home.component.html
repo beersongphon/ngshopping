@@ -99,18 +99,24 @@
 
     <div class="row">
       <div *ngFor="let p of product | slice:0:8;" class="col-lg-3 col-12 col-md-6 col-sm-6 mb-5">
+        <app-products [products]="p"></app-products>
+      </div>
+
+      <!-- <div *ngFor="let p of product | slice:0:8;" class="col-lg-3 col-12 col-md-6 col-sm-6 mb-5">
         <div class="product">
           <div class="product-wrap">
-            <a [routerLink]="['/product-single', p.product_id, p.product_name]"><img class="img-fluid w-100 mb-3 img-first" [src]="image+p.img_product" alt="product-img" /></a>
-            <!-- <a *ngFor="let img of p.images" href="#"><img class="img-fluid w-100 mb-3 img-first" [src]="image+img.img_product" alt="product-img" /></a> -->
-            <!-- <a *ngFor="let img of p.images" href="#"><img class="img-fluid w-100 mb-3 img-second" [src]="image+img.img_product" alt="product-img" /></a> -->
-            <!-- <a *ngFor="let img of p.images" href="#"><img [className]="isActive ? 'img-first' : 'img-second'" class="img-fluid w-100 mb-3 " [src]="image+img.img_product" alt="product-img" /></a> -->
-          </div>
+            <a [routerLink]="['/product-single', p.product_id, p.product_name]">
+              <img class="img-fluid w-100 mb-3 img-first" [src]="image+p.img_product" alt="product-img" />
+            </a> -->
+            <!-- <a *ngFor="let img of p.images" [routerLink]="['/product-single', p.product_id, p.product_name]"><img class="img-fluid w-100 mb-3 img-first" [src]="image+img.img_product" alt="product-img" /></a> -->
+            <!-- <a *ngFor="let img of p.images" [routerLink]="['/product-single', p.product_id, p.product_name]"><img class="img-fluid w-100 mb-3 img-second" [src]="image+img.img_product" alt="product-img" /></a> -->
+            <!-- <a *ngFor="let img of p.images" [routerLink]="['/product-single', p.product_id, p.product_name]"><img [className]="isActive ? 'img-first' : 'img-second'" class="img-fluid w-100 mb-3 " [src]="image+img.img_product" alt="product-img" /></a> -->
+          <!-- </div> -->
 
           <!-- <span class="onsale">Sale</span> -->
-          <div class="product-hover-overlay">
+          <!-- <div class="product-hover-overlay">
             <a *ngIf="(isCustommer())" [routerLink]="['/product-single', p.product_id, p.product_name]"><i class="tf-ion-android-cart"></i></a>
-            <a *ngIf="(isLogout())" routerLink="/login"><i class="tf-ion-android-cart"></i></a>
+            <a *ngIf="(!isCustommer())" routerLink="/login"><i class="tf-ion-android-cart"></i></a>
             <a href="#"><i class="tf-ion-ios-heart"></i></a>
           </div>
 
@@ -121,7 +127,7 @@
             </span>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- <div class="col-lg-3 col-12 col-md-6 col-sm-6 mb-5">
         <div class="product">

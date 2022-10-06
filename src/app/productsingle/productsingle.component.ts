@@ -21,7 +21,7 @@ export class ProductsingleComponent implements OnInit {
 
   productAdded: any | null;
 
-  products: Product[] = [];
+  product: Product[] = [];
 
   constructor(private cartService: CartService,
     private apiService: ApiService,
@@ -31,18 +31,26 @@ export class ProductsingleComponent implements OnInit {
 
   ngOnInit() {
     // this.productService.getProducts()
-    //   .subscribe(products => this.products = products);
+    //   .subscribe(products => this.product = products);
     // this.productService.getProducts(this.id, this.title).subscribe(
     //   (products) => {
-    //     this.products = products['data']
+    //     this.product = products['data']
     //   }
     // );
 
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.title = this.route.snapshot.paramMap.get('title') || '';
-    // this.getProduct();
+    this.getProduct();
     this.getProductDetail();
     this.getProductDetailImage();
+  }
+
+  getProduct(): void {
+    this.productService.getShop().subscribe(
+      (data) => {
+        this.product = data;
+      }
+    );
   }
 
   addToCart(product: Product, quantity: number): void {

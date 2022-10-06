@@ -47,11 +47,15 @@
 
         <div class="row">
           <div class="col-lg-4 col-12 col-md-6 col-sm-6 mb-5" *ngFor="let s of shop | paginate: { id:'paginationshop', itemsPerPage: 6, currentPage: page };">
+            <app-products [products]="s"></app-products>
+          </div>
+
+          <!-- <div class="col-lg-4 col-12 col-md-6 col-sm-6 mb-5" *ngFor="let s of shop | paginate: { id:'paginationshop', itemsPerPage: 6, currentPage: page };">
             <div class="product">
               <div class="product-wrap">
-                <a routerLink="/product-single"><img class="img-fluid w-100 mb-3 img-first" [src]="image+s.img_product" alt="product-img" /></a>
+                <a routerLink="/product-single"><img class="img-fluid w-100 mb-3 img-first" [src]="image+s.img_product" alt="product-img" /></a> -->
                 <!-- <a routerLink="/product-single"><img class="img-fluid w-100 mb-3 img-second" src="assets/images/444.jpg" alt="product-img" /></a> -->
-              </div>
+              <!-- </div>
 
               <span class="onsale">{{ txtTitle }}</span>
               <div class="product-hover-overlay">
@@ -67,7 +71,7 @@
                 </span>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <!-- <div class="col-lg-4 col-12 col-md-6 col-sm-6 mb-5">
             <div class="product">
