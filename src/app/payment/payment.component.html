@@ -1,0 +1,98 @@
+<app-header></app-header>
+<section class="page-header">
+  <div class="overly"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="content text-center">
+          <h1 class="mb-3">Payment</h1>
+          <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent justify-content-center">
+              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Payment</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="page-wrapper">
+  <div class="checkout shopping">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 pr-5">
+          <div class="billing-details mt-5">
+            <h4 class="mb-4">Billing Details</h4>
+            <form class="checkout-form" #paymentForm="ngForm" novalidate>
+              <div class="row" *ngIf="user">
+                <div class="col-lg-6">
+                  <div class="form-group mb-4">
+                    <label for="first_name">First Name</label>
+                    <input type="text" class="form-control" id="first_name" name="user_firstname" [(ngModel)]="user.user_firstname" placeholder=""
+                    #user_firstname="ngModel" [ngClass]="{'is-invalid': user_firstname.invalid && (user_firstname.dirty || user_firstname.touched)}" required>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group mb-4">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" class="form-control" id="last_name" name="user_lastname" [(ngModel)]="user.user_lastname" placeholder=""
+                    #user_lastname="ngModel" [ngClass]="{'is-invalid': user_lastname.invalid && (user_lastname.dirty || user_lastname.touched)}" required>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group mb-4">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" name="user_address" [(ngModel)]="user.user_address" placeholder=""
+                    #user_address="ngModel" [ngClass]="{'is-invalid': user_address.invalid && (user_address.dirty || user_address.touched)}" required>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group mb-4">
+                    <label for="phone">Phone </label>
+                    <input type="text" class="form-control" id="phone" name="user_tel" [(ngModel)]="user.user_tel" placeholder=""
+                    #user_tel="ngModel" [ngClass]="{'is-invalid': user_tel.invalid && (user_tel.dirty || user_tel.touched)}" required>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group mb-4">
+                    <label for="order">Order</label>
+                    <select class="form-control" id="order_id" name="order_id" [(ngModel)]="order_ids" [disabled]="isDisableOrderID" (change)="changeOrderID()"
+                    #order_id="ngModel" [ngClass]="{'is-invalid': order_id.invalid && (order_id.dirty || order_id.touched)}" required>
+                      <!-- <option value="" selected>Choose a Category</option> -->
+                      <option *ngFor="let o of order" [value]="o.order_id">{{o.order_id}} (รวมทั้งหมด {{o.order_total | currency:'':'' }})</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group mb-4">
+                    <label for="order">Pay Total</label>
+                    <select class="form-control" id="pay_total" name="pay_total" [(ngModel)]="pay_totals" [disabled]="isDisableOrderID"
+                    #pay_total="ngModel" [ngClass]="{'is-invalid': pay_total.invalid && (pay_total.dirty || pay_total.touched)}" required readonly>
+                    <option *ngFor="let p of payment" [value]="p.order_total" selected>{{p.order_total | currency:'':'' }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group mb-4">
+                    <label for="fileToUpload">Slip</label>
+                    <input type="file" class="form-control" id="fileToUpload" name="fileToUpload" ngModel placeholder="File" [disabled]="isDisableOrderID"
+                    #fileToUpload="ngModel" (change)="onFileChange($event)" [ngClass]="{'is-invalid': fileToUpload.invalid && (fileToUpload.dirty || fileToUpload.touched)}" required>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <button [disabled]="paymentForm.invalid" class="btn btn-primary" type="submit" (click)="insertPayment(paymentForm.value)">Upload</button>
+                </div>
+                <!-- <button [disabled]="paymentForm.invalid"class="btn btn-primary" type="submit" (click)="insertPayment(order)">Upload</button> -->
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

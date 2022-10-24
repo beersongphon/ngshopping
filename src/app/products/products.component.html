@@ -1,6 +1,6 @@
 <div class="product">
   <div class="product-wrap">
-    <a [routerLink]="['/product-single', products.product_id, products.product_name]">
+    <a [routerLink]="['/product-single', products.product_id, products.product_name]" (click)="click()">
       <img class="img-fluid w-100 mb-3 img-first" [src]="image+products.img_product" alt="product-img" />
     </a>
     <!-- <a *ngFor="let img of products.images" [routerLink]="['/product-single', products.product_id, products.product_name]">
@@ -9,21 +9,25 @@
     <a *ngFor="let img of products.images" [routerLink]="['/product-single', products.product_id, products.product_name]">
       <img class="img-fluid w-100 mb-3 img-second" [src]="image+img.img_product" alt="product-img" />
     </a> -->
-    <a *ngFor="let img of products.images" [routerLink]="['/product-single', products.product_id, products.product_name]">
+    <a *ngFor="let img of products.images" [routerLink]="['/product-single', products.product_id, products.product_name]" (click)="click()">
       <img class="img-fluid w-100 mb-3" [ngClass]="img.img_product > 0 ? 'img-first' : 'img-second'" [src]="image+img.img_product" alt="product-img" />
     </a>
   </div>
 
-  <!-- <span class="onsale">Sale</span> -->
+  <span class="onsale">Sale</span>
   <div class="product-hover-overlay">
-    <a *ngIf="(isCustommer())" [routerLink]="['/product-single', products.product_id, products.product_name]"><i class="tf-ion-android-cart"></i></a>
+    <a *ngIf="(isCustommer())" [routerLink]="['/product-single', products.product_id, products.product_name]" (click)="click()">
+      <i class="tf-ion-android-cart"></i>
+    </a>
     <a *ngIf="(!isCustommer())" routerLink="/login"><i class="tf-ion-android-cart"></i></a>
     <a href="#"><i class="tf-ion-ios-heart"></i></a>
   </div>
 
   <div class="product-info">
     <h2 class="product-title h5 mb-0">
-      <a [routerLink]="['/product-single', products.product_id, products.product_name]">{{products.product_name}}</a>
+      <a [routerLink]="['/product-single', products.product_id, products.product_name]" (click)="click()">
+        {{products.product_name}}
+      </a>
     </h2>
     <span class="price">
       ${{products.product_price | currency:'':''}}

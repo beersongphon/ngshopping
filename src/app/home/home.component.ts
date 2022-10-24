@@ -20,11 +20,11 @@ export class HomeComponent implements OnInit {
   constructor(private title: Title, private apiService: ApiService, private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.getProduct();
+    this.getProducts();
   }
 
-  getProduct(): void {
-    this.productService.getShop().subscribe(
+  getProducts(): void {
+    this.productService.getShops().subscribe(
       (data) => {
         this.product = data;
         // data.sort((a: any,b: any) => a.product_id.localeCompare(b.product_id));

@@ -16,24 +16,30 @@ import { ProductsingleComponent } from './productsingle/productsingle.component'
 import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProductComponent } from './product/product.component';
+import { PaymentComponent } from './payment/payment.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]  },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'shop', component: ShopComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'address', component: AddressComponent, canActivate: [AuthGuard]  },
-  { path: 'edit-address', component: EditAddressComponent, canActivate: [AuthGuard]  },
+  { path: 'address', component: AddressComponent, canActivate: [AuthGuard] },
+  { path: 'edit-address', component: EditAddressComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'order', component: OrdersComponent, canActivate: [AuthGuard]  },
+  { path: 'order', component: OrdersComponent, canActivate: [AuthGuard] },
   { path: 'product-single/:id/:title', component: ProductsingleComponent },
-  { path: 'profile-details', component: ProfileDetailComponent, canActivate: [AuthGuard]  },
-  { path: 'product', component: ProductComponent, canActivate: [AuthGuard]  },
+  { path: 'profile-details', component: ProfileDetailComponent, canActivate: [AuthGuard] },
+  { path: 'product', component: ProductComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
+  { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
+  { path: 'order-history', component: OrderHistoryComponent, canActivate: [AuthGuard] },
+  { path: '**', component: PagenotfoundComponent }
 ];
 
 @NgModule({

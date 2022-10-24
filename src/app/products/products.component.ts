@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 import { ApiService } from '../shared/api.service';
 
 @Component({
@@ -9,9 +9,10 @@ import { ApiService } from '../shared/api.service';
 })
 export class ProductsComponent implements OnInit {
   @Input() products: any;
+
   image: String = "http://localhost/api_shopping/upload/";
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -41,5 +42,11 @@ export class ProductsComponent implements OnInit {
     } else {
       return false
     }
+  }
+
+  click(): void {
+    this.router.navigate(['/product-single', this.products.product_id, this.products.product_name]).then(() => {
+      window.location.reload();
+    });
   }
 }

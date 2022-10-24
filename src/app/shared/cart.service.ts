@@ -64,12 +64,37 @@ export class CartService {
     return this.http.put<any[]>(environment.apiUrl + '/api_update_checkstock.php', formValue, { headers: apiHeader });
   }
 
-  getOrder(): Observable<any[]>{
+  getOrder(): Observable<any[]> {
     const apiHeader = { 'Authorization': '' + this.getToken() };
     return this.http.get<any[]>(environment.apiUrl + '/api_get_order.php', { headers: apiHeader });
   }
 
+  insertPayment(formValue: any): Observable<any> {
+    const apiHeader = { 'Content-Type': 'application/json' };
+    return this.http.post<any>(environment.apiUrl + '/api_insert_payment.php', formValue, { headers: apiHeader });
+  }
+
+  updatePayment(formValue: any): Observable<any> {
+    const apiHeader = { 'Content-Type': 'application/json' };
+    return this.http.put<any>(environment.apiUrl + '/api_update_payment.php', formValue, { headers: apiHeader });
+  }
+
+  getOrderUser(formValue: any): Observable<any> {
+    const apiHeader = { 'Content-Type': 'application/json' };
+    return this.http.post<any>(environment.apiUrl + '/api_get_order_user.php', formValue, { headers: apiHeader });
+  }
+
+  getPayment(formValue: any): Observable<any> {
+    const apiHeader = { 'Content-Type': 'application/json' };
+    return this.http.post<any>(environment.apiUrl + '/get_payment.php', formValue, { headers: apiHeader });
+  }
+
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  url :string = "https://raw.githubusercontent.com/sagarshirbhate/Country-State-City-Database/master/Contries.json";
+  allCountries(): Observable<any>{
+    return this.http.get(this.url);
   }
 }

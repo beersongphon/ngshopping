@@ -319,7 +319,7 @@ input[type="tel"]:focus {
 
 .pagination {
   -webkit-box-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
 
 .pagination .page-item .page-link {
@@ -534,6 +534,7 @@ a.text-primary:hover {
   color: #000;
 }
 
+
 .navigation .navbar-nav > li > a {
   color: #000;
   font-size: 17px;
@@ -561,6 +562,10 @@ a.text-primary:hover {
 .navigation .navbar-nav .nav-link span {
   font-size: 8px;
   margin-left: 3px;
+}
+
+.navbar-light .navbar-nav .active > .nav-link {
+  color: #fb5c42;
 }
 
 .navigation .nav .open > a {

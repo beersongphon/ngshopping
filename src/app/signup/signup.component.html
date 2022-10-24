@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="account section">
   <div class="container">
     <div class="row justify-content-center">
@@ -7,8 +8,7 @@
             <h2 class="mb-2">Sign Up</h2>
             <p class="lead">Already have an account? <a routerLink="/login"> Login now</a></p>
           </div>
-
-          <form action="#">
+          <!-- <form action="#">
             <div class="form-group mb-4">
               <label for="#">Enter Email Address</label>
               <input type="text" class="form-control" placeholder="Enter Email Address">
@@ -26,11 +26,79 @@
               <label for="#">Confirm Password</label>
               <input type="text" class="form-control" placeholder="Confirm Password">
             </div>
-
             <a href="#" class="btn btn-main mt-3 btn-block">Signup</a>
+          </form> -->
+          <form action="#">
+            <div class="form-group mb-4">
+              <label for="#">ชื่อ</label>
+              <input required #user_firstname="ngModel"
+              [ngClass]="{ 'is-invalid': user_firstname.invalid && (user_firstname.touched || user_firstname.dirty) }"
+              ngModel name="user_firstname" type="text" class="form-control" id="user_firstname" placeholder="ชื่อ">
+            </div>
+            <div class="form-group mb-4">
+              <label for="#">นามสกุล</label>
+              <input required #user_lastname="ngModel"
+              [ngClass]="{ 'is-invalid': user_lastname.invalid && (user_lastname.touched || user_lastname.dirty) }"
+              ngModel name="user_lastname" type="text" class="form-control" id="user_lastname" placeholder="นามสกุล">
+            </div>
+            <div class="form-group mb-4">
+              <label for="#">ที่อยู่</label>
+              <input required #user_address="ngModel"
+              [ngClass]="{ 'is-invalid': user_address.invalid && (user_address.touched || user_address.dirty) }"
+              ngModel name="user_address" type="text" class="form-control" id="user_address" placeholder="ที่อยู่">
+            </div>
+            <div class="form-group mb-4">
+              <label for="#">เบอร์โทรศัพท์</label>
+              <input required #user_tel="ngModel"
+              [ngClass]="{ 'is-invalid': user_tel.invalid && (user_tel.touched || user_tel.dirty) }"
+              ngModel name="user_tel" type="number" class="form-control" id="user_tel" placeholder="เบอร์โทรศัพท์">
+            </div>
+            <div class="form-group mb-4">
+              <label for="#">อีเมล</label>
+              <input required #user_email="ngModel"
+              [ngClass]="{ 'is-invalid': user_email.invalid && (user_email.touched || user_email.dirty) }"
+              ngModel name="user_email" type="email" class="form-control" id="user_email" placeholder="อีเมล">
+            </div>
+            <div class="form-group mb-4">
+              <label for="#">เพศ</label>
+              <div class="form-check">
+                <input required #user_sex="ngModel"
+                [ngClass]="{ 'is-invalid': user_sex.invalid && (user_sex.touched || user_sex.dirty) }"
+                ngModel class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1">
+                <label class="form-check-label" for="exampleRadios1">
+                  ชาย
+                </label>
+              </div>
+              <div class="form-check">
+                <input required #user_sex="ngModel"
+                [ngClass]="{ 'is-invalid': user_sex.invalid && (user_sex.touched || user_sex.dirty) }"
+                ngModel class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="0">
+                <label class="form-check-label" for="exampleRadios2">
+                  หญิง
+                </label>
+              </div>
+            </div>
+            <div class="form-group mb-4">
+              <label for="#">ชื่อผู้ใช้</label>
+              <input required #user_username="ngModel"
+              [ngClass]="{ 'is-invalid': user_username.invalid && (user_username.touched || user_username.dirty) }"
+              ngModel name="user_username" type="text" class="form-control" id="user_username" placeholder="ชื่อผู้ใช้">
+            </div>
+            <div class="form-group mb-4">
+              <label for="#">รหัสผ่าน</label>
+              <input required #user_password="ngModel"
+              [ngClass]="{ 'is-invalid': user_password.invalid && (user_password.touched || user_password.dirty) }"
+              ngModel name="user_password" type="password" class="form-control" id="user_password" placeholder="รหัสผ่าน">
+            </div>
+            <div class="form-group">
+              <label for="#">ยืนยันรหัสผ่าน</label>
+              <input type="password" class="form-control" placeholder="ยืนยันรหัสผ่าน">
+            </div>
+            <button type="submit" class="btn btn-main mt-3 btn-block">Signup</button>
           </form>
         </div>
       </div>
     </div>
   </div>
 </div>
+<app-footer></app-footer>

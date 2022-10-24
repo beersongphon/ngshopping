@@ -1,0 +1,59 @@
+<app-header></app-header>
+<section class="page-header">
+  <div class="overly"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="content text-center">
+          <h1 class="mb-3">Order History</h1>
+          <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent justify-content-center">
+              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Order History</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="page-wrapper">
+  <div class="checkout shopping">
+    <div class="container">
+      <div class="row">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">No.</th>
+              <th scope="col" style="width: 7rem;">Order ID</th>
+              <th scope="col">Order Date</th>
+              <th scope="col">Status</th>
+              <th scope="col">Order Total</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of order | paginate: { id:'pagination', itemsPerPage: 10, currentPage: currentPage }; let i= index">
+              <th scope="row">#{{ p.pageNo }}</th>
+              <td>{{ p.order_id }}</td>
+              <td>{{ p.order_date }}</td>
+              <td>{{ p.status_name }}</td>
+              <td>{{ p.order_total | currency:'':'' }}</td>
+              <td>
+                <a routerLink="/order" class="btn btn-dark btn-small">View</a>
+              </td>
+            </tr>
+            <tr *ngIf="!order.length">
+              <td colspan="6">No data to display.</td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls id="pagination" class="text-center" (pageChange)="currentPage = $event" previousLabel="ก่อนหน้า" nextLabel="ถัดไป" [autoHide]="true"></pagination-controls>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-page-print-order-history [sentToPrint]="sentToPrint"></app-page-print-order-history>
+<app-footer></app-footer>

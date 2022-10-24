@@ -80,7 +80,11 @@ export class HeaderComponent implements OnInit {
 
   //แบ่งสิทธิ์สำหรับทุกระดับผู้ใช้
   isLogin() {
-    return this.apiService.isLoggedIn();
+    if (this.apiService.isLoggedIn()) {
+      return true
+    } else {
+      return false
+    }
   }
 
   //แบ่งสิทธิ์สำหรับผู้ดูแลระบบ
@@ -115,6 +119,18 @@ export class HeaderComponent implements OnInit {
       return false
     } else {
       return true
+    }
+  }
+
+  isPermission(permission: any) {
+    if (permission == '1') {
+      return true
+    } else if (permission == '2') {
+      return true
+    } else if (permission == '3') {
+      return true
+    } else {
+      return false
     }
   }
 

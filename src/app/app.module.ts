@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +27,10 @@ import { SignupComponent } from './signup/signup.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProductComponent } from './product/product.component';
+import { ProductsComponent } from './products/products.component';
+import { PaymentComponent } from './payment/payment.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -57,7 +61,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 import { MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ProductsComponent } from './products/products.component';
+import { PagePrintOrderHistoryComponent } from './order-history/page-print-order-history/page-print-order-history.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +85,11 @@ import { ProductsComponent } from './products/products.component';
     SidebarComponent,
     ContactComponent,
     ProductComponent,
-    ProductsComponent
+    ProductsComponent,
+    PaymentComponent,
+    OrderHistoryComponent,
+    PagenotfoundComponent,
+    PagePrintOrderHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -128,7 +136,8 @@ import { ProductsComponent } from './products/products.component';
       provide: MAT_DATE_LOCALE,
       useValue: 'en-GB'
     },
-    DatePipe
+    DatePipe,
+    CurrencyPipe
   ],
   bootstrap: [AppComponent]
 })

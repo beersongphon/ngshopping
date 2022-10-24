@@ -1,3 +1,4 @@
+<app-header></app-header>
 <section class="page-header">
   <div class="overly"></div>
   <div class="container">
@@ -46,7 +47,7 @@
         </div>
 
         <div class="row">
-          <div class="col-lg-4 col-12 col-md-6 col-sm-6 mb-5" *ngFor="let s of shop | paginate: { id:'paginationshop', itemsPerPage: 6, currentPage: page };">
+          <div class="col-lg-4 col-12 col-md-6 col-sm-6 mb-5" *ngFor="let s of shop | paginate: config;">
             <app-products [products]="s"></app-products>
           </div>
 
@@ -201,13 +202,42 @@
             </div>
           </div> -->
 
-          <!-- <div class="col-12">
-            <nav aria-label="Page navigation">
-              <pagination-controls id="paginationshop" class="pagination" (pageChange)="page = $event" previousLabel="" nextLabel="" [autoHide]="true"></pagination-controls>
-            </nav>
-          </div> -->
-
           <div class="col-12">
+            <nav aria-label="Page navigation">
+              <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
+                <ul class="pagination">
+                  <li *ngIf="!p.isFirstPage()" class="page-item">
+                    <a (click)="p.previous()" class="page-link" aria-label="Previous" [class.disabled]="p.isFirstPage()" style="cursor: pointer;">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <!-- <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
+                    <span *ngIf="!p.isFirstPage()" (click)="p.previous()"></span>
+                  </div> -->
+                  <li class="page-item" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+                    <a class="page-link" style="cursor: pointer;" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">{{ page.label }}</a>
+                    <a class="page-link" *ngIf="p.getCurrent() === page.value">{{ page.label }}</a>
+                  </li>
+                  <!-- <div class="page-item" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+                    <span (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">{{ page.label }}</span>
+                      <div *ngIf="p.getCurrent() === page.value">
+                        <span>{{ page.label }}</span>
+                      </div>
+                  </div> -->
+                  <li *ngIf="!p.isLastPage()" class="page-item">
+                    <a (click)="p.next()" class="page-link" aria-label="Next" [class.disabled]="p.isLastPage()" style="cursor: pointer;">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                  <!-- <div class="pagination-next" [class.disabled]="p.isLastPage()">
+                    <span *ngIf="!p.isLastPage()" (click)="p.next()"> > </span>
+                  </div> -->
+                </ul>
+              </pagination-template>
+            </nav>
+          </div>
+
+          <!-- <div class="col-12">
             <nav aria-label="Page navigation">
               <ul class="pagination">
                 <li class="page-item">
@@ -225,14 +255,22 @@
                 </li>
               </ul>
             </nav>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="col-md-3">
         <!-- color and size -->
         <form class="mb-5">
+          <section class="widget widget-sizes mb-5">
+            <h3 class="widget-title h4 mb-4">Shop by Sizes</h3>
+            <div class="custom-control custom-checkbox" *ngFor="let c of category; let i = index;">
+              <input type="checkbox" class="custom-control-input" id="size{{i+1}}" name="txtSearch" [value]="c.category_id" [(ngModel)]="c.isChecked" (change)="changeSelection()">
+              <label class="custom-control-label" for="size{{i+1}}">{{c.category_name}}</label>
+            </div>
+          </section>
+
           <!-- color -->
-          <section class="widget widget-colors mb-5">
+          <!-- <section class="widget widget-colors mb-5">
             <h3 class="widget-title h4 mb-4">Shop by color</h3>
             <ul class="list-inline">
               <li class="list-inline-item mr-4">
@@ -266,10 +304,10 @@
                 </div>
               </li>
             </ul>
-          </section>
+          </section> -->
 
           <!-- size -->
-          <section class="widget widget-sizes mb-5">
+          <!-- <section class="widget widget-sizes mb-5">
             <h3 class="widget-title h4 mb-4">Shop by Sizes</h3>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="size1" checked>
@@ -291,13 +329,13 @@
               <input type="checkbox" class="custom-control-input" id="size5">
               <label class="custom-control-label" for="size5">XS Extra Small</label>
             </div>
-          </section>
+          </section> -->
 
-          <button type="button" class="btn btn-black btn-small">Filter</button>
+          <button type="button" class="btn btn-black btn-small" (click)="getShop()">Filter</button>
         </form>
 
         <!-- popular product -->
-        <section class="widget widget-popular mb-5">
+        <!-- <section class="widget widget-popular mb-5">
           <h3 class="widget-title mb-4 h4">Popular Products</h3>
           <a class="popular-products-item media" routerLink="/product-single">
             <img src="assets/images/p-1.jpg" alt="" class="img-fluid mr-4">
@@ -322,8 +360,9 @@
               <span class="price">$45</span>
             </div>
           </a>
-        </section>
+        </section> -->
       </div>
     </div>
   </div>
 </section>
+<app-footer></app-footer>

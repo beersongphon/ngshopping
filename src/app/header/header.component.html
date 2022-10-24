@@ -12,11 +12,11 @@
           <a class="nav-link" routerLink="/">Home </a>
         </li>
 
-        <li class="nav-item" *ngIf="permission_id == 1">
+        <li class="nav-item" *ngIf="(isLogin() && permission_id == 1)">
           <a class="nav-link" href="#">About Us</a>
         </li>
         <!-- Pages -->
-        <li class="nav-item dropdown dropdown-slide" *ngIf="permission_id == 1">
+        <li class="nav-item dropdown dropdown-slide" *ngIf="(isLogin() && permission_id == 1)">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-delay="350" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Pages.
           </a>
@@ -31,17 +31,20 @@
         </li>
         <!-- / Pages -->
 
+        <li *ngIf="loginbtn" class="nav-item">
+          <a class="nav-link" routerLink="/shop" routerLinkActive="active">Shop.</a>
+        </li>
         <!-- Blog -->
-        <li class="nav-item dropdown dropdown-slide">
+        <li *ngIf="logoutbtn" class="nav-item dropdown dropdown-slide" routerLinkActive="active">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-delay="350" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Shop.
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
-            <li><a routerLink="/shop">Shop</a></li>
-            <li><a routerLink="/product-single">Product Details</a></li>
-            <li><a routerLink="/checkout">Checkout</a></li>
-            <li><a routerLink="/cart">Cart</a></li>
-            <li><a href="#">Confirmation</a></li>
+            <li><a routerLink="/shop" routerLinkActive="active">Shop</a></li>
+            <li><a routerLink="/order-history">Order History</a></li>
+            <li><a routerLink="/checkout" routerLinkActive="active">Checkout</a></li>
+            <li><a routerLink="/cart" routerLinkActive="active">Cart</a></li>
+            <li><a routerLink="/payment" routerLinkActive="active">Confirmation</a></li>
           </ul>
         </li>
         <!-- / Blog -->
@@ -75,12 +78,12 @@
         <a href="#" class="search_toggle" id="search-icon"><i class="tf-ion-android-search"></i></a>
       </li>
 
-      <li *ngIf="loginbtn" class="dropdown cart-nav dropdown-slide list-inline-item">
+      <!-- <li *ngIf="loginbtn" class="dropdown cart-nav dropdown-slide list-inline-item">
         <a href="#" class="dropdown-toggle cart-icon" data-toggle="dropdown" data-hover="dropdown">
           <i class="tf-ion-android-cart"></i>
         </a>
-      </li>
-      <li *ngIf="permission_id == 3"class="dropdown cart-nav dropdown-slide list-inline-item">
+      </li> -->
+      <li *ngIf="(isLogin() && permission_id == 3)" class="dropdown cart-nav dropdown-slide list-inline-item">
         <a href="#" class="dropdown-toggle cart-icon" data-toggle="dropdown" data-hover="dropdown">
           <i class="tf-ion-android-cart"></i>
         </a>

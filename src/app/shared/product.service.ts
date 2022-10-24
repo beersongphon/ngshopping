@@ -15,8 +15,6 @@ import { environment } from './../../environments/environment';
 })
 export class ProductService {
 
-  private productUrl = `${environment.apiUrl}/product`;
-
   constructor(private http: HttpClient) { }
 
   // getProducts(): Observable<Product[]> {
@@ -26,13 +24,27 @@ export class ProductService {
   //     );
   // }
 
-  getShop(): Observable<any[]> {
+  getShops(): Observable<any[]> {
+    return this.http.get<any[]>(environment.apiUrl + '/api_get_product_front-end.php');
+  }
+
+  getShop(formValue: any): Observable<any> {
+    const apiHeader = { 'Content-Type': 'application/json' };
+    return this.http.post<any>(environment.apiUrl + '/api_get_product_front-end.php', formValue, { headers: apiHeader });
+  }
+
+  getProducts(): Observable<any[]> {
     return this.http.get<any[]>(environment.apiUrl + '/api_get_product.php');
   }
 
-  getProduct(formValue: any): Observable<any[]>{
+  getProduct(formValue: any): Observable<any> {
     const apiHeader = { 'Content-Type': 'application/json' };
     return this.http.post<any>(environment.apiUrl + '/api_get_product.php', formValue, { headers: apiHeader });
+  }
+
+  getOrderHistory(formValue: any): Observable<any> {
+    const apiHeader = { 'Content-Type': 'application/json' };
+    return this.http.post<any>(environment.apiUrl + '/api_get_order_history.php', formValue, { headers: apiHeader });
   }
 
   // getProducts(id: number, title: string): Observable<any> {
@@ -56,5 +68,9 @@ export class ProductService {
       'id': id.toString()
     };
     return this.http.get<any>(environment.apiUrl + '/api_get_product_detail_image.php', { params: param });
+  }
+
+  getCategory(): Observable<any[]> {
+    return this.http.get<any[]>(environment.apiUrl + '/api_get_category.php');
   }
 }

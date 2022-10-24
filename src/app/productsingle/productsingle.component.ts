@@ -40,13 +40,13 @@ export class ProductsingleComponent implements OnInit {
 
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.title = this.route.snapshot.paramMap.get('title') || '';
-    this.getProduct();
+    this.getProducts();
     this.getProductDetail();
     this.getProductDetailImage();
   }
 
-  getProduct(): void {
-    this.productService.getShop().subscribe(
+  getProducts(): void {
+    this.productService.getShops().subscribe(
       (data) => {
         this.product = data;
       }
