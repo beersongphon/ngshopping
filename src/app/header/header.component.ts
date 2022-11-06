@@ -28,7 +28,6 @@ export class HeaderComponent implements OnInit {
     );
     //เช็ค token
     if (this.apiService.isLoggedIn()) {
-      console.log("loggedin");
       this.loginbtn = false;
       this.logoutbtn = true
     }
@@ -55,7 +54,16 @@ export class HeaderComponent implements OnInit {
           this.name = data.user_firstname + " " + data.user_lastname;
           this.permission_id = data.permission_id;
         } else {
-          console.log(this.permission_id);
+          Swal.fire({
+            icon: 'error',
+            title: (this.name),
+            showConfirmButton: false,
+            timer: 1500
+          }).then((result) => {
+            if (result.isDismissed) {
+              window.history.back;
+            }
+          });
         }
       }, error: (error) => {
         this.name = "";

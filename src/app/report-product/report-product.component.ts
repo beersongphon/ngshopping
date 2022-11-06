@@ -34,7 +34,6 @@ export class ReportProductComponent implements OnInit, OnDestroy {
     this.sub = this.productService.getReportProduct({}).subscribe(
       (products) => {
         if (products.status == "success") {
-          console.log(products['data']);
           this.product = products['data'];
           this.product = this.addPageNo(this.product);
           this.products = Object.assign({ total: products['total'], data: this.addPageNo(products['data']) });
@@ -65,12 +64,10 @@ export class ReportProductComponent implements OnInit, OnDestroy {
     // }
     for (let i = 0; i < this.products.length; i++) {
       listToPrint[num] = JSON.parse(JSON.stringify(this.products[i]));
-      console.log(listToPrint[i]);
       num++
-      console.log(listToPrint);
 
       if (this.products[i] == true) {
-        console.log(listToPrint);
+
       }
     }
     if (listToPrint.length == 0) {

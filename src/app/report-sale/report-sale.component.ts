@@ -47,14 +47,8 @@ export class ReportSaleComponent implements OnInit, OnDestroy {
     this.sub = this.productService.getReportSale(body).subscribe(
       (products) => {
         if (products.status == "success") {
-          // this.product = this.addPageNo(products['data']);
-          // console.log(products['data']);
-          // this.product = products['data'];
           this.product = this.addPageNo(products['data']);
-          // console.log(this.product);
           this.products = Object.assign({ total: products['total'], data: this.addPageNo(products['data']) });
-          console.log(this.product);
-
         }
       }
     );

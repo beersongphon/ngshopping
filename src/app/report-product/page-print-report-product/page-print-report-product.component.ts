@@ -24,7 +24,6 @@ export class PagePrintReportProductComponent implements OnInit {
     this.sentToPrint.subscribe(result => {
       if (result) {
         this.printList = result
-        console.log(this.printList);
 
         this.disablePage = true
         this.numCount = 0
@@ -107,7 +106,6 @@ export class PagePrintReportProductComponent implements OnInit {
     for (let selection of printList) {
       sum += selection.product_quantity;
     }
-    console.log(sum);
 
     return sum;
   }

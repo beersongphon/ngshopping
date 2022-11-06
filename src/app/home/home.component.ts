@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
       (data) => {
         this.product = data;
         // data.sort((a: any,b: any) => a.product_id.localeCompare(b.product_id));
-        console.log(data);
         // for (let i = 0; i < data.length; i++) {
         //   let body = []
         //   for(let img of data[i].images) {

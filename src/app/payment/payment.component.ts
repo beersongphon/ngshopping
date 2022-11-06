@@ -108,17 +108,13 @@ export class PaymentComponent implements OnInit {
     this.status = false
     // const file = event.target.files[0];
     const file = event.target.files[0].name.toLowerCase().match(/(.jpg|.png)/);
-    console.log(file);
     if (file) {
       const fileReader = new FileReader();
-      console.log(fileReader);
       fileReader.readAsDataURL(event.target.files[0]);
       fileReader.onload = (ev: any) => {
         const data = ev.target.result;
-        console.log(data);
         // this.imageSrc = fileReader.result;
         this.imageSrc = data;
-        console.log(this.imageSrc);
       };
       // fileReader.readAsArrayBuffer(event.target.files[0]);
     } else {
@@ -240,7 +236,6 @@ export class PaymentComponent implements OnInit {
         // this.product = products;
         this.payment = payments;
         this.isDisableOrderID = false;
-        console.log(payments);
         // for (let i = 0; i < this.payment.length; i++) {
         //   $("#pay_total").append(`'<option value="${this.payment[i].order_total}">${parseFloat(this.payment[i].order_total)}</option>'`);
         // }

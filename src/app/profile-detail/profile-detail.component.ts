@@ -40,8 +40,6 @@ export class ProfileDetailComponent implements OnInit {
         this.user_email = data.user_email;
         this.user_tel = data.user_tel;
         this.user_password = data.user_password;
-        console.log(data.user_password);
-
         this.permission_id = data.permission_id;
       }
     );
@@ -88,7 +86,6 @@ export class ProfileDetailComponent implements OnInit {
       this.apiService.updateUser(bodyUpdate).subscribe(
         (messages) => {
           if (messages.status == "success") {
-            console.log(messages.status);
             Swal.fire({
               icon: 'success',
               title: (messages.message),

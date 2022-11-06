@@ -21,11 +21,8 @@ export class PagePrintOrderHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.sentToPrint.subscribe(result => {
-      console.log(this.sentToPrint);
-      console.log(result);
       if (result) {
         this.printLabelList = result
-        console.log(this.printLabelList);
         this.disablePage = true
         this.numCount = 0
 

@@ -23,11 +23,10 @@ export class PagePrintReportSaleComponent implements OnInit {
   ngOnInit(): void {
     this.sentToPrint.subscribe(result => {
       if (result) {
-        this.printList = result
-        console.log(this.printList);
+        this.printList = result;
 
-        this.disablePage = true
-        this.numCount = 0
+        this.disablePage = true;
+        this.numCount = 0;
 
         setTimeout(async () => {
           // for (let i = 0; i < this.printList.length; i++) {
@@ -103,16 +102,10 @@ export class PagePrintReportSaleComponent implements OnInit {
   }
 
   calculateSubTotal(printList: any) {
-    console.log(printList);
-
     let sum = 0;
     for (let selection of printList) {
-      console.log(printList);
       sum += selection.order_total * selection.quantity;
-      console.log(sum);
-
     }
-    console.log(sum);
     return sum;
   }
 

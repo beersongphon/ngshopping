@@ -113,7 +113,6 @@ export class ApiService {
   //เช็ค token
   isLoggedIn(): boolean {
     const token = this.getToken();
-    console.log(token);
     if (token != null) {
       return true
     }

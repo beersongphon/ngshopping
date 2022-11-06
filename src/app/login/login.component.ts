@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../shared/api.service';
 import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -39,49 +40,69 @@ export class LoginComponent implements OnInit {
 
   //เข้าสู่ระบบ
   login(): void {
-    console.log(this.loginForm.value);
-    this.subLogin = this.apiService.login(this.loginForm.value).subscribe(
-      (token) => {
-        // admin@rmutp.ac.th
+    this.subLogin = this.apiService.login(this.loginForm.value).subscribe({
+      next: (token) => {
         if (token.data) {
-          console.log(token.data);
-          alert(token.message);
-          if(token.data.permission_id == "1") {
-            const redirect = this.apiService.redirectUrl ? this.apiService.redirectUrl : '/dashboard';
-            this.router.navigate([redirect]).then(() => {
-              window.location.reload();
-            });
-            // this.router.navigate([redirect]);
-          } else if(token.data.permission_id == "2") {
-            const redirect = this.apiService.redirectUrl ? this.apiService.redirectUrl : '/student';
-            this.router.navigate([redirect]).then(() => {
-              window.location.reload();
-            });
-            // this.router.navigate([redirect]);
-          } else if(token.data.permission_id == "3") {
-            const redirect = this.apiService.redirectUrl ? this.apiService.redirectUrl : '/';
-            this.router.navigate([redirect]).then(() => {
-              window.location.reload();
-            });
-            // this.router.navigate([redirect]);
-          }
-          localStorage.setItem('token', (token.data.user_id));
-          localStorage.setItem('userlevel_id', (token.data.permission_id));
-          this.isLogin = true;
-          // const redirect = this.apiService.redirectUrl ? this.apiService.redirectUrl : '/';
-          // this.router.navigate([redirect]);
-          // this.profile = token.data;
-          // this.profile.image = '../../assets/image/user.png';
-
+          Swal.fire({
+            icon: 'success',
+            title: (token.message),
+            showConfirmButton: false,
+            timer: 1500
+          }).then((result) => {
+            if (result.isDismissed) {
+              if (token.data.permission_id == "1") {
+                const redirect = this.apiService.redirectUrl ? this.apiService.redirectUrl : '/dashboard';
+                this.router.navigate([redirect]).then(() => {
+                  window.location.reload();
+                });
+                // this.router.navigate([redirect]);
+              } else if (token.data.permission_id == "2") {
+                const redirect = this.apiService.redirectUrl ? this.apiService.redirectUrl : '/student';
+                this.router.navigate([redirect]).then(() => {
+                  window.location.reload();
+                });
+                // this.router.navigate([redirect]);
+              } else if (token.data.permission_id == "3") {
+                const redirect = this.apiService.redirectUrl ? this.apiService.redirectUrl : '/';
+                this.router.navigate([redirect]).then(() => {
+                  window.location.reload();
+                });
+                // this.router.navigate([redirect]);
+              }
+              localStorage.setItem('token', (token.data.user_id));
+              localStorage.setItem('userlevel_id', (token.data.permission_id));
+              this.isLogin = true;
+              // const redirect = this.apiService.redirectUrl ? this.apiService.redirectUrl : '/';
+              // this.router.navigate([redirect]);
+              // this.profile = token.data;
+              // this.profile.image = '../../assets/image/user.png';
+            }
+          });
         } else {
-          alert(token.message);
+          Swal.fire({
+            icon: "error",
+            title: (token.message),
+            showConfirmButton: false,
+            timer: 2000
+          }).then((result) => {
+            if (result.isDismissed) {
+              window.history.back;
+            }
+          });
         }
-      },
-      (error) => {
-        alert(error.name);
-        // alert(error.name);
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 }
 

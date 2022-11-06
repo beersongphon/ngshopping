@@ -15,9 +15,7 @@ export class SignupComponent implements OnInit {
   }
 
   insertUser(formValue: any): void {
-    console.log(formValue);
     if(this.validateSubmit(formValue)) return
-    console.log(formValue);
     this.apiService.insertUser(formValue).subscribe({
       next: (data) => {
         if (data.status == "success") {

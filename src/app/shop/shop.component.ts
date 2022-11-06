@@ -47,7 +47,6 @@ export class ShopComponent implements OnInit {
   }
 
   onPageChange(event: any) {
-    console.log(event);
     this.config.currentPage = event;
   }
 
