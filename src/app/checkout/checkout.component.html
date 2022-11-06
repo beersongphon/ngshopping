@@ -23,11 +23,11 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 pr-5">
-          <div class="coupon-notice " data-toggle="modal" data-target="#coupon-modal">
+          <!-- <div class="coupon-notice " data-toggle="modal" data-target="#coupon-modal">
             <div class="bg-light p-3">
               Have a coupon? <a routerLink="/checkout" class="showcoupon">Click here to enter your code</a>
             </div>
-          </div>
+          </div> -->
 
           <div class="billing-details mt-5">
             <h4 class="mb-4">Billing Details</h4>
@@ -188,9 +188,13 @@
 
             <ul class="summary-prices list-unstyled mb-4">
               <li class="d-flex justify-content-between">
-                <span>Subtotal:</span>
+                <span>Total:</span>
                 <span class="h5">${{subTotal() | currency:'':''}}</span>
               </li>
+              <!-- <li class="d-flex justify-content-between">
+                <span>Subtotal:</span>
+                <span class="h5">${{subTotal() | currency:'':''}}</span>
+              </li> -->
               <!-- <li class="d-flex justify-content-between">
                 <span>Shipping:</span>
                 <span class="h5">Free</span>

@@ -62,8 +62,8 @@
                   <td class="product-quantity" data-title="Quantity">
                     <div class="quantity">
                       <label class="sr-only">Quantity</label>
-                        <input #quantity type="number" step="1" min="1" [max]="selection.product.product_quantity" [value]="selection.quantity" title="Qty" size="4" (change)="onQuantityChange(selection, + quantity.value)" />
-                       <!-- <input type="number" id="qty" class="input-text qty text" step="1" min="0" max="9" value="1" title="Qty" size="4"> -->
+                        <p style="margin: 0 0 0px;"><input #quantity type="number" step="1" min="1" [max]="selection.product.product_quantity" [value]="selection.quantity" title="Qty" size="4" (change)="onQuantityChange(selection, + quantity.value)" /></p>
+                        <!-- <input type="number" id="qty" class="input-text qty text" step="1" min="0" max="9" value="1" title="Qty" size="4"> -->
                     </div>
                   </td>
                   <td class="product-subtotal" data-title="Total">
@@ -163,12 +163,12 @@
                     <a href="#" class="remove" aria-label="Remove this item" data-product_id="30" data-product_sku="">×</a>
                   </td>
                 </tr> -->
-                <tr>
+                <!-- <tr>
                   <td colspan="6" class="actions">
                     <div class="coupon">
-                      <input type="text" name="coupon_code" class="input-text form-control" id="coupon_code" value="" placeholder="Coupon code" style="float: left !important;">
-                                            <!-- <input type="text" name="coupon_code" class="input-text form-control" id="coupon_code" value="" placeholder="Coupon code"> -->
-                      <button type="button" class="btn btn-black btn-small" name="apply_coupon" value="Apply coupon">Apply coupon</button>
+                      <input type="text" name="coupon_code" class="input-text form-control" id="coupon_code" value="" placeholder="Coupon code" style="float: left !important;"> -->
+                      <!-- <input type="text" name="coupon_code" class="input-text form-control" id="coupon_code" value="" placeholder="Coupon code"> -->
+                      <!-- <button type="button" class="btn btn-black btn-small" name="apply_coupon" value="Apply coupon">Apply coupon</button>
                       <span class="float-right mt-3 mt-lg-0">
                         <button type="button" class="btn btn-dark btn-small" name="update_cart" value="Update cart" disabled="">Update cart</button>
                       </span>
@@ -176,7 +176,7 @@
                     <input type="hidden" id="woocommerce-cart-nonce" name="woocommerce-cart-nonce" value="27da9ce3e8">
                     <input type="hidden" name="_wp_http_referer" value="/cart/">
                   </td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
             <!-- <table class="table shop_table shop_table_responsive cart" cellspacing="0" *ngIf="!cart.selections.length">
