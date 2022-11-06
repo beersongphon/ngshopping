@@ -73,126 +73,126 @@
           <a class="nav-link" href="#">Contact Us</a>
         </li> -->
       </ul>
-    </div>
+      <!-- Navbar-collapse -->
+      <ul class="top-menu list-inline mb-0 d-lg-block" id="top-menu">
+      <!-- <ul class="top-menu list-inline mb-0 d-none d-lg-block" id="top-menu"> -->
+        <!-- <li class="list-inline-item">
+          <a href="#" class="search_toggle" id="search-icon"><i class="tf-ion-android-search"></i></a>
+        </li> -->
 
-    <!-- Navbar-collapse -->
-    <ul class="top-menu list-inline mb-0 d-none d-lg-block" id="top-menu">
-      <!-- <li class="list-inline-item">
-        <a href="#" class="search_toggle" id="search-icon"><i class="tf-ion-android-search"></i></a>
-      </li> -->
-
-      <!-- <li *ngIf="loginbtn" class="dropdown cart-nav dropdown-slide list-inline-item">
-        <a href="#" class="dropdown-toggle cart-icon" data-toggle="dropdown" data-hover="dropdown">
-          <i class="tf-ion-android-cart"></i>
-        </a>
-      </li> -->
-      <li *ngIf="(isLogin() && permission_id == 3)" class="dropdown cart-nav dropdown-slide list-inline-item">
-        <a href="#" class="dropdown-toggle cart-icon" data-toggle="dropdown" data-hover="dropdown">
-          <i class="tf-ion-android-cart"></i>
-        </a>
-        <div class="dropdown-menu cart-dropdown">
-          <!-- Cart Item -->
-          <div class="media" *ngFor="let selection of cart.selections | slice:0:4; let i = index">
-            <a routerLink="/product-single">
-              <!-- <img class="media-object img-fluid mr-3" [src]="image+selection.product.img_product" alt="image" /> -->
-              <img class="media-object img- mr-3" [src]="image+selection.product.img_product" alt="image" />
-            </a>
-            <div class="media-body">
-              <h6>{{selection.product.product_name}}</h6>
-              <div class="cart-price">
-                <span>{{selection.quantity}} x</span>
-                <span>{{selection.product.product_price * selection.quantity | currency:'':''}}</span>
-              </div>
-            </div>
-            <a (click)="remove(selection.product)" class="remove">
-              <i class="tf-ion-close"></i>
-            </a>
-            <!-- <a href="#" class="remove">
-              <i class="tf-ion-close"></i>
-            </a> -->
-          </div>
-          <!-- / Cart Item -->
-
-          <!-- Cart Item -->
-          <div class="media" *ngIf="!cart.selections.length">
-            <div class="media-body">
-              <span class="h6">Your cart is empty.</span>
-            </div>
-          </div>
-          <!-- / Cart Item -->
-
-          <!-- Cart Item -->
-          <!-- <div class="media">
-            <a routerLink="/product-single">
-              <img class="media-object img- mr-3" src="assets/images/cart-1.jpg" alt="image" />
+        <!-- <li *ngIf="loginbtn" class="dropdown cart-nav dropdown-slide list-inline-item">
+          <a href="#" class="dropdown-toggle cart-icon" data-toggle="dropdown" data-hover="dropdown">
+            <i class="tf-ion-android-cart"></i>
+          </a>
+        </li> -->
+        <li *ngIf="(isLogin() && permission_id == 3)" class="dropdown cart-nav dropdown-slide list-inline-item">
+          <a href="#" class="dropdown-toggle cart-icon" data-toggle="dropdown" data-hover="dropdown">
+            <i class="tf-ion-android-cart"></i>
+          </a>
+          <div class="dropdown-menu cart-dropdown">
+            <!-- Cart Item -->
+            <div class="media" *ngFor="let selection of cart.selections | slice:0:4; let i = index">
+              <a routerLink="/product-single">
+                <!-- <img class="media-object img-fluid mr-3" [src]="image+selection.product.img_product" alt="image" /> -->
+                <img class="media-object img- mr-3" [src]="image+selection.product.img_product" alt="image" />
               </a>
-            <div class="media-body">
-              <h6>Ladies Bag</h6>
-              <div class="cart-price">
-                <span>1 x</span>
-                <span>1250.00</span>
+              <div class="media-body">
+                <h6>{{selection.product.product_name}}</h6>
+                <div class="cart-price">
+                  <span>{{selection.quantity}} x</span>
+                  <span>{{selection.product.product_price * selection.quantity | currency:'':''}}</span>
+                </div>
+              </div>
+              <a (click)="remove(selection.product)" class="remove">
+                <i class="tf-ion-close"></i>
+              </a>
+              <!-- <a href="#" class="remove">
+                <i class="tf-ion-close"></i>
+              </a> -->
+            </div>
+            <!-- / Cart Item -->
+
+            <!-- Cart Item -->
+            <div class="media" *ngIf="!cart.selections.length">
+              <div class="media-body">
+                <span class="h6">Your cart is empty.</span>
               </div>
             </div>
-            <a href="#" class="remove"><i class="tf-ion-close"></i></a>
-          </div> -->
-          <!-- / Cart Item -->
+            <!-- / Cart Item -->
 
-          <!-- Cart Item -->
-          <!-- <div class="media">
-            <a routerLink="/product-single">
-              <img class="media-object img-fluid mr-3" src="assets/images/cart-2.jpg" alt="image" />
-            </a>
-            <div class="media-body">
-              <h6>Skinny Jeans</h6>
-              <div class="cart-price">
-                <span>1 x</span>
-                <span>1250.00</span>
+            <!-- Cart Item -->
+            <!-- <div class="media">
+              <a routerLink="/product-single">
+                <img class="media-object img- mr-3" src="assets/images/cart-1.jpg" alt="image" />
+                </a>
+              <div class="media-body">
+                <h6>Ladies Bag</h6>
+                <div class="cart-price">
+                  <span>1 x</span>
+                  <span>1250.00</span>
+                </div>
               </div>
-            </div>
-            <a href="#" class="remove"><i class="tf-ion-close"></i></a>
-          </div> -->
-          <!-- / Cart Item -->
+              <a href="#" class="remove"><i class="tf-ion-close"></i></a>
+            </div> -->
+            <!-- / Cart Item -->
 
-          <div class="cart-summary">
-            <span class="h6">Total</span>
-            <span class="total-price h6">${{subTotal() | currency:'':''}}</span>
+            <!-- Cart Item -->
+            <!-- <div class="media">
+              <a routerLink="/product-single">
+                <img class="media-object img-fluid mr-3" src="assets/images/cart-2.jpg" alt="image" />
+              </a>
+              <div class="media-body">
+                <h6>Skinny Jeans</h6>
+                <div class="cart-price">
+                  <span>1 x</span>
+                  <span>1250.00</span>
+                </div>
+              </div>
+              <a href="#" class="remove"><i class="tf-ion-close"></i></a>
+            </div> -->
+            <!-- / Cart Item -->
 
-            <div class="text-center cart-buttons mt-3">
-              <a routerLink="/cart" class="btn btn-small btn-transparent btn-block">View Cart</a>
-              <!-- <a *ngIf="cart.selections.length" routerLink="/checkout" class="btn btn-small btn-main btn-block">Checkout</a> -->
-              <!-- <a *ngIf="!cart.selections.length" class="btn btn-small btn-main btn-block">Checkout</a> -->
-              <button [disabled]="!cart.selections.length" routerLink="/checkout" class="btn btn-small btn-main btn-block">Checkout</button>
+            <div class="cart-summary">
+              <span class="h6">Total</span>
+              <span class="total-price h6">${{subTotal() | currency:'':''}}</span>
+
+              <div class="text-center cart-buttons mt-3">
+                <a routerLink="/cart" class="btn btn-small btn-transparent btn-block">View Cart</a>
+                <!-- <a *ngIf="cart.selections.length" routerLink="/checkout" class="btn btn-small btn-main btn-block">Checkout</a> -->
+                <!-- <a *ngIf="!cart.selections.length" class="btn btn-small btn-main btn-block">Checkout</a> -->
+                <button [disabled]="!cart.selections.length" routerLink="/checkout" class="btn btn-small btn-main btn-block">Checkout</button>
+              </div>
             </div>
           </div>
-        </div>
-      </li>
-      <li class="nav-item dropdown cart-icon dropdown-slide list-inline-item">
-        <a href="#" class="dropdown-toggle cart-icon" id="navbarDropdown6" data-toggle="dropdown" data-hover="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="tf-ion-ios-person mr-3"></i>
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
-          <li><a *ngIf="logoutbtn" routerLink="/dashboard">Dahsboard</a></li>
-          <li><a *ngIf="logoutbtn" routerLink="/profile-details">Profile Details</a></li>
-          <li><a *ngIf="loginbtn" routerLink="/login">Login Page</a></li>
-          <li><a *ngIf="loginbtn" routerLink="/signup">SignUp Page</a></li>
-          <li><a *ngIf="loginbtn" routerLink="/forgot-password">Forgot Password</a></li>
-          <li><a *ngIf="logoutbtn" routerLink="#" (click)="logout()">Log Out</a></li>
-        </ul>
-        <!-- <a href="#" class="dropdown-toggle cart-icon" data-toggle="dropdown" data-hover="dropdown">
-          <i class="tf-ion-ios-person mr-3"></i>
-        </a>
-        <a *ngIf="loginbtn" routerLink="/login">
-          <i class="tf-ion-ios-person mr-3"></i>
-        </a>
-        <a *ngIf="logoutbtn" routerLink="#" (click)="logout()">
-          <i class="tf-ion-ios-person mr-3"></i>
-        </a> -->
-      </li>
-      <!-- <li class="list-inline-item">
-        <a href="#">
-          <i class="tf-ion-ios-person mr-3"></i>
-        </a>
-      </li> -->
-    </ul>
+        </li>
+        <li class="nav-item dropdown cart-icon dropdown-slide list-inline-item">
+          <a href="#" class="dropdown-toggle cart-icon" id="navbarDropdown6" data-toggle="dropdown" data-hover="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="tf-ion-ios-person mr-3"></i>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
+            <li><a *ngIf="logoutbtn" routerLink="/dashboard">Dahsboard</a></li>
+            <li><a *ngIf="logoutbtn" routerLink="/profile-details">Profile Details</a></li>
+            <li><a *ngIf="loginbtn" routerLink="/login">Login Page</a></li>
+            <li><a *ngIf="loginbtn" routerLink="/signup">SignUp Page</a></li>
+            <li><a *ngIf="loginbtn" routerLink="/forgot-password">Forgot Password</a></li>
+            <li><a *ngIf="logoutbtn" routerLink="#" (click)="logout()">Log Out</a></li>
+          </ul>
+          <!-- <a href="#" class="dropdown-toggle cart-icon" data-toggle="dropdown" data-hover="dropdown">
+            <i class="tf-ion-ios-person mr-3"></i>
+          </a>
+          <a *ngIf="loginbtn" routerLink="/login">
+            <i class="tf-ion-ios-person mr-3"></i>
+          </a>
+          <a *ngIf="logoutbtn" routerLink="#" (click)="logout()">
+            <i class="tf-ion-ios-person mr-3"></i>
+          </a> -->
+        </li>
+        <!-- <li class="list-inline-item">
+          <a href="#">
+            <i class="tf-ion-ios-person mr-3"></i>
+          </a>
+        </li> -->
+      </ul>
+    </div>
   </div>
 </nav>
