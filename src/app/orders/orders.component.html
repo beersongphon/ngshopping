@@ -38,14 +38,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let o of order;">
+            <tr *ngFor="let o of order; let i = index;">
               <th scope="row">#{{ o.order_id }}</th>
               <td>{{ o.order_date }}</td>
               <td>{{ o.status_name }}</td>
-              <td>{{ o.order_total }}</td>
+              <td>{{ o.order_total | currency:'':''  }}</td>
               <td>
-                <a *ngIf="o.status_name == 'รอการชำระ'" routerLink="/order" class="btn btn-dark btn-small">Payment</a>
-                <a *ngIf="o.status_name == 'ชำระเงินแล้ว'" routerLink="/order" class="btn btn-dark btn-small">View</a>
+                <a *ngIf="o.status_name == 'รอการชำระ'" routerLink="/payment" class="btn btn-dark btn-small">Payment</a>
+                <a *ngIf="o.status_name == 'ชำระเงินแล้ว'" routerLink="/order" class="btn btn-dark btn-small" (click)="clickPrint(i)">View</a>
               </td>
             </tr>
             <tr *ngIf="!order.length">
@@ -82,6 +82,7 @@
           </tbody>
         </table>
       </div>
+      <app-page-print-order-history [sentToPrint]="sentToPrint"></app-page-print-order-history>
     </div>
   </div>
 </section>

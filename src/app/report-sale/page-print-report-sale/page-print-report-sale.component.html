@@ -1,0 +1,48 @@
+<div id="pagePrint" *ngIf="disablePage">
+  <!-- Hoverable rows start -->
+  <section class="section">
+    <div class="row" id="table-hover-row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title" align="center">รายงานสินค้าคงเหลือ</h2>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+              <!-- table hover -->
+              <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-center" align="center" width="20">ลำดับ</th>
+                        <th class="text-center" align="center" width="130">เลขที่สั่งซื้อ</th>
+                        <th class="text-left" align="left" width="130">วันที่</th>
+                        <th align="left">ชื่อ - นามสกุล</th>
+                        <th class="text-center" width="120" align="center">เบอร์โทรศัพท์</th>
+                        <th class="text-right" width="80" align="right">ราคารวม</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of printList.data">
+                      <td class="text-center" align="center">{{item.pageNo}}</td>
+                        <td class="text-center" align="center">{{item.order_id}}</td>
+                        <td class="text-left">{{item.order_date}}</td>
+                        <td class="text-bold-500">{{item.order_name}}</td>
+                        <td class="text-center" align="center">{{item.order_tel}}</td>
+                        <td class="text-right" align="right">{{item.order_total | currency:'':''}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" align="right"><strong>รวมเงินทั้งสิ้น</strong></td>
+                      <td align="right">{{printList.total | currency:'':''}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- <button onclick="window.print()">Print </button>  -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

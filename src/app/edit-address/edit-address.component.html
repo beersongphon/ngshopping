@@ -28,8 +28,8 @@
       <div class="col-12 col-md-7 col-sm-12 col-lg-9">
         <div class="acccount-settings">
           <h4 class="mb-4">Edit Address</h4>
-          <form action="#">
-            <div class="form-row">
+          <form #addressForm="ngForm" novalidate>
+            <!-- <div class="form-row">
               <div class="col-lg-6">
                 <div class="form-group">
                   <label>Region</label>
@@ -46,8 +46,13 @@
             <div class="form-group mb-4">
               <label>Address</label>
               <textarea class="form-control" name="address" id="address"></textarea>
+            </div> -->
+            <div class="form-group mb-4" *ngIf="user">
+              <label>Address</label>
+              <textarea class="form-control" name="user_address" id="address" [(ngModel)]="user.user_address"
+              #user_address="ngModel" [ngClass]="{'is-invalid': user_address.invalid && (user_address.dirty || user_address.touched)}" required></textarea>
             </div>
-            <button class="btn btn-dark">Save Changes</button>
+            <button class="btn btn-dark" [disabled]="addressForm.invalid" (click)="updateUser(addressForm.value)">Save Changes</button>
           </form>
         </div>
       </div>

@@ -5,13 +5,12 @@
     <div class="row justify-content-center">
       <div class="col-lg-6">
         <div class="content text-center">
-          <h1 class="mb-3">Order</h1>
-          <p>Order</p>
-
+          <h1 class="mb-3">Product</h1>
+          <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent justify-content-center">
               <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Order</li>
+              <li class="breadcrumb-item active" aria-current="page">Product</li>
             </ol>
           </nav>
         </div>
@@ -32,12 +31,13 @@
             <div class="input-group mb-3">
               <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
               <div class="input-group">
-                <input #text="ngModel" ngModel name="searchText" type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="ค้นหา" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <div class="input-group-append">
+                <input #text="ngModel" [(ngModel)]="search" name="searchText" type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="ค้นหา" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append" (click)="getProduct()">
                   <div class="input-group-text">
                     <i class="fas fa-search-plus"></i>
                   </div>
                 </div>
+                <button button mat-button routerLink="/add-product" mat-flat-button color="primary">Add Row</button>
                 <!-- <button button mat-button (click)="openDialog('Add', {})" mat-flat-button color="primary">Add Row</button> -->
               </div>
             </div>
@@ -65,7 +65,7 @@
               <td>{{ p.product_description }}</td>
               <td>
                 <a routerLink="/order" class="btn btn-dark btn-small">View</a> |
-                <a routerLink="/order" class="btn btn-warning btn-small">Edit</a> |
+                <a [routerLink]="['/edit-product', p.product_id, p.product_name]" class="btn btn-warning btn-small">Edit</a> |
                 <a routerLink="/order" class="btn btn-danger btn-small">Delete</a>
               </td>
             </tr>

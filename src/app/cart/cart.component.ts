@@ -42,6 +42,8 @@ export class CartComponent implements OnInit {
   }
 
   remove(product: Product): void {
+    console.log(product);
+
     this.cart.remove(product);
   }
 

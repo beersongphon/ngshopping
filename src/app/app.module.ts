@@ -30,38 +30,60 @@ import { ProductComponent } from './product/product.component';
 import { ProductsComponent } from './products/products.component';
 import { PaymentComponent } from './payment/payment.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { PagePrintOrderHistoryComponent } from './order-history/page-print-order-history/page-print-order-history.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
+import { BrandComponent } from './brand/brand.component';
+import { AddBrandComponent } from './add-brand/add-brand.component';
+import { EditBrandComponent } from './edit-brand/edit-brand.component';
+import { CategoryComponent } from './category/category.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { EditCategoryComponent } from './edit-category/edit-category.component';
+import { ReportProductComponent } from './report-product/report-product.component';
+import { ReportSaleComponent } from './report-sale/report-sale.component';
+import { PagePrintReportProductComponent } from './report-product/page-print-report-product/page-print-report-product.component';
+import { PagePrintReportSaleComponent } from './report-sale/page-print-report-sale/page-print-report-sale.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatLineModule } from '@angular/material/core';
+import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatDividerModule } from '@angular/material/divider';
+import { MatTreeModule } from '@angular/material/tree';
 import { MatTableModule } from '@angular/material/table';
-import { MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule, MatLineModule } from '@angular/material/core';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CdkTreeModule } from '@angular/cdk/tree';
+import { PortalModule } from '@angular/cdk/portal';
+
 import { NgxPaginationModule } from 'ngx-pagination';
-import { PagePrintOrderHistoryComponent } from './order-history/page-print-order-history/page-print-order-history.component';
+import { NgxPrintModule } from 'ngx-print';
 
 @NgModule({
   declarations: [
@@ -88,8 +110,20 @@ import { PagePrintOrderHistoryComponent } from './order-history/page-print-order
     ProductsComponent,
     PaymentComponent,
     OrderHistoryComponent,
-    PagenotfoundComponent,
-    PagePrintOrderHistoryComponent
+    PagePrintOrderHistoryComponent,
+    AddProductComponent,
+    EditProductComponent,
+    BrandComponent,
+    AddBrandComponent,
+    EditBrandComponent,
+    CategoryComponent,
+    AddCategoryComponent,
+    EditCategoryComponent,
+    ReportProductComponent,
+    ReportSaleComponent,
+    PagePrintReportProductComponent,
+    PagePrintReportSaleComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,
@@ -106,29 +140,39 @@ import { PagePrintOrderHistoryComponent } from './order-history/page-print-order
     MatCardModule,
     MatCheckboxModule,
     MatChipsModule,
-    MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatGridListModule,
     MatIconModule,
     MatInputModule,
-    MatLineModule,
+    MatListModule,
     MatMenuModule,
     MatProgressBarModule,
+    MatProgressSpinnerModule,
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
-    MatSliderModule,
     MatSlideToggleModule,
+    MatSliderModule,
     MatSnackBarModule,
-    MatTableModule,
+    MatSortModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatTreeModule,
+    MatTableModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatPaginatorModule,
     MatNativeDateModule,
     MatRippleModule,
+    MatLineModule,
+    OverlayModule,
+    CdkTreeModule,
+    PortalModule,
     NgxPaginationModule,
+    // NgxPrintModule,
     CommonModule,
   ],
   providers: [

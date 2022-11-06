@@ -1,0 +1,105 @@
+<app-header></app-header>
+<section class="page-header">
+  <div class="overly"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="content text-center">
+          <h1 class="mb-3">Report Sale</h1>
+          <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent justify-content-center">
+              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Report Sale</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="user-dashboard page-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-5 col-sm-12 col-lg-3">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="col-12 col-md-7 col-sm-12 col-lg-9">
+        <form #userForm="ngForm" novalidate>
+          <div class="form-row align-item-center">
+            <div class="input-group mb-3">
+              <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
+              <!-- <div class="input-group">
+                <input #text="ngModel" [(ngModel)]="search" name="searchText" type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="ค้นหา" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append" (click)="getReportProduct()">
+                  <div class="input-group-text">
+                    <i class="fas fa-search-plus"></i>
+                  </div>
+                </div>
+                <button button mat-button routerLink="/add-product" mat-flat-button color="primary">Add Row</button>
+              </div> -->
+              <div class="input-group mb-3">
+                <div class="input-group">
+                  <div class="input-group-append">
+                    <label class="input-group-text">From</label>
+                  </div>
+                  <input type="date" class="form-control" placeholder="Start" name="date1" [(ngModel)]="order_date_from"/>
+                  <div class="input-group-append">
+                    <label class="input-group-text">To</label>
+                  </div>
+                  <input type="date" class="form-control" placeholder="End"  name="date2" [(ngModel)]="order_date_to"/>
+                  <button type="button" class="btn btn-primary" style="font-size: 18px;
+                  letter-spacing: .5px;
+                  padding: 4px 15px;
+                  text-transform: capitalize;
+                  font-weight: 600;
+                  border-radius: 0px;
+                  border: 2px solid transparent;" (click)="getReportSale('search')"><i class="fa fa-search"></i></button>
+                  <button type="button" class="btn btn-success" style="font-size: 18px;
+                  letter-spacing: .5px;
+                  padding: 4px 15px;
+                  text-transform: capitalize;
+                  font-weight: 600;
+                  border-radius: 0px;
+                  border: 2px solid transparent;" (click)="getReportSale('refresh')"><i class="fa fa-refresh"></i></button>
+                  <!-- <button button mat-button routerLink="/add-product" mat-flat-button color="primary">Add Row</button> -->
+                </div>
+                <!-- <a href="./report_sale.php" type="button" class="btn btn-success"><i class="fa fa-refresh"></i></a> -->
+              </div>
+            </div>
+          </div>
+        </form>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">No.</th>
+              <th scope="col" style="width: 7rem;">Order ID</th>
+              <th scope="col">Date</th>
+              <th scope="col">Name</th>
+              <th scope="col">Tel</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of product | paginate: { id:'pagination', itemsPerPage: 10, currentPage: currentPage }; let i= index">
+              <th scope="row">#{{ p.pageNo }}</th>
+              <td>{{ p.order_id }}</td>
+              <td>{{ p.order_date }}</td>
+              <td>{{ p.order_name }}</td>
+              <td>{{ p.order_tel}}</td>
+              <td>{{ p.order_total | currency:'':'' }}</td>
+            </tr>
+            <tr *ngIf="!product.length">
+              <td colspan="6">No data to display.</td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls id="pagination" class="text-center" (pageChange)="currentPage = $event" previousLabel="ก่อนหน้า" nextLabel="ถัดไป" [autoHide]="true"></pagination-controls>
+        <button type="button" class="btn btn-primary btn-block" (click)="clickPrintLabel()">ออกรายงาน</button>
+      </div>
+    </div>
+  </div>
+</section>
+<app-page-print-report-sale [sentToPrint]="sentToPrint"></app-page-print-report-sale>
+<app-footer></app-footer>

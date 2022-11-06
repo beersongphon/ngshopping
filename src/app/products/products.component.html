@@ -16,16 +16,18 @@
 
   <span class="onsale">Sale</span>
   <div class="product-hover-overlay">
-    <a *ngIf="(isCustommer())" [routerLink]="['/product-single', products.product_id, products.product_name]" (click)="click()">
+    <a *ngIf="(isCustommer())" [routerLink]="['/product-single', products.product_id, products.product_name]">
       <i class="tf-ion-android-cart"></i>
     </a>
-    <a *ngIf="(!isCustommer())" routerLink="/login"><i class="tf-ion-android-cart"></i></a>
+    <a *ngIf="(!isCustommer())" routerLink="/login">
+      <i class="tf-ion-android-cart"></i>
+    </a>
     <a href="#"><i class="tf-ion-ios-heart"></i></a>
   </div>
 
   <div class="product-info">
     <h2 class="product-title h5 mb-0">
-      <a [routerLink]="['/product-single', products.product_id, products.product_name]" (click)="click()">
+      <a [routerLink]="['/product-single', products.product_id, products.product_name]">
         {{products.product_name}}
       </a>
     </h2>

@@ -1,0 +1,51 @@
+<div id="pagePrint" *ngIf="disablePage">
+  <!-- Hoverable rows start -->
+  <section class="section">
+    <div class="row" id="table-hover-row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title" align="center">รายงานสินค้าคงเหลือ</h2>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+              <!-- table hover -->
+              <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-center" width="40">ลำดับ</th>
+                      <th class="text-center" width="90">รหัสสินค้า</th>
+                      <th class="text-left" align="left" width="130">วันที่</th>
+                      <th width="200" align="left">ชื่อสินค้า</th>
+                      <th align="left" width="50">ยี่ห้อ</th>
+                      <th align="left" width="60">ประเภท</th>
+                      <th class="text-center">เหลือ (ชิ้น)</th>
+                      <!-- <th>ACTION</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of printList">
+                      <td class="text-center" align="center">{{item.pageNo}}</td>
+                      <td class="text-center" align="center">{{item.product_id}}</td>
+                      <td class="text-left">{{item.product_date}}</td>
+                      <td class="text-bold-500">{{item.product_name}}</td>
+                      <td class="text-bold-500">{{item.brand_name}}</td>
+                      <td class="text-bold-500" align="left">{{item.category_name}}</td>
+                      <td class="text-center" align="center">{{item.product_quantity}}</td>
+                    </tr>
+                    <!-- <tr>
+                      <td class="text-right" align="right" colspan="6"><strong>จำนวนทั้งหมด</strong></td>
+                      <td class="text-center" align="center">{{+printList.product_quantity}}</td>
+                    </tr> -->
+                  </tbody>
+                </table>
+                <!-- <button onclick="window.print()">Print </button>  -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

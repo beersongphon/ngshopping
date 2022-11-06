@@ -151,7 +151,7 @@ input[type="tel"]:focus {
 }
 
 .btn {
-  font-size: 18px;
+  /* font-size: 18px; */
   letter-spacing: .5px;
   padding: 14px 35px;
   text-transform: capitalize;

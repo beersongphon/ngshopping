@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
       (token) => {
         // admin@rmutp.ac.th
         if (token.data) {
+          console.log(token.data);
           alert(token.message);
           if(token.data.permission_id == "1") {
             const redirect = this.apiService.redirectUrl ? this.apiService.redirectUrl : '/dashboard';

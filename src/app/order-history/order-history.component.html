@@ -41,7 +41,9 @@
               <td>{{ p.status_name }}</td>
               <td>{{ p.order_total | currency:'':'' }}</td>
               <td>
-                <a routerLink="/order" class="btn btn-dark btn-small">View</a>
+                <!-- <a routerLink="/order" class="btn btn-dark btn-small">View</a> -->
+                <button class="btn btn-dark btn-small" (click)="clickPrintLabel(i)">View</button>
+                <!-- <button class="btn btn-dark btn-small" (click)="clickPrintLabel(i)" printSectionId="pagePrintLabel" [useExistingCss]="true" ngxPrint>พิมพ์รายงาน</button> -->
               </td>
             </tr>
             <tr *ngIf="!order.length">

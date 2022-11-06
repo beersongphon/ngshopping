@@ -53,7 +53,8 @@ export class ShopComponent implements OnInit {
   }
 
   getShops(): void {
-    this.productService.getShops().subscribe(
+    let body: any = [];
+    this.productService.getShop(body).subscribe(
       (data) => {
         this.shop = data;
         if (data[0].product_quantity == 0) {
@@ -77,7 +78,10 @@ export class ShopComponent implements OnInit {
   }
 
   getCategory(): void {
-    this.productService.getCategory().subscribe(
+    let body = {
+      txtSearch: ''
+    }
+    this.productService.getCategory(body).subscribe(
       (data) => {
         this.category = data;
       }

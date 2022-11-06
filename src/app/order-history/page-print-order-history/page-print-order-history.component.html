@@ -1,1 +1,87 @@
-<p>page-print-order-history works!</p>
+<!-- <div id="pagePrintLabel" *ngIf="disablePage">
+  <div class='order-container'>
+    <div class='order-title'>ใบเสร็จ</div>
+    <div class='order-head'>
+      <div class='order-date'>
+        <b>เลขที่ใบเสร็จ</b>
+        <span class='order-underline'>{{printLabelList[numCount].order_id}}</span><br />
+        <b>วันที่สั่งซื้อ</b>
+        <span class='order-underline'>{{printLabelList[numCount].order_date | date: 'dd/MM/yyyy'}}</span>
+      </div>
+      <div class='order-customer'> <b>ชื่อ-สกุล</b>
+        <span class='order-underline'>{{printLabelList[numCount].order_name}}</span><br />
+        <b>ที่อยู่</b>
+        <span class='order-underline'>{{printLabelList[numCount].order_address}}</span><br />
+        <b>เบอร์โทรศัพท์</b>
+        <span class='order-underline'>{{printLabelList[numCount].order_tel}}</span><br />
+        <b>อีเมล</b>
+        <span class='order-underline'>{{printLabelList[numCount].order_email}}</span>
+      </div>
+    </div>
+    <div class='clear'></div>
+    <div class='order-content'>
+      <table width='100%' border='1' cellpadding='3' cellspacing='0'>
+        <tr>
+          <td><strong>สินค้า</strong></td>
+          <td align='center'><strong>ราคา</strong></td>
+          <td align='center'><strong>จำนวน</strong></td>
+          <td align='right'><strong>ราคารวม</strong></td>
+        </tr>
+        <tr *ngFor="let p of printLabelList[numCount].data">
+          <td>{{p.product_name}} ยี่ห้อ : {{p.brand_name}}</td>
+          <td align='center'>{{p.order_price | currency:'':''}}</td>
+          <td align='center'>{{p.order_quantity}}</td>
+          <td align='right'>{{p.order_quantity * p.order_price | currency:'':''}}</td>
+        </tr>
+        <tr>
+          <td colspan='3' align='right'><strong>รวมเงินทั้งสิ้น</strong></td>
+          <td align='right'>{{printLabelList[numCount].order_total | currency:'':''}}</td>
+        </tr>
+      </table>
+    </div>
+</div> -->
+
+<div id="pagePrintLabel" *ngIf="disablePage">
+  <div class='order-container'>
+    <div class='order-title'>ใบเสร็จ</div>
+    <div class='order-head'>
+      <div class='order-date'>
+        <b>เลขที่ใบเสร็จ</b>
+        <span class='order-underline'>{{printLabelList.order_id}}</span><br />
+        <b>วันที่สั่งซื้อ</b>
+        <span class='order-underline'>{{printLabelList.order_date | date: 'dd/MM/yyyy'}}</span>
+      </div>
+      <div class='order-customer'> <b>ชื่อ-สกุล</b>
+        <span class='order-underline'>{{printLabelList.order_name}}</span><br />
+        <b>ที่อยู่</b>
+        <span class='order-underline'>{{printLabelList.order_address}}</span><br />
+        <b>เบอร์โทรศัพท์</b>
+        <span class='order-underline'>{{printLabelList.order_tel}}</span><br />
+        <b>อีเมล</b>
+        <span class='order-underline'>{{printLabelList.order_email}}</span>
+      </div>
+    </div>
+    <div class='clear'></div>
+    <div class='order-content'>
+      <table width='100%' border='1' cellpadding='3' cellspacing='0'>
+        <tr>
+          <td><strong>สินค้า</strong></td>
+          <td align='center'><strong>ราคา</strong></td>
+          <td align='center'><strong>จำนวน</strong></td>
+          <td align='right'><strong>ราคารวม</strong></td>
+        </tr>
+        <tr *ngFor="let p of printLabelList.data">
+          <td>{{p.product_name}} ยี่ห้อ : {{p.brand_name}}</td>
+          <td align='center'>{{p.order_price | currency:'':''}}</td>
+          <td align='center'>{{p.order_quantity}}</td>
+          <td align='right'>{{p.order_quantity * p.order_price | currency:'':''}}</td>
+        </tr>
+        <tr>
+          <td colspan='3' align='right'><strong>รวมเงินทั้งสิ้น</strong></td>
+          <td align='right'>{{printLabelList.order_total | currency:'':''}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+

@@ -24,7 +24,8 @@ export class HomeComponent implements OnInit {
   }
 
   getProducts(): void {
-    this.productService.getShops().subscribe(
+    let body: any = [];
+    this.productService.getShop(body).subscribe(
       (data) => {
         this.product = data;
         // data.sort((a: any,b: any) => a.product_id.localeCompare(b.product_id));

@@ -51,7 +51,7 @@
 
         <!-- Account -->
         <li class="nav-item dropdown dropdown-slide">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-delay="350" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-delay="350" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="(isLogin() && permission_id == 1)">
             Account.
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown5">

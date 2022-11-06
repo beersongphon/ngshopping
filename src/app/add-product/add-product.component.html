@@ -1,0 +1,105 @@
+<app-header></app-header>
+<section class="page-header">
+  <div class="overly"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="content text-center">
+          <h1 class="mb-3">Add Product</h1>
+          <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent justify-content-center">
+              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item"><a routerLink="/product">Product</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Add Product</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="user-dashboard page-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-5 col-sm-12 col-lg-3">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="col-12 col-md-7 col-sm-12 col-lg-9">
+        <div class="tab-pane fade show active" id="settings" role="tabpanel">
+          <div class="acccount-settings">
+            <h4 class="mb-4">Add Product</h4>
+            <form #userForm="ngForm" novalidate>
+              <div class="row p-5">
+                <table id="image_list" class="table">
+                  <tr *ngFor='let url of images'>
+                    <td>
+                      <img [src]="url.img_product" width="200px">
+                    </td>
+                    <td>
+                    <!-- <button type="button" class="btn btn-danger btn-sm" (click)="deleteImage(url)">Remove</button> -->
+                    <button class="btn btn-danger" (click)="deleteImage(url)">Remove</button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="input-group mb-3">
+                <input id='file' name="file" type="file" class="form-control" (change)="uploadImage($event)" required multiple>
+                <!-- <button (change)="uploadImage($event)" class="btn btn-primary" id="btn_upload" name="btn_upload" type="button" style="letter-spacing: .5px; padding: 8px 20px; text-transform: capitalize; font-weight: 600; border-radius: 0px; border: 2px solid transparent;">
+                  อัปโหลดรูปภาพ
+                </button> -->
+              </div>
+
+              <hr>
+              <div class="form-group mb-4">
+                <label>Product Name </label>
+                <!-- <input type="text" class="form-control" name="product_name" placeholder="Jassa"> -->
+                <input type="text" class="form-control" name="product_name" placeholder="Jassa" ngModel
+                #product_name="ngModel" [ngClass]="{'is-invalid': product_name.invalid && (product_name.dirty || product_name.touched)}" required>
+              </div>
+              <div class="form-group mb-4">
+                <label>Brand </label>
+                <select class="form-control" name="brand_id" ngModel
+                #brand_id="ngModel" [ngClass]="{'is-invalid': brand_id.invalid && (brand_id.dirty || brand_id.touched)}" required>
+                  <option *ngFor="let b of brand" [value]="b.brand_id">{{b.brand_name}}</option>
+                </select>
+              </div>
+              <div class="form-group mb-4">
+                <label>Category </label>
+                <select class="form-control" name="category_id" ngModel
+                #category_id="ngModel" [ngClass]="{'is-invalid': category_id.invalid && (category_id.dirty || category_id.touched)}" required>
+                  <option *ngFor="let c of category" [value]="c.category_id">{{c.category_name}}</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Price</label>
+                    <input type="text" class="form-control" name="product_price" placeholder="John" ngModel
+                    #product_price="ngModel" [ngClass]="{'is-invalid': product_price.invalid && (product_price.dirty || product_price.touched)}" required>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Product Quantity</label>
+                    <input type="number" class="form-control" name="product_quantity" placeholder="Jas" ngModel
+                    #product_quantity="ngModel" [ngClass]="{'is-invalid': product_quantity.invalid && (product_quantity.dirty || product_quantity.touched)}" required>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mb-4">
+                <label>description</label>
+                <textarea class="form-control" name="product_description" ngModel
+                #product_description="ngModel" [ngClass]="{'is-invalid': product_description.invalid && (product_description.dirty || product_description.touched)}" required></textarea>
+              </div>
+              <button type="submit" [disabled]="userForm.invalid" class="btn btn-dark" (click)="insertProduct(userForm.value)">Save Changes</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

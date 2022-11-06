@@ -46,7 +46,8 @@ export class ProductsingleComponent implements OnInit {
   }
 
   getProducts(): void {
-    this.productService.getShops().subscribe(
+    let body: any = [];
+    this.productService.getShop(body).subscribe(
       (data) => {
         this.product = data;
       }

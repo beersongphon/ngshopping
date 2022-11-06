@@ -15,6 +15,8 @@ export class ProductComponent implements OnInit, OnDestroy {
   pageNo: object | undefined;
   sub: Subscription | undefined;
 
+  search: string = "";
+
   currentPage: number = 1;
 
   constructor(private apiService: ApiService, private productService: ProductService) { }
@@ -24,8 +26,8 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   getProduct(): void {
-    let search = { txtSearch: "" }
-    this.sub = this.productService.getProduct(search).subscribe(
+    let body = { txtSearch: this.search }
+    this.sub = this.productService.getProduct(body).subscribe(
       (products) => {
         // this.product = products;
         this.product = this.addPageNo(products);

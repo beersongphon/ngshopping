@@ -60,9 +60,24 @@ export class ApiService {
     return throwError(error);
   }
 
-  getUser(): Observable<any>{
+  getUser(): Observable<any> {
     const apiHeader = { 'Authorization': '' + this.getToken() };
     return this.http.get<any>(environment.apiUrl + '/api_show_user.php', { headers: apiHeader });
+  }
+
+  insertUser(formValue: any): Observable<any> {
+    const apiHeader = { 'Content-Type': 'application/json' };
+    return this.http.post<any>(environment.apiUrl + '/api_insert_user.php', formValue, { headers: apiHeader });
+  }
+
+  updateUser(formValue: any): Observable<any> {
+    const apiHeader = { 'Content-Type': 'application/json' };
+    return this.http.put<any>(environment.apiUrl + '/api_update_user.php', formValue, { headers: apiHeader });
+  }
+
+  deleteUser(formValue: any): Observable<any> {
+    const apiHeader = { 'Content-Type': 'application/json' };
+    return this.http.post<any>(environment.apiUrl + '/api_delete_user.php', formValue, { headers: apiHeader });
   }
 
   // public userregistration(User_Name: any, Email: any, Password: any) {

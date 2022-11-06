@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { ApiService } from './../shared/api.service';
 import { ProductService } from './../shared/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order-history',
@@ -45,34 +46,73 @@ export class OrderHistoryComponent implements OnInit, OnDestroy {
     return item;
   }
 
-  clickPrintLabel(){
+  clickPrintLabel(nums: any) {
     // this.SpinnerService.show()
-    // let listToPrint = []
-    // let num = 0
-    // for (let i = 0; i < this.chbSelect.length; i++) {
-    //   if (this.chbSelect[i] == true) {
-    //     listToPrint[num] = JSON.parse(JSON.stringify(this.tableListPrintLabel[i]));
-    //     num++
+    let listToPrint: any[] = []
+    let listToPrints: any
+    let num = 0
+    listToPrints = JSON.parse(JSON.stringify(this.order[nums]));
+    // console.log(listToPrints);
+
+    // for (let i = 0; i < this.order.length; i++) {
+    //   listToPrint[nums] = JSON.parse(JSON.stringify(this.order[i]));
+    //   console.log(listToPrint[nums]);
+    //   nums++
+    //   console.log(listToPrint);
+
+    //   if (this.order[i] == true) {
+    //     console.log(listToPrint);
     //   }
     // }
-    // if(listToPrint.length == 0){
-    //   this.objAlert = fn_get_Alert_Error('กรุณาระบุรายการที่ต้องการพิมพ์')
-    //   Swal.fire(this.objAlert)
-
-    // }else{
-    //   for (let i = 0; i < listToPrint.length; i++) {
-    //     listToPrint[i].custName = listToPrint[i].custName.split(' ')[0] + " xxxxx";
-    //     listToPrint[i].contactPhone1 = markDataPrivacy(listToPrint[i].contactPhone1,'tel')
-
-    //   }
-    //   this.sentToPrint.next(listToPrint)
-
-    // }
-
-    // this.SpinnerService.hide()
+    if (listToPrints.length == 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'กรุณาระบุรายการที่ต้องการพิมพ์',
+        showConfirmButton: false,
+        timer: 1500
+      }).then((result) => {
+        if (result.isDismissed) {
+          window.history.back;
+        }
+      });
+    } else {
+      // for (let i = 0; i < listToPrint.length; i++) {
+      //   // listToPrint[i].custName = listToPrint[i].custName.split(' ')[0] + " xxxxx";
+      //   // listToPrint[i].contactPhone1 = markDataPrivacy(listToPrint[i].contactPhone1,'tel')
+      //   listToPrint[i]
+      // }
+      // this.sentToPrint.next(listToPrint);
+      this.sentToPrint.next(listToPrints);
+    }
   }
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
   }
+
+
+    onClickDownloadPdf(){
+      var sTable = document.getElementById('tab')?.innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        // CREATE A WINDOW OBJECT.
+        var win: any = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>Profile</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+
+        win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+        win.print();    // PRINT THE CONTENTS.
+    }
 }

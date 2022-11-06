@@ -191,7 +191,7 @@ export class PaymentComponent implements OnInit {
     } else {
       Swal.fire({
         icon: 'error',
-        title: 'Upload file ได้เฉพาะ .xls หรือ .xlsx เท่านั้น',
+        title: 'Upload file ได้เฉพาะ .jpg หรือ .png เท่านั้น',
         showConfirmButton: false,
         timer: 1500
       }).then((result) => {
