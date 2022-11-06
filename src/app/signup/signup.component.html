@@ -28,73 +28,75 @@
             </div>
             <a href="#" class="btn btn-main mt-3 btn-block">Signup</a>
           </form> -->
-          <form action="#">
+          <form #userForm="ngForm" novalidate>
             <div class="form-group mb-4">
-              <label for="#">ชื่อ</label>
+              <label for="#">Firstname</label>
               <input required #user_firstname="ngModel"
               [ngClass]="{ 'is-invalid': user_firstname.invalid && (user_firstname.touched || user_firstname.dirty) }"
-              ngModel name="user_firstname" type="text" class="form-control" id="user_firstname" placeholder="ชื่อ">
+              ngModel name="user_firstname" type="text" class="form-control" id="user_firstname" placeholder="Firstname">
             </div>
             <div class="form-group mb-4">
-              <label for="#">นามสกุล</label>
+              <label for="#">Lastname</label>
               <input required #user_lastname="ngModel"
               [ngClass]="{ 'is-invalid': user_lastname.invalid && (user_lastname.touched || user_lastname.dirty) }"
-              ngModel name="user_lastname" type="text" class="form-control" id="user_lastname" placeholder="นามสกุล">
+              ngModel name="user_lastname" type="text" class="form-control" id="user_lastname" placeholder="Lastname">
             </div>
             <div class="form-group mb-4">
-              <label for="#">ที่อยู่</label>
+              <label for="#">Address</label>
               <input required #user_address="ngModel"
               [ngClass]="{ 'is-invalid': user_address.invalid && (user_address.touched || user_address.dirty) }"
-              ngModel name="user_address" type="text" class="form-control" id="user_address" placeholder="ที่อยู่">
+              ngModel name="user_address" type="text" class="form-control" id="user_address" placeholder="Address">
             </div>
             <div class="form-group mb-4">
-              <label for="#">เบอร์โทรศัพท์</label>
+              <label for="#">Tel</label>
               <input required #user_tel="ngModel"
               [ngClass]="{ 'is-invalid': user_tel.invalid && (user_tel.touched || user_tel.dirty) }"
-              ngModel name="user_tel" type="number" class="form-control" id="user_tel" placeholder="เบอร์โทรศัพท์">
+              ngModel name="user_tel" type="number" class="form-control" id="user_tel" placeholder="Tel">
             </div>
             <div class="form-group mb-4">
-              <label for="#">อีเมล</label>
+              <label for="#">Email</label>
               <input required #user_email="ngModel"
               [ngClass]="{ 'is-invalid': user_email.invalid && (user_email.touched || user_email.dirty) }"
-              ngModel name="user_email" type="email" class="form-control" id="user_email" placeholder="อีเมล">
+              ngModel name="user_email" type="email" class="form-control" id="user_email" placeholder="Email">
             </div>
             <div class="form-group mb-4">
-              <label for="#">เพศ</label>
+              <label for="#">Sex</label>
               <div class="form-check">
                 <input required #user_sex="ngModel"
                 [ngClass]="{ 'is-invalid': user_sex.invalid && (user_sex.touched || user_sex.dirty) }"
-                ngModel class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1">
+                ngModel class="form-check-input" type="radio" name="user_sex" id="exampleRadios1" value="ชาย">
                 <label class="form-check-label" for="exampleRadios1">
-                  ชาย
+                  Male
                 </label>
               </div>
               <div class="form-check">
                 <input required #user_sex="ngModel"
                 [ngClass]="{ 'is-invalid': user_sex.invalid && (user_sex.touched || user_sex.dirty) }"
-                ngModel class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="0">
+                ngModel class="form-check-input" type="radio" name="user_sex" id="exampleRadios2" value="หญิง">
                 <label class="form-check-label" for="exampleRadios2">
-                  หญิง
+                  Female
                 </label>
               </div>
             </div>
             <div class="form-group mb-4">
-              <label for="#">ชื่อผู้ใช้</label>
+              <label for="#">Username</label>
               <input required #user_username="ngModel"
               [ngClass]="{ 'is-invalid': user_username.invalid && (user_username.touched || user_username.dirty) }"
-              ngModel name="user_username" type="text" class="form-control" id="user_username" placeholder="ชื่อผู้ใช้">
+              ngModel name="user_username" type="text" class="form-control" id="user_username" placeholder="Username">
             </div>
             <div class="form-group mb-4">
-              <label for="#">รหัสผ่าน</label>
+              <label for="#">Password</label>
               <input required #user_password="ngModel"
               [ngClass]="{ 'is-invalid': user_password.invalid && (user_password.touched || user_password.dirty) }"
-              ngModel name="user_password" type="password" class="form-control" id="user_password" placeholder="รหัสผ่าน">
+              ngModel name="user_password" type="password" class="form-control" id="user_password" placeholder="Password">
             </div>
             <div class="form-group">
-              <label for="#">ยืนยันรหัสผ่าน</label>
-              <input type="password" class="form-control" placeholder="ยืนยันรหัสผ่าน">
+              <label for="#">Confirm Password</label>
+              <input required #user_confirm_password="ngModel"
+              [ngClass]="{ 'is-invalid': user_confirm_password.invalid && (user_confirm_password.touched || user_confirm_password.dirty) }"
+              ngModel name="user_confirm_password" type="password" class="form-control" id="user_confirm_password" placeholder="Confirm Password">
             </div>
-            <button type="submit" class="btn btn-main mt-3 btn-block">Signup</button>
+            <button [disabled]="userForm.invalid" type="submit" class="btn btn-main mt-3 btn-block" (click)="insertUser(userForm.value)">Signup</button>
           </form>
         </div>
       </div>
