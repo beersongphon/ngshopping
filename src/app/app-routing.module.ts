@@ -17,7 +17,7 @@ import { ProfileDetailComponent } from './profile-detail/profile-detail.componen
 import { SignupComponent } from './signup/signup.component';
 import { ProductComponent } from './product/product.component';
 import { PaymentComponent } from './payment/payment.component';
-import { OrderHistoryComponent } from './order-history/order-history.component';
+import { UserComponent } from './user/user.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { BrandComponent } from './brand/brand.component';
@@ -48,7 +48,7 @@ const routes: Routes = [
   { path: 'product', component: ProductComponent, canActivate: [AuthGuard] },
   { path: 'signup', component: SignupComponent },
   { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
-  { path: 'order-history', component: OrderHistoryComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'add-product', component: AddProductComponent, canActivate: [AuthGuard] },
   { path: 'edit-product/:id/:title', component: EditProductComponent, canActivate: [AuthGuard] },
   { path: 'brand', component: BrandComponent, canActivate: [AuthGuard] },

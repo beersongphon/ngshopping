@@ -38,8 +38,6 @@ export class ReportProductComponent implements OnInit, OnDestroy {
           this.product = products['data'];
           this.product = this.addPageNo(this.product);
           this.products = Object.assign({ total: products['total'], data: this.addPageNo(products['data']) });
-          console.log(this.product);
-
         }
       }
     );
@@ -55,7 +53,7 @@ export class ReportProductComponent implements OnInit, OnDestroy {
     return item;
   }
 
-  clickPrintLabel() {
+  clickPrint() {
     // this.SpinnerService.show()
     let listToPrint = []
     let num = 0

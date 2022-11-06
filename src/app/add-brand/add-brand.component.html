@@ -9,8 +9,8 @@
           <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent justify-content-center">
-              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-              <li class="breadcrumb-item"><a routerLink="/product">Brand</a></li>
+              <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
+              <li class="breadcrumb-item"><a routerLink="/brand">Brand</a></li>
               <li class="breadcrumb-item active" aria-current="page">Add Brand</li>
             </ol>
           </nav>
@@ -30,13 +30,13 @@
         <div class="tab-pane fade show active" id="settings" role="tabpanel">
           <div class="acccount-settings">
             <h4 class="mb-4">Add Brand</h4>
-            <form #userForm="ngForm" novalidate>
+            <form #brandForm="ngForm" novalidate>
               <div class="form-group mb-4">
                 <label>Brand Name </label>
-                <input type="text" class="form-control" name="brand_name" placeholder="Jassa" ngModel
+                <input type="text" class="form-control" name="brand_name" ngModel
                 #brand_name="ngModel" [ngClass]="{'is-invalid': brand_name.invalid && (brand_name.dirty || brand_name.touched)}" required>
               </div>
-              <button type="submit" [disabled]="userForm.invalid" class="btn btn-dark" (click)="insertProduct(userForm.value)">Save Changes</button>
+              <button type="submit" [disabled]="brandForm.invalid" class="btn btn-dark" (click)="insertBrand(brandForm.value)">Save Changes</button>
             </form>
           </div>
         </div>

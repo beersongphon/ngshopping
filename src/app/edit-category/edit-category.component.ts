@@ -31,7 +31,16 @@ export class EditCategoryComponent implements OnInit {
       next: (data) => {
         this.category = data;
       }, error: (error) => {
-        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
     });
   }
@@ -42,16 +51,43 @@ export class EditCategoryComponent implements OnInit {
     body = {
       category_id: this.id,
       category_name: formValue.category_name
-    }
+    };
     this.productService.updateCategory(body).subscribe({
       next: (data) => {
         if (data.status == "success") {
-
+          Swal.fire({
+            icon: "success",
+            title: (data.message),
+            showConfirmButton: false,
+            timer: 2000
+          }).then((result) => {
+            if (result.isDismissed) {
+              this.router.navigate(['/brand']);
+            }
+          });
         } else {
-
+          Swal.fire({
+            icon: "error",
+            title: (data.message),
+            showConfirmButton: false,
+            timer: 2000
+          }).then((result) => {
+            if (result.isDismissed) {
+              window.history.back;
+            }
+          });
         }
       }, error: (error) => {
-        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
     });
   }

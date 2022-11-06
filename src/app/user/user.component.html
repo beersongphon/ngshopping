@@ -5,12 +5,12 @@
     <div class="row justify-content-center">
       <div class="col-lg-6">
         <div class="content text-center">
-          <h1 class="mb-3">Brand</h1>
+          <h1 class="mb-3">User</h1>
           <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent justify-content-center">
               <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Brand</li>
+              <li class="breadcrumb-item active" aria-current="page">User</li>
             </ol>
           </nav>
         </div>
@@ -32,12 +32,12 @@
               <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
               <div class="input-group">
                 <input #text="ngModel" [(ngModel)]="search" name="searchText" type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="ค้นหา" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <div class="input-group-append" (click)="getBrand()">
+                <div class="input-group-append" (click)="getUser()">
                   <div class="input-group-text">
                     <i class="fas fa-search-plus"></i>
                   </div>
                 </div>
-                <button button mat-button routerLink="/add-brand" mat-flat-button color="primary">Add Row</button>
+                <button button mat-button routerLink="/add-product" mat-flat-button color="primary">Add Row</button>
                 <!-- <button button mat-button (click)="openDialog('Add', {})" mat-flat-button color="primary">Add Row</button> -->
               </div>
             </div>
@@ -47,24 +47,28 @@
           <thead>
             <tr>
               <th scope="col">No.</th>
-              <th scope="col" style="width: 7rem;">Brand ID</th>
-              <th scope="col">Brand Name</th>
-              <th scope="col" style="width: 17rem;">Actions</th>
+              <th scope="col" style="width: 7rem;">Username</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">Tel</th>
+              <th scope="col">Sex</th>
+              <th scope="col">Date</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let b of brand | paginate: { id:'pagination', itemsPerPage: 10, currentPage: currentPage }; let i= index">
-              <th scope="row">#{{ b.pageNo }}</th>
-              <td>{{ b.brand_id }}</td>
-              <td>{{ b.brand_name }}</td>
-              <td>
-                <!-- <a routerLink="/order" class="btn btn-dark btn-small">View</a> | -->
-                <a [routerLink]="['/edit-brand', b.brand_id, b.brand_name]" class="btn btn-warning btn-small">Edit</a> |
-                <a routerLink="/brand" class="btn btn-danger btn-small" (click)="deleteBrand(b.brand_id)">Delete</a>
-              </td>
+            <tr *ngFor="let u of user | paginate: { id:'pagination', itemsPerPage: 10, currentPage: currentPage }; let i= index">
+              <th scope="row">#{{ u.pageNo }}</th>
+              <td>{{ u.user_username }}</td>
+              <td>{{ u.user_firstname }}</td>
+              <td>{{ u.user_lastname }}</td>
+              <td>{{ u.user_address }}</td>
+              <td>{{ u.user_tel }}</td>
+              <td>{{ u.user_sex }}</td>
+              <td>{{ u.user_datetime }}</td>
             </tr>
-            <tr *ngIf="!brand.length">
-              <td colspan="5">No data to display.</td>
+            <tr *ngIf="!user.length">
+              <td colspan="6">No data to display.</td>
             </tr>
           </tbody>
         </table>

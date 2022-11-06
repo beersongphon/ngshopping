@@ -65,16 +65,27 @@ export class CheckoutComponent implements OnInit {
   }
 
   getUser(): void {
-    this.apiService.getUser().subscribe(
-      (data) => {
+    this.apiService.getUser().subscribe({
+      next: (data) => {
         this.user_id = data.user_id;
         this.user_firstname = data.user_firstname;
         this.user_lastname = data.user_lastname;
         this.user_address = data.user_address;
         this.user_email = data.user_email;
         this.user_tel = data.user_tel;
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 
   insertOrder(state: any): void {

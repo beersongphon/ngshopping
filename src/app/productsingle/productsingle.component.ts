@@ -4,6 +4,7 @@ import { CartService } from './../shared/cart.service';
 import { ApiService } from './../shared/api.service';
 import { Product } from '../shared/product.model';
 import { ProductService } from './../shared/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-productsingle',
@@ -47,11 +48,22 @@ export class ProductsingleComponent implements OnInit {
 
   getProducts(): void {
     let body: any = [];
-    this.productService.getShop(body).subscribe(
-      (data) => {
+    this.productService.getShop(body).subscribe({
+      next: (data) => {
         this.product = data;
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 
   addToCart(product: Product, quantity: number): void {
@@ -65,20 +77,40 @@ export class ProductsingleComponent implements OnInit {
   }
 
   getProductDetail(): void {
-    this.productService.getProductDetail(this.id, this.title).subscribe(
-      (productsingle) => {
-        // console.log(productsingle);
-        this.productItem = productsingle['data'];
+    this.productService.getProductDetail(this.id, this.title).subscribe({
+      next: (data) => {
+        this.productItem = data['data'];
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 
   getProductDetailImage(): void {
-    this.productService.getProductDetailImage(this.id).subscribe(
-      (productsingleimage) => {
-        // console.log(productsingleimage);
-        this.images = productsingleimage['data'];
+    this.productService.getProductDetailImage(this.id).subscribe({
+      next: (data) => {
+        this.images = data['data'];
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 }

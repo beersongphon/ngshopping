@@ -29,8 +29,8 @@ import { ContactComponent } from './contact/contact.component';
 import { ProductComponent } from './product/product.component';
 import { ProductsComponent } from './products/products.component';
 import { PaymentComponent } from './payment/payment.component';
-import { OrderHistoryComponent } from './order-history/order-history.component';
-import { PagePrintOrderHistoryComponent } from './order-history/page-print-order-history/page-print-order-history.component';
+import { PagePrintOrderHistoryComponent } from './orders/page-print-order-history/page-print-order-history.component';
+import { UserComponent } from './user/user.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { BrandComponent } from './brand/brand.component';
@@ -109,8 +109,8 @@ import { NgxPrintModule } from 'ngx-print';
     ProductComponent,
     ProductsComponent,
     PaymentComponent,
-    OrderHistoryComponent,
     PagePrintOrderHistoryComponent,
+    UserComponent,
     AddProductComponent,
     EditProductComponent,
     BrandComponent,

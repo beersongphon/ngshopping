@@ -1,7 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 import { ApiService } from './../shared/api.service';
 import { ProductService } from './../shared/product.service';
+import { environment } from './../../environments/environment';
 
 @Component({
   selector: 'app-product',
@@ -19,7 +22,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   currentPage: number = 1;
 
-  constructor(private apiService: ApiService, private productService: ProductService) { }
+  constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
     this.getProduct();
@@ -27,12 +30,22 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   getProduct(): void {
     let body = { txtSearch: this.search }
-    this.sub = this.productService.getProduct(body).subscribe(
-      (products) => {
-        // this.product = products;
-        this.product = this.addPageNo(products);
+    this.sub = this.productService.getProduct(body).subscribe({
+      next: (data) => {
+        this.product = this.addPageNo(data);
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 
   addPageNo(item: any) {
@@ -45,8 +58,65 @@ export class ProductComponent implements OnInit, OnDestroy {
     return item;
   }
 
+  deleteProduct(id: any) {
+    let body = {}
+    body = {
+      product_id: id,
+    }
+    Swal.fire({
+      title: "คุณแน่ใจหรือไม่?",
+      text: "คุณจะไม่สามารถเปลี่ยนกลับได้!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "OK"
+    }).then((result) => {
+      if (result.value) {
+        this.productService.deleteProduct(body).subscribe({
+          next: (data) => {
+            if (data.status == "success") {
+              Swal.fire({
+                icon: "success",
+                title: (data.message),
+                showConfirmButton: false,
+                timer: 2000
+              }).then((result) => {
+                if (result.isDismissed) {
+                  this.router.navigate(['/product']);
+                  this.getProduct();
+                }
+              });
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: (data.message),
+                showConfirmButton: false,
+                timer: 2000
+              }).then((result) => {
+                if (result.isDismissed) {
+                  window.history.back;
+                }
+              });
+            }
+          }, error: (error) => {
+            Swal.fire({
+              icon: "error",
+              title: (error),
+              showConfirmButton: false,
+              timer: 2000
+            }).then((result) => {
+              if (result.isDismissed) {
+                window.history.back;
+              }
+            });
+          }
+        });
+      }
+    })
+  }
+
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
   }
-
 }

@@ -8,15 +8,18 @@
 
     <div class="collapse navbar-collapse " id="main-navbar">
       <ul class="navbar-nav mx-auto">
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <li *ngIf="loginbtn"class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" routerLink="/">Home </a>
+        </li>
+        <li *ngIf="(isLogin() && isCustommer())"class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           <a class="nav-link" routerLink="/">Home </a>
         </li>
 
-        <li class="nav-item" *ngIf="(isLogin() && permission_id == 1)">
+        <!-- <li class="nav-item" *ngIf="(isLogin() && permission_id == 1)">
           <a class="nav-link" href="#">About Us</a>
-        </li>
+        </li> -->
         <!-- Pages -->
-        <li class="nav-item dropdown dropdown-slide" *ngIf="(isLogin() && permission_id == 1)">
+        <!-- <li class="nav-item dropdown dropdown-slide" *ngIf="(isLogin() && permission_id == 1)">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-delay="350" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Pages.
           </a>
@@ -28,14 +31,14 @@
             <li><a href="#">404 Page</a></li>
             <li><a href="#">FAQ</a></li>
           </ul>
-        </li>
+        </li> -->
         <!-- / Pages -->
 
         <li *ngIf="loginbtn" class="nav-item">
           <a class="nav-link" routerLink="/shop" routerLinkActive="active">Shop.</a>
         </li>
         <!-- Blog -->
-        <li *ngIf="logoutbtn" class="nav-item dropdown dropdown-slide" routerLinkActive="active">
+        <li *ngIf="(isLogin() && isCustommer())" class="nav-item dropdown dropdown-slide" routerLinkActive="active">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-delay="350" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Shop.
           </a>
@@ -50,7 +53,7 @@
         <!-- / Blog -->
 
         <!-- Account -->
-        <li class="nav-item dropdown dropdown-slide">
+        <!-- <li class="nav-item dropdown dropdown-slide">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-delay="350" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="(isLogin() && permission_id == 1)">
             Account.
           </a>
@@ -63,7 +66,7 @@
             <li><a routerLink="/signup">SignUp Page</a></li>
             <li><a routerLink="/forgot-password">Forgot Password</a></li>
           </ul>
-        </li>
+        </li> -->
         <!-- / Account -->
 
         <!-- <li class="nav-item">
@@ -74,9 +77,9 @@
 
     <!-- Navbar-collapse -->
     <ul class="top-menu list-inline mb-0 d-none d-lg-block" id="top-menu">
-      <li class="list-inline-item">
+      <!-- <li class="list-inline-item">
         <a href="#" class="search_toggle" id="search-icon"><i class="tf-ion-android-search"></i></a>
-      </li>
+      </li> -->
 
       <!-- <li *ngIf="loginbtn" class="dropdown cart-nav dropdown-slide list-inline-item">
         <a href="#" class="dropdown-toggle cart-icon" data-toggle="dropdown" data-hover="dropdown">

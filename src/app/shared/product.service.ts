@@ -24,17 +24,9 @@ export class ProductService {
   //     );
   // }
 
-  getShops(): Observable<any[]> {
-    return this.http.get<any[]>(environment.apiUrl + '/api_get_product_front-end.php');
-  }
-
   getShop(formValue: any): Observable<any> {
     const apiHeader = { 'Content-Type': 'application/json' };
     return this.http.post<any>(environment.apiUrl + '/api_get_product_front-end.php', formValue, { headers: apiHeader });
-  }
-
-  getProducts(): Observable<any[]> {
-    return this.http.get<any[]>(environment.apiUrl + '/api_get_product.php');
   }
 
   getProduct(formValue: any): Observable<any> {
@@ -110,10 +102,6 @@ export class ProductService {
   getCategory(formValue: any): Observable<any> {
     const apiHeader = { 'Content-Type': 'application/json' };
     return this.http.post<any>(environment.apiUrl + '/api_get_category.php', formValue, { headers: apiHeader });
-  }
-
-  getCategorys(): Observable<any[]> {
-    return this.http.get<any[]>(environment.apiUrl + '/api_get_category.php');
   }
 
   getEditCategory(formValue: any): Observable<any> {

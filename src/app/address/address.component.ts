@@ -18,15 +18,48 @@ export class AddressComponent implements OnInit {
   }
 
   getUser(): void {
-    this.apiService.getUser().subscribe(
-      (data) => {
+    this.apiService.getUser().subscribe({
+      next: (data) => {
         if (data.user_firstname) {
           this.name = data.user_firstname + " " + data.user_lastname;
           this.address = data.user_address;
         }
-      },(error) => {
+      }, error: (error) => {
         this.name = "";
       }
-    );
+    });
+  }
+
+  isLogin() {
+    if (this.apiService.isLoggedIn()) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  isAdmin() {
+    if (this.apiService.getUserlevel() == '1') {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  isStaff() {
+    if (this.apiService.getUserlevel() == '2') {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  //แบ่งสิทธิ์สำหรับลูกค้า
+  isCustommer() {
+    if (this.apiService.getUserlevel() == '3') {
+      return true
+    } else {
+      return false
+    }
   }
 }

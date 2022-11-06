@@ -9,7 +9,7 @@
           <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent justify-content-center">
-              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
             </ol>
           </nav>
@@ -29,25 +29,22 @@
         <!-- <p>Hello Therichpost (not Therichpost? <a routerLink="/">Log out</a>)</p>
         From your account dashboard you can view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details</a>. -->
         <div class="row">
-          <div class="col-xl-3 col-md-6">
+          <div class="col-xl-4 col-md-6">
             <div class="card card-stats">
               <!-- Card body -->
               <div class="card-body">
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">User</h5>
-                    <span class="h2 font-weight-bold mb-0"> Peorple</span>
+                    <span class="h2 font-weight-bold mb-0" *ngIf="countuser">{{countuser.user_id}} Peorple</span>
                   </div>
                   <div class="col-auto">
-                    <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
-
-                    </div>
+                    <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow"></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
 
       </div>

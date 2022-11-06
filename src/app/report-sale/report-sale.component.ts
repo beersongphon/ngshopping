@@ -71,7 +71,7 @@ export class ReportSaleComponent implements OnInit, OnDestroy {
   }
 
 
-  clickPrintLabel() {
+  clickPrint() {
     let listToPrint: any;
     let num = 0
     listToPrint = JSON.parse(JSON.stringify(this.products));

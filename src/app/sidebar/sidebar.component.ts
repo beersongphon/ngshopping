@@ -20,4 +20,32 @@ export class SidebarComponent implements OnInit {
       window.location.reload();
     });
   }
+
+  isLogin() {
+    return this.apiService.isLoggedIn();
+  }
+
+  isAdmin() {
+    if (this.apiService.getUserlevel() == '1') {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  isStaff() {
+    if (this.apiService.getUserlevel() == '2') {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  isCustommer() {
+    if (this.apiService.getUserlevel() == '3') {
+      return true
+    } else {
+      return false
+    }
+  }
 }

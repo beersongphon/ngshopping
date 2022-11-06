@@ -5,6 +5,7 @@ import { CartService } from './../shared/cart.service';
 import { CartCalculator } from './../shared/cart-calculator';
 import { Product } from '../shared/product.model';
 import { ProductSelection } from './../shared/product-selection';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
@@ -45,20 +46,20 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
   }
+
   getUser(): void {
-    this.apiService.getUser().subscribe(
-      (data) => {
+    this.apiService.getUser().subscribe({
+      next: (data) => {
         if (data.user_firstname) {
           this.name = data.user_firstname + " " + data.user_lastname;
           this.permission_id = data.permission_id;
-          console.log(this.permission_id);
         } else {
           console.log(this.permission_id);
         }
-      },(error) => {
+      }, error: (error) => {
         this.name = "";
       }
-    );
+    });
   }
 
   subTotal(): number {

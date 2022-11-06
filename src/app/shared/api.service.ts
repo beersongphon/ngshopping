@@ -65,6 +65,11 @@ export class ApiService {
     return this.http.get<any>(environment.apiUrl + '/api_show_user.php', { headers: apiHeader });
   }
 
+  getUsers(formValue: any): Observable<any> {
+    const apiHeader = { 'Content-Type': 'application/json' };
+    return this.http.post<any>(environment.apiUrl + '/api_get_user.php', formValue, { headers: apiHeader });
+  }
+
   insertUser(formValue: any): Observable<any> {
     const apiHeader = { 'Content-Type': 'application/json' };
     return this.http.post<any>(environment.apiUrl + '/api_insert_user.php', formValue, { headers: apiHeader });
@@ -79,16 +84,6 @@ export class ApiService {
     const apiHeader = { 'Content-Type': 'application/json' };
     return this.http.post<any>(environment.apiUrl + '/api_delete_user.php', formValue, { headers: apiHeader });
   }
-
-  // public userregistration(User_Name: any, Email: any, Password: any) {
-  //   return this.http.post<any>(this.registerUrl, { User_Name, Email, Password }).pipe(
-  //     map(
-  //       Users => {
-  //         return Users;
-  //       }
-  //     )
-  //   );
-  // }
 
   //token
   setToken(token: string, Userlevel_ID: string) {

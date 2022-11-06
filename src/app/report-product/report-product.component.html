@@ -9,7 +9,7 @@
           <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent justify-content-center">
-              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Report Product</li>
             </ol>
           </nav>
@@ -54,7 +54,7 @@
           </tbody>
         </table>
         <pagination-controls id="pagination" class="text-center" (pageChange)="currentPage = $event" previousLabel="ก่อนหน้า" nextLabel="ถัดไป" [autoHide]="true"></pagination-controls>
-        <button type="button" class="btn btn-primary btn-block" (click)="clickPrintLabel()">ออกรายงาน</button>
+        <button [disabled]="!product.length" type="button" class="btn btn-primary btn-block" (click)="clickPrint()">Print Report</button>
       </div>
     </div>
   </div>

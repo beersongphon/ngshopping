@@ -30,35 +30,63 @@ export class EditBrandComponent implements OnInit {
     this.productService.getEditBrand(body).subscribe({
       next: (data) => {
         this.brand = data;
-        console.log(data);
       }, error: (error) => {
-        console.log(error);
-      }, complete: () => {
-        console.log('complete');
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
     });
   }
 
-  // เพิ่มสินค้า
   updateBrand(formValue: any) {
     let body = {}
     body = {
       brand_id: this.id,
       brand_name: formValue.brand_name
-    }
+    };
     this.productService.updateBrand(body).subscribe({
       next: (data) => {
         if (data.status == "success") {
-
+          Swal.fire({
+            icon: "success",
+            title: (data.message),
+            showConfirmButton: false,
+            timer: 2000
+          }).then((result) => {
+            if (result.isDismissed) {
+              this.router.navigate(['/brand']);
+            }
+          });
         } else {
-
+          Swal.fire({
+            icon: "error",
+            title: (data.message),
+            showConfirmButton: false,
+            timer: 2000
+          }).then((result) => {
+            if (result.isDismissed) {
+              window.history.back;
+            }
+          });
         }
-        console.log(data);
-
       }, error: (error) => {
-        console.log(error);
-      }, complete: () => {
-        console.log('complete');
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
     });
 

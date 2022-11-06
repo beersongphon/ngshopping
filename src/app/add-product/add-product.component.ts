@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ProductService } from './../shared/product.service';
@@ -13,19 +11,19 @@ import { ProductService } from './../shared/product.service';
 export class AddProductComponent implements OnInit {
 
   brand: any[] = [
-    { brand_id: '', brand_name: '---กรุณาเลือกยี่ห้อ ---'}
+    { brand_id: '', brand_name: '---กรุณาเลือกยี่ห้อ ---' }
   ];
   category: any[] = [
-    { category_id: '', category_name: '---กรุณาเลือกประเภท---'}
+    { category_id: '', category_name: '---กรุณาเลือกประเภท---' }
   ];
   images: any[] = [];
-  myForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    file: new FormControl('', [Validators.required]),
-    fileSource: new FormControl('', [Validators.required])
-  });
+  // myForm = new FormGroup({
+  //   name: new FormControl('', [Validators.required]),
+  //   file: new FormControl('', [Validators.required]),
+  //   fileSource: new FormControl('', [Validators.required])
+  // });
 
-  constructor(private productService: ProductService, private router: Router, private http: HttpClient) { }
+  constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
     this.getBrand();
@@ -35,30 +33,50 @@ export class AddProductComponent implements OnInit {
   getBrand(): void {
     let body = {
       txtSearch: ''
-    }
-    this.productService.getBrand(body).subscribe(
-      (data) => {
+    };
+    this.productService.getBrand(body).subscribe({
+      next: (data) => {
         this.brand = this.brand.concat(data);
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 
   getCategory(): void {
     let body = {
       txtSearch: ''
     }
-    this.productService.getCategory(body).subscribe(
-      (data) => {
+    this.productService.getCategory(body).subscribe({
+      next: (data) => {
         this.category = this.category.concat(data);
-        console.log(this.category);
-
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 
-  get formValue() {
-    return this.myForm.controls;
-  }
+  // get formValue() {
+  //   return this.myForm.controls;
+  // }
 
   // อัปโหลดรูปภาพ
   uploadImage(event: any) {
@@ -68,8 +86,8 @@ export class AddProductComponent implements OnInit {
         var reader = new FileReader();
         reader.onload = (event: any) => {
           // Push Base64 string
-          this.images.push({img_product: event.target.result});
-          this.patchValues();
+          this.images.push({ img_product: event.target.result });
+          // this.patchValues();
         }
         reader.readAsDataURL(event.target.files[i]);
       }
@@ -77,14 +95,13 @@ export class AddProductComponent implements OnInit {
   }
 
   // Patch form Values
-  patchValues() {
-    this.myForm.patchValue({
-      fileSource: this.images
-    });
-  }
+  // patchValues() {
+  //   this.myForm.patchValue({
+  //     fileSource: this.images
+  //   });
+  // }
 
   // Remove Image
-  // ลบรูปภาพ
   deleteImage(url: any) {
     this.images = this.images.filter(img => (img != url));
     // this.patchValues();
@@ -92,12 +109,6 @@ export class AddProductComponent implements OnInit {
 
   // เพิ่มสินค้า
   insertProduct(formValue: any) {
-    // let product_name = $("#product_name").val();
-    // let brand_id = $("#brand_id").val();
-    // let category_id = $("#category_id").val();
-    // let product_price = $("#product_price").val();
-    // let product_quantity = $("#product_quantity").val();
-    // let product_description = $("#product_description").val();
     let body = {}
     body = {
       product_name: formValue.product_name,
@@ -107,8 +118,8 @@ export class AddProductComponent implements OnInit {
       product_quantity: formValue.product_quantity,
       product_description: formValue.product_description
     }
-    this.productService.insertProduct(body).subscribe(
-      (data) => {
+    this.productService.insertProduct(body).subscribe({
+      next: (data) => {
         if (data.status == "success") {
           let product_id = data.id;
           let bodyInsertImage = []
@@ -119,182 +130,71 @@ export class AddProductComponent implements OnInit {
             };
             bodyInsertImage.push(bodyInsert)
           }
-          console.log(bodyInsertImage);
-
-          if(this.images.length == 1){
-            this.productService.insertImageProduct(bodyInsertImage).subscribe(
-              (data) => {
+          if (this.images.length == 1) {
+            this.productService.insertImageProduct(bodyInsertImage).subscribe({
+              next: (data) => {
                 if (data.status == "success") {
-                  setTimeout(function () {
-                    // window.location.replace("product.php");
-                    //console.log(product_name, product_price, product_quantity, product_description, response);
-                  }, 300);
+
                 } else {
                   Swal.fire({
-                    icon: 'error',
-                    title: 'กรุณาเพิ่มรูปภาพ',
+                    icon: "error",
+                    title: (data.message),
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 2000
                   }).then((result) => {
                     if (result.isDismissed) {
                       window.history.back;
                     }
                   });
                 }
-              }
-            );
-          }
-        } else {
-
-        }
-      }
-    );
-    // $.ajax({
-    //   url: "query/add_product.php",
-    //   type: "post",
-    //   data: {
-    //     "product_name": product_name,
-    //     "brand_id": brand_id,
-    //     "category_id": category_id,
-    //     "product_price": product_price,
-    //     "product_quantity": product_quantity,
-    //     "product_description": product_description
-    //   },
-    //   success: function (response) {
-    //     console.log(response);
-    //     let product_id = response;
-    //     // listImage.forEach((image) => {
-    //     //   $.ajax({
-    //     //     url: "query/add_image_product.php",
-    //     //     type: "post",
-    //     //     data: {
-    //     //       "img_product" : image,
-    //     //       "product_id" : product_id
-    //     //     },
-    //     //     success: function(response) {
-    //     //       console.log(response);
-    //     //     }
-    //     //   });
-    //     // });
-    //     setTimeout(function () {
-    //       window.location.replace("product.php");
-    //       //console.log(product_name, product_price, product_quantity, product_description, response);
-    //     }, 300);
-    //   }
-    // });
-  }
-
-  // แก้ไขสินค้า
-  editProduct() {
-    let product_id = $("#product_id").val();
-    let product_name = $("#product_name").val();
-    let brand_id = $("#brand_id").val();
-    let category_id = $("#category_id").val();
-    let product_price = $("#product_price").val();
-    let product_quantity = $("#product_quantity").val();
-    let product_description = $("#product_description").val();
-    $.ajax({
-      url: "query/edit_product.php",
-      type: "post",
-      data: {
-        "product_id": product_id,
-        "product_name": product_name,
-        "brand_id": brand_id,
-        "category_id": category_id,
-        "product_price": product_price,
-        "product_quantity": product_quantity,
-        "product_description": product_description
-      },
-      success: function (response) {
-        console.log(response);
-        if (response) {
-          $.ajax({
-            url: "query/delete_image_product.php",
-            type: "post",
-            data: {
-              "product_id": product_id
-            },
-            success: function (response) {
-              if (response) {
-                this.listImage.forEach((image: any) => {
-                  this.addImage(image, product_id);
+              }, error: (error) => {
+                Swal.fire({
+                  icon: "error",
+                  title: (error),
+                  showConfirmButton: false,
+                  timer: 2000
+                }).then((result) => {
+                  if (result.isDismissed) {
+                    window.history.back;
+                  }
                 });
-                setTimeout(function () {
-                  window.location.replace("product.php");
-                  //console.log(product_id, image2, product_name, product_price, product_description, response);
-                }, 300);
               }
+            });
+          }
+          Swal.fire({
+            icon: "success",
+            title: (data.message),
+            showConfirmButton: false,
+            timer: 2000
+          }).then((result) => {
+            if (result.isDismissed) {
+              this.router.navigate(['/product']);
             }
-          })
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: (data.message),
+            showConfirmButton: false,
+            timer: 2000
+          }).then((result) => {
+            if (result.isDismissed) {
+              window.history.back;
+            }
+          });
         }
-      }
-    });
-  }
-
-  // เพิ่มรูปภาพ
-  async addImage(image: any, product_id: any) {
-    await $.ajax({
-      url: "query/add_image_product.php",
-      type: "post",
-      data: {
-        "img_product": image,
-        "product_id": product_id
-      },
-      success: function (response) { }
-    });
-  }
-
-  // ลบสินค้า
-  deleteProduct(id: any) {
-    Swal.fire({
-      title: "คุณแน่ใจหรือไม่?",
-      text: "คุณจะไม่สามารถเปลี่ยนกลับได้!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "OK"
-    }).then((result) => {
-      if (result.value) {
-        //let category_name = $('#category_name').val();
-        $.ajax({
-          url: "query/product_delete.php",
-          type: "post",
-          data: {
-            delete_id: id
-          },
-          success: function (response) {
-            // console.log(response);
-            if (response == "success") {
-              Swal.fire({
-                icon: "success",
-                title: "ลบข้อมูลสำเร็จ",
-                showConfirmButton: false,
-                timer: 2000
-              }).then((result) => {
-                if (result.isDismissed) {
-                  //$('#delete'+id).hide('slow');
-                  window.location.replace("product.php");
-                }
-              })
-            } else {
-              console.log(response);
-              //alert("เกิดขึ้นผิดพลาด: " + response);
-              Swal.fire({
-                icon: "error",
-                title: "เกิดขึ้นผิดพลาด: " + response,
-                showConfirmButton: false,
-                timer: 2000
-              }).then((result) => {
-                if (result.isDismissed) {
-                  window.history.back;
-                }
-              })
-            }
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
           }
         });
       }
-    })
+    });
   }
-
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { ApiService } from '../shared/api.service';
 
 @Component({
@@ -10,14 +11,39 @@ import { ApiService } from '../shared/api.service';
 export class ProductsComponent implements OnInit {
   @Input() products: any;
 
-  image: String = "http://localhost/api_shopping/upload/";
+  loginbtn: boolean;
+  logoutbtn: boolean;
+  name: any;
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  srcImage = environment.imageUrl;
+
+  constructor(private apiService: ApiService, private router: Router) {
+    apiService.getLoggedInName.subscribe(
+      name => this.changeName(name)
+    );
+    //เช็ค token
+    if (this.apiService.isLoggedIn()) {
+      this.loginbtn = false;
+      this.logoutbtn = true
+    }
+    else {
+      this.loginbtn = true;
+      this.logoutbtn = false
+    }
+  }
+
+  private changeName(name: boolean): void {
+    this.logoutbtn = name;
+    this.loginbtn = !name;
+  }
 
   ngOnInit(): void {
   }
 
-  //แบ่งสิทธิ์สำหรับผู้ดูแลระบบ
+  isLogin() {
+    return this.apiService.isLoggedIn();
+  }
+
   isAdmin() {
     if (this.apiService.getUserlevel() == '1') {
       return true
@@ -26,7 +52,6 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  //แบ่งสิทธิ์สำหรับพนักงาน
   isStaff() {
     if (this.apiService.getUserlevel() == '2') {
       return true
@@ -35,7 +60,6 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  //แบ่งสิทธิ์สำหรับลูกค้า
   isCustommer() {
     if (this.apiService.getUserlevel() == '3') {
       return true

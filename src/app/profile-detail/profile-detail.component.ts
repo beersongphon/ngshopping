@@ -181,4 +181,37 @@ export class ProfileDetailComponent implements OnInit {
     }
     return false;
   }
+
+  isLogin() {
+    if (this.apiService.isLoggedIn()) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  isAdmin() {
+    if (this.apiService.getUserlevel() == '1') {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  isStaff() {
+    if (this.apiService.getUserlevel() == '2') {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  //แบ่งสิทธิ์สำหรับลูกค้า
+  isCustommer() {
+    if (this.apiService.getUserlevel() == '3') {
+      return true
+    } else {
+      return false
+    }
+  }
 }

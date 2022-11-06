@@ -73,6 +73,9 @@ export class PaymentComponent implements OnInit {
 
   isDisableOrderID = true;
 
+  imageSrc: any = '';
+  status: boolean = false
+
 
   constructor(private currencyPipe: CurrencyPipe, private http: HttpClient, private apiService: ApiService, public cart: CartService, private cartCalculator: CartCalculator, private router: Router,
     private datePipe: DatePipe) { }
@@ -83,93 +86,23 @@ export class PaymentComponent implements OnInit {
   }
 
   getUser(): void {
-    this.apiService.getUser().subscribe(
-      (data) => {
+    this.apiService.getUser().subscribe({
+      next: (data) => {
         this.user = data;
-        // this.user_id = data.user_id;
-        // this.user_firstname = data.user_firstname;
-        // this.user_lastname = data.user_lastname;
-        // this.user_address = data.user_address;
-        // this.user_email = data.user_email;
-        // this.user_tel = data.user_tel;
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
-
-
-  fileChange(event: any) {
-    const fileList: FileList = event.target.files;
-    //check whether file is selected or not
-    if (fileList.length > 0) {
-
-      const file = fileList[0];
-      console.log(this.slip_image);
-
-      //get file information such as name, size and type
-      console.log('finfo', file.name, file.size, file.type);
-      //max file size is 4 mb
-      if ((file.size / 1048576) <= 4) {
-        let formData = new FormData();
-        let info = { id: 2, name: 'raja' }
-        formData.append('file', file, file.name);
-        formData.append('id', '2');
-        formData.append('tz', new Date().toISOString())
-        formData.append('update', '2')
-        formData.append('info', JSON.stringify(info))
-        this.file_data = formData
-
-      } else {
-        //this.snackBar.open('File size exceeds 4 MB. Please choose less than 4 MB','',{duration: 2000});
-      }
-
-    }
-
-
-    // if (event.target.files && event.target.files[0]) {
-    //   var filesAmount = event.target.files.length;
-    //   console.log(event.target.files);
-    //   console.log(filesAmount);
-    //   for (let i = 0; i < filesAmount; i++) {
-    //     var reader = new FileReader();
-    //     reader.onload = (event: any) => {
-    //       // Push Base64 string
-    //       // this.images.push(event.target.result);
-    //       // this.patchValues();
-    //     }
-    //     reader.readAsDataURL(event.target.files[i]);
-    //   }
-    // }
-
-  }
-
-
-  // filedata:any;
-  //   /* File onchange event */
-  //   fileEvent(e:any){
-  //       this.filedata = e.target.files[0];
-  //   }
-  //   /* Upload button functioanlity */
-  //   onSubmitform(f: NgForm) {
-
-  //     var myFormData = new FormData();
-  //     const headers = new HttpHeaders();
-  //     headers.append('Content-Type', 'multipart/form-data');
-  //     headers.append('Accept', 'application/json');
-  //     myFormData.append('image', this.filedata);
-  //     console.log(myFormData);
-  //     console.log(this.slip_image);
-  //     /* Image Post Request */
-  //     this.http.post('http://localhost/api_shopping/save.php', myFormData, {
-  //     headers: headers
-  //     }).subscribe(data => {
-  //      //Check success message
-  //      console.log(data);
-  //     });
-
-  // }
-
-  imageSrc: any = '';
-  status: boolean = false
 
   onFileChange(event: any) {
     this.status = false
@@ -200,26 +133,6 @@ export class PaymentComponent implements OnInit {
         }
       });
     }
-
-    // this.status = event.target.files.length>0?true:false
-    // console.log(this.status);
-    // if(this.status==true){
-    //    const reader = new FileReader();
-    //    console.log(reader);
-    //    reader.readAsDataURL(file);
-    //    console.log(reader);
-    //    reader.onload = () => {
-    //       this.imageSrc = reader.result;
-    //       console.log(this.imageSrc);
-    //    }
-    // }
-  }
-  submit() {
-    this.http.post('http://localhost/api_shopping/imageupload.php', { 'image': this.imageSrc })
-      .subscribe(response => {
-        console.log('Uploaded Successfully.', response);
-
-      })
   }
 
   insertPayment(order: any): void {
@@ -305,20 +218,6 @@ export class PaymentComponent implements OnInit {
       }
     );
   }
-  sub() {
-    // let body = { user_id: localStorage.getItem('token'), order_id: this.order_ids };
-    // // let bodys = Object.assign(body, { order_id: this.order_ids });
-    // this.cart.getOrderUser(body).subscribe(
-    //   (payments) => {
-    //     if (payments.status == "success") {
-    //       this.payments = payments;
-    //       this.isDisableOrderID = false;
-    //     } else {
-    //       this.isDisableOrderID = true;
-    //     }
-    //   }
-    // );
-  }
 
   addPageNo(item: any) {
     for (let i = 0; i < item.length; i++) {
@@ -329,12 +228,6 @@ export class PaymentComponent implements OnInit {
     }
     return item;
   }
-
-  // ngOnDestroy(): void {
-  //   this.sub?.unsubscribe();
-  // }
-
-
 
   changeOrderID() { //Angular 11
     var order_id = $("#order_id").val();
@@ -387,22 +280,5 @@ export class PaymentComponent implements OnInit {
     // });
   }
 
-  // เปลี่ยนรับค่าราคารวมที่ชำระ
-  totalChange(): void {
-    $("#pay_total").empty();
-    var order_id = $("#order_id").val();
-    $.ajax({
-      url: "query/get_payment.php",
-      data: {
-        "order_id": order_id
-      },
-      method: "post",
-      dataType: "json",
-      success: function (result) {
-        result.forEach((data: any) => {
-          $("#pay_total").append(`<option value="${data.order_total}">${parseFloat(data.order_total)}</option>`);
-        });
-      }
-    });
-  }
+
 }

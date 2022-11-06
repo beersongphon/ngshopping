@@ -9,7 +9,7 @@
           <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent justify-content-center">
-              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Product</li>
             </ol>
           </nav>
@@ -52,7 +52,7 @@
               <th scope="col">Price</th>
               <th scope="col">Quantity</th>
               <th scope="col">Description</th>
-              <th scope="col">Actions</th>
+              <th scope="col" style="width: 17rem;">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -64,9 +64,9 @@
               <td>{{ p.product_quantity }}</td>
               <td>{{ p.product_description }}</td>
               <td>
-                <a routerLink="/order" class="btn btn-dark btn-small">View</a> |
+                <!-- <a routerLink="/order" class="btn btn-dark btn-small">View</a> | -->
                 <a [routerLink]="['/edit-product', p.product_id, p.product_name]" class="btn btn-warning btn-small">Edit</a> |
-                <a routerLink="/order" class="btn btn-danger btn-small">Delete</a>
+                <a routerLink="/product" class="btn btn-danger btn-small" (click)="deleteProduct(p.product_id)">Delete</a>
               </td>
             </tr>
             <tr *ngIf="!product.length">

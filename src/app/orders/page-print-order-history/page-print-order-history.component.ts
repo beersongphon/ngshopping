@@ -25,19 +25,19 @@ export class PagePrintOrderHistoryComponent implements OnInit {
       console.log(result);
       if (result) {
         this.printLabelList = result
-
+        console.log(this.printLabelList);
         this.disablePage = true
         this.numCount = 0
 
         setTimeout(async () => {
-          var eGridDiv = document.querySelector<HTMLElement>('#pagePrintLabel')! as any;
+          var eGridDiv = document.querySelector<HTMLElement>('#pagePrint')! as any;
           eGridDiv.style.width = '1400px';
           eGridDiv.style.height = '600px';
           let dataToPrint = []
           let dataToPrints = {}
           // for(let i = 0; i < this.printLabelList.length; i++){
           //   this.changeDetectorRef.detectChanges();
-          //   let body: any = document.getElementById('pagePrintLabel')
+          //   let body: any = document.getElementById('pagePrint')
           //   console.log(body);
 
           //   dataToPrint.push(await htmlToImage.toPng(body).then((data:any) => {
@@ -48,7 +48,7 @@ export class PagePrintOrderHistoryComponent implements OnInit {
 
           this.changeDetectorRef.detectChanges();
 
-          // let body: any = document.getElementById('pagePrintLabel')
+          // let body: any = document.getElementById('pagePrint')
           // // console.log(body);
 
           // dataToPrints = await htmlToImage.toPng(body).then((data: any) => {
@@ -70,7 +70,7 @@ export class PagePrintOrderHistoryComponent implements OnInit {
           // })
 
 
-          var sTable = document.getElementById('pagePrintLabel')?.innerHTML;
+          var sTable = document.getElementById('pagePrint')?.innerHTML;
 
           var style = "<style>";
           style = style + "body {font-family: 'Garuda'}";
