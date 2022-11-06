@@ -55,25 +55,23 @@
                     <span class="amount">
                       <span class="currencySymbol">
                         <pre wp-pre-tag-3=""></pre>
-                        <!-- <p>{{selection.product.product_price | currency:'':''}}</p> -->
+                        <p>{{selection.product.product_price | currency}}</p>
                       </span>
-                      {{selection.product.product_price | currency:'':''}}
                     </span>
                   </td>
                   <td class="product-quantity" data-title="Quantity">
                     <div class="quantity">
                       <label class="sr-only">Quantity</label>
-                      <input #quantity type="number" step="1" min="1" [max]="selection.product.product_quantity" [value]="selection.quantity" title="Qty" size="4" (change)="onQuantityChange(selection, + quantity.value)" />
-                      <!-- <input type="number" id="qty" class="input-text qty text" step="1" min="0" max="9" value="1" title="Qty" size="4"> -->
+                        <input #quantity type="number" step="1" min="1" [max]="selection.product.product_quantity" [value]="selection.quantity" title="Qty" size="4" (change)="onQuantityChange(selection, + quantity.value)" />
+                       <!-- <input type="number" id="qty" class="input-text qty text" step="1" min="0" max="9" value="1" title="Qty" size="4"> -->
                     </div>
                   </td>
                   <td class="product-subtotal" data-title="Total">
                     <span class="amount">
                       <span class="currencySymbol">
                         <pre wp-pre-tag-3=""></pre>
-                        <!-- <p>{{selection.product.product_price * +quantity.value | currency:'':''}}</p> -->
+                        <p>{{selection.product.product_price * +quantity.value | currency}}</p>
                       </span>
-                      {{selection.product.product_price * +quantity.value | currency:'':''}}
                     </span>
                   </td>
                   <td class="product-remove" data-title="Remove">
@@ -125,22 +123,22 @@
                     <span class="amount">
                       <span class="currencySymbol">
                         <pre wp-pre-tag-3=""></pre>
+                        <p>90.00</p>
                       </span>
-                      90.00
                     </span>
                   </td>
                   <td class="product-quantity" data-title="Quantity">
                     <div class="quantity">
                       <label class="sr-only">Quantity</label>
-                      <input type="number" id="qty" class="input-text qty text" step="1" min="0" max="9" name="#" value="1" title="Qty" size="4">
+                      <input type="number" id="qty" class="input-text qty text" step="1" min="0" max="9" value="1" title="Qty" size="4">
                     </div>
                   </td>
                   <td class="product-subtotal" data-title="Total">
                     <span class="amount">
                       <span class="currencySymbol">
                         <pre wp-pre-tag-3=""></pre>
+                        <p>90.00</p>
                       </span>
-                      90.00
                     </span>
                   </td> -->
                   <!-- <td class="product-subtotal" data-title="Total">
@@ -169,7 +167,7 @@
                   <td colspan="6" class="actions">
                     <div class="coupon">
                       <input type="text" name="coupon_code" class="input-text form-control" id="coupon_code" value="" placeholder="Coupon code" style="float: left !important;">
-                      <!-- <input type="text" name="coupon_code" class="input-text form-control" id="coupon_code" value="" placeholder="Coupon code"> -->
+                                            <!-- <input type="text" name="coupon_code" class="input-text form-control" id="coupon_code" value="" placeholder="Coupon code"> -->
                       <button type="button" class="btn btn-black btn-small" name="apply_coupon" value="Apply coupon">Apply coupon</button>
                       <span class="float-right mt-3 mt-lg-0">
                         <button type="button" class="btn btn-dark btn-small" name="update_cart" value="Update cart" disabled="">Update cart</button>
@@ -223,6 +221,10 @@
           <h4 class="mb-4">Cart totals</h4>
           <ul class="list-unstyled mb-4">
             <li class="d-flex justify-content-between pb-2 mb-3">
+              <h5>Total</h5>
+              <span>${{subTotal() | currency:'':''}}</span>
+            </li>
+            <!-- <li class="d-flex justify-content-between pb-2 mb-3">
               <h5>Subtotal</h5>
               <span>${{subTotal() | currency:'':''}}</span>
             </li>
@@ -232,8 +234,8 @@
             </li>
             <li class="d-flex justify-content-between pb-2">
               <h5>Total</h5>
-              <!-- <span>${{grandTotal}}</span> -->
-            </li>
+              <span>${{grandTotal}}</span>
+            </li> -->
           </ul>
           <!-- <a routerLink="/checkout" class="btn btn-main btn-small">Proceed to checkout</a> -->
           <button [disabled]="!cart.selections.length" routerLink="/checkout" class="btn btn-main btn-small">Proceed to checkout</button>
@@ -242,4 +244,3 @@
     </div>
   </div>
 </section>
-<app-footer></app-footer>
