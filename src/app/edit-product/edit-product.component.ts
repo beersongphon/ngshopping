@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ProductService } from './../shared/product.service';
@@ -18,12 +16,14 @@ export class EditProductComponent implements OnInit {
   srcImage = environment.imageUrl;
 
   product: any = {};
-  brand: any[] = [
-    { brand_id: '', brand_name: '---กรุณาเลือกยี่ห้อ ---' }
-  ];
-  category: any[] = [
-    { category_id: '', category_name: '---กรุณาเลือกประเภท---' }
-  ];
+  brand: any[] = [{
+    brand_id: '',
+    brand_name: '---กรุณาเลือกยี่ห้อ ---'
+  }];
+  category: any[] = [{
+    category_id: '',
+    category_name: '---กรุณาเลือกประเภท---'
+  }];
   image: any[] = [];
   images: any[] = [];
 
@@ -37,7 +37,7 @@ export class EditProductComponent implements OnInit {
   // });
 
   constructor(private productService: ProductService, private router: Router,
-    private route: ActivatedRoute, private http: HttpClient, private formBuilder: FormBuilder) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));

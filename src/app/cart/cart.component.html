@@ -45,7 +45,7 @@
                 <tr class="cart_item" *ngFor="let selection of cart.selections let i = index">
                   <td class="product-thumbnail" data-title="Thumbnail">
                     <a [routerLink]="['/product-single', selection.product.product_id, selection.product.product_name]">
-                      <img [src]="image+selection.product.img_product" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">
+                      <img [src]="srcImage+selection.product.img_product" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">
                     </a>
                   </td>
                   <td class="product-name" data-title="Product">

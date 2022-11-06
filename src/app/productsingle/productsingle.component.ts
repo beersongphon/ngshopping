@@ -1,10 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { CartService } from './../shared/cart.service';
 import { ApiService } from './../shared/api.service';
 import { Product } from '../shared/product.model';
 import { ProductService } from './../shared/product.service';
-import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-productsingle',
@@ -18,7 +19,7 @@ export class ProductsingleComponent implements OnInit {
   title: string = '';
   // productdetail?: any;
   images?: any;
-  image: String = "http://localhost/api_shopping/upload/";
+  srcImage = environment.imageUrl;
 
   productAdded: any | null;
 
@@ -31,22 +32,14 @@ export class ProductsingleComponent implements OnInit {
     private productService: ProductService) { }
 
   ngOnInit() {
-    // this.productService.getProducts()
-    //   .subscribe(products => this.product = products);
-    // this.productService.getProducts(this.id, this.title).subscribe(
-    //   (products) => {
-    //     this.product = products['data']
-    //   }
-    // );
-
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.title = this.route.snapshot.paramMap.get('title') || '';
-    this.getProducts();
+    this.getProduct();
     this.getProductDetail();
     this.getProductDetailImage();
   }
 
-  getProducts(): void {
+  getProduct(): void {
     let body: any = [];
     this.productService.getShop(body).subscribe({
       next: (data) => {

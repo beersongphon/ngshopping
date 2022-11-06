@@ -18,6 +18,8 @@ export class ProductComponent implements OnInit, OnDestroy {
   pageNo: object | undefined;
   sub: Subscription | undefined;
 
+  srcImage = environment.imageUrl;
+
   search: string = "";
 
   currentPage: number = 1;

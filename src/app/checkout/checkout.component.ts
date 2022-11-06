@@ -55,7 +55,6 @@ export class CheckoutComponent implements OnInit {
   user_address: any;
   user_email: any;
   user_tel: any;
-  image: String = "http://localhost/api_shopping/upload/";
 
   constructor(private apiService: ApiService, public cart: CartService, private cartCalculator: CartCalculator, private router: Router,
     private datePipe: DatePipe) { }

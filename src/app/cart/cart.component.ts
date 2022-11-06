@@ -3,6 +3,7 @@ import { CartService } from './../shared/cart.service';
 import { CartCalculator } from './../shared/cart-calculator';
 import { Product } from '../shared/product.model';
 import { ProductSelection } from './../shared/product-selection';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cart',
@@ -11,7 +12,7 @@ import { ProductSelection } from './../shared/product-selection';
 })
 export class CartComponent implements OnInit {
 
-  image: String = "http://localhost/api_shopping/upload/";
+  srcImage = environment.imageUrl;
 
   max: number = 9
 

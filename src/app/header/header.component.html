@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white w-100 navigation" id="navbar">
   <div class="container">
-    <a class="navbar-brand font-weight-bold" routerLink="/">E-Shop</a>
+    <a *ngIf="loginbtn" class="navbar-brand font-weight-bold" routerLink="/">E-Shop</a>
+    <a *ngIf="(isLogin() && isCustommer())" class="navbar-brand font-weight-bold" routerLink="/">E-Shop</a>
+    <a *ngIf="(isLogin() && isAdmin())" class="navbar-brand font-weight-bold" routerLink="/dashboard">E-Shop</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -8,10 +10,10 @@
 
     <div class="collapse navbar-collapse " id="main-navbar">
       <ul class="navbar-nav mx-auto">
-        <li *ngIf="loginbtn"class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <li *ngIf="loginbtn" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           <a class="nav-link" routerLink="/">Home </a>
         </li>
-        <li *ngIf="(isLogin() && isCustommer())"class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <li *ngIf="(isLogin() && isCustommer())" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           <a class="nav-link" routerLink="/">Home </a>
         </li>
 
@@ -93,8 +95,8 @@
             <!-- Cart Item -->
             <div class="media" *ngFor="let selection of cart.selections | slice:0:4; let i = index">
               <a routerLink="/product-single">
-                <!-- <img class="media-object img-fluid mr-3" [src]="image+selection.product.img_product" alt="image" /> -->
-                <img class="media-object img- mr-3" [src]="image+selection.product.img_product" alt="image" />
+                <!-- <img class="media-object img-fluid mr-3" [src]="srcImage+selection.product.img_product" alt="image" /> -->
+                <img class="media-object img- mr-3" [src]="srcImage+selection.product.img_product" alt="image" />
               </a>
               <div class="media-body">
                 <h6>{{selection.product.product_name}}</h6>
@@ -170,12 +172,12 @@
             <i class="tf-ion-ios-person mr-3"></i>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
-            <li><a *ngIf="logoutbtn" routerLink="/dashboard">Dahsboard</a></li>
-            <li><a *ngIf="logoutbtn" routerLink="/profile-details">Profile Details</a></li>
-            <li><a *ngIf="loginbtn" routerLink="/login">Login Page</a></li>
-            <li><a *ngIf="loginbtn" routerLink="/signup">SignUp Page</a></li>
-            <li><a *ngIf="loginbtn" routerLink="/forgot-password">Forgot Password</a></li>
-            <li><a *ngIf="logoutbtn" routerLink="#" (click)="logout()">Log Out</a></li>
+            <li *ngIf="logoutbtn"><a routerLink="/dashboard">Dahsboard</a></li>
+            <li *ngIf="logoutbtn"><a routerLink="/profile-details">Profile Details</a></li>
+            <li *ngIf="loginbtn"><a routerLink="/login">Login Page</a></li>
+            <li *ngIf="loginbtn"><a routerLink="/signup">SignUp Page</a></li>
+            <!-- <li *ngIf="loginbtn"><a routerLink="/forgot-password">Forgot Password</a></li> -->
+            <li *ngIf="logoutbtn"><a routerLink="#" (click)="logout()">Log Out</a></li>
           </ul>
           <!-- <a href="#" class="dropdown-toggle cart-icon" data-toggle="dropdown" data-hover="dropdown">
             <i class="tf-ion-ios-person mr-3"></i>

@@ -59,7 +59,7 @@ export class PaymentComponent implements OnInit {
   user_address: any;
   user_email: any;
   user_tel: any;
-  image: String = "http://localhost/api_shopping/upload/";
+
   slip_image: any;
   order_ids: any;
   pay_totals: any;

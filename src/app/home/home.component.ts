@@ -12,7 +12,6 @@ import { ProductService } from './../shared/product.service';
 export class HomeComponent implements OnInit {
   public isActive: boolean = true;
   product: any[] = [];
-  image: String = "http://localhost/api_shopping/upload/";
 
   //Slider settings
   slideConfig = { "slidesToShow": 1, "slidesToScroll": 1 };

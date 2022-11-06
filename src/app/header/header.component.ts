@@ -6,6 +6,7 @@ import { CartCalculator } from './../shared/cart-calculator';
 import { Product } from '../shared/product.model';
 import { ProductSelection } from './../shared/product-selection';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit {
   name: any;
   permission_id: any = true;
 
-  image: String = "http://localhost/api_shopping/upload/";
+  srcImage = environment.imageUrl;
 
   constructor(private apiService: ApiService, public cart: CartService, private cartCalculator: CartCalculator, private router: Router) {
     apiService.getLoggedInName.subscribe(

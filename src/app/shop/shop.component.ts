@@ -13,7 +13,6 @@ export class ShopComponent implements OnInit {
   shop: any = [];
   category: any = [];
   page: number = 1;
-  image: String = "http://localhost/api_shopping/upload/";
   confirm: String = "";
   tableClass: String = "";
   txtTitle: String = "";
