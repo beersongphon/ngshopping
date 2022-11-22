@@ -3,7 +3,7 @@ import { CartService } from './../shared/cart.service';
 import { CartCalculator } from './../shared/cart-calculator';
 import { Product } from '../shared/product.model';
 import { ProductSelection } from './../shared/product-selection';
-import { environment } from 'src/environments/environment';
+import { environment } from './../../environments/environment';
 
 @Component({
   selector: 'app-cart',
@@ -43,8 +43,6 @@ export class CartComponent implements OnInit {
   }
 
   remove(product: Product): void {
-    console.log(product);
-
     this.cart.remove(product);
   }
 

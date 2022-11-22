@@ -5,6 +5,7 @@ import { ErrorHandler } from './error-handler';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
+import Swal from 'sweetalert2';
 
 
 /**
@@ -14,6 +15,9 @@ import { environment } from './../../environments/environment';
   providedIn: 'root'
 })
 export class ProductService {
+
+  productItem: any;
+  images: any[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -144,14 +148,50 @@ export class ProductService {
     return this.http.post<any>(environment.apiUrl + '/api_get_order_history.php', formValue, { headers: apiHeader });
   }
 
-  getProductDetail(id: number, title: string): Observable<any> {
+  // getProductDetail(id: number, title: string): Observable<any> {
+  //   const param = {
+  //     'id': id.toString(),
+  //     'title': title
+  //   };
+  //   // return this.http.get<any>(environment.apiUrl + '/api_get_product_detail.php', { params: param });
+  //   const apiHeader = { 'Content-Type': 'application/json' };
+  //   return this.http.post<any>(environment.apiUrl + '/api_get_product_detail.php', param, { headers: apiHeader });
+  // }
+
+  getProductDetail(id: any, title: any): void {
     const param = {
       'id': id.toString(),
       'title': title
     };
-    // return this.http.get<any>(environment.apiUrl + '/api_get_product_detail.php', { params: param });
     const apiHeader = { 'Content-Type': 'application/json' };
-    return this.http.post<any>(environment.apiUrl + '/api_get_product_detail.php', param, { headers: apiHeader });
+    this.http.post<any>(environment.apiUrl + '/api_get_product_detail.php', param, { headers: apiHeader }).subscribe({
+      // this.productService.getProductDetail(this.id, this.title).subscribe({
+      next: (data) => {
+        this.productItem = data['data'];
+        this.images = data['data'].images;
+        this.images = this.images.map((item: any) => ({
+          ...item,
+          img_product: environment.imageUrl + item.img_product,
+        }));
+        // this.productItem = Object.assign(this.productItem, { img_product: environment.imageUrl + this.productItem.img_product });
+        // for (let i = 0; i < this.productItem.images.length; i++) {
+        //   let element = this.productItem.images;
+        //   this.images[i] = Object.assign({ img_pro_id: element[i].img_pro_id, img_product: environment.imageUrl + element[i].img_product });
+        // }
+        // this.productItem = Object.assign(this.productItem, { images: this.images });
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
+      }
+    });
   }
 
   getProductDetailImage(id: number): Observable<any> {

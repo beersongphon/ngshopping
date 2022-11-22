@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
-import { ApiService } from '../shared/api.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductService } from './../shared/product.service';
+import { ApiService } from './../shared/api.service';
 
 @Component({
   selector: 'app-products',
@@ -15,9 +15,10 @@ export class ProductsComponent implements OnInit {
   logoutbtn: boolean;
   name: any;
 
-  srcImage = environment.imageUrl;
+  id: any;
+  title: string = '';
 
-  constructor(private apiService: ApiService, private router: Router) {
+  constructor(private apiService: ApiService, private router: Router, private route: ActivatedRoute, private productService: ProductService) {
     apiService.getLoggedInName.subscribe(
       name => this.changeName(name)
     );
@@ -68,9 +69,32 @@ export class ProductsComponent implements OnInit {
     }
   }
 
+  // async click(): Promise<void> {
+  //   // if (await this.router.navigate(['/product-single'])) {
+  //   //   this.router.navigate(['/product-single', this.products.product_id, this.products.product_name])
+  //   // }
+  //   await this.router.navigate(['/product-single', this.products.product_id, this.products.product_name])
+  // }
+
   click(): void {
-    this.router.navigate(['/product-single', this.products.product_id, this.products.product_name]).then(() => {
-      window.location.reload();
-    });
+    if (this.loginbtn == true) {
+      this.router.navigate(['/login']);
+    } else {
+      setTimeout(() => {
+        this.id = Number(this.route.snapshot.params['id']);
+        this.title = this.route.snapshot.params['title'];
+        if (this.route.snapshot.routeConfig?.path == 'product-single/:id/:title') {
+          this.productService.getProductDetail(this.id, this.title);
+          this.router.navigate(['/product-single', this.products.product_id, this.products.product_name]);
+        }
+        this.router.navigate(['/product-single', this.products.product_id, this.products.product_name]);
+      }, 100);
+    }
   }
+
+  // click(): void {
+  //   this.router.navigate(['/product-single', this.products.product_id, this.products.product_name]).then(() => {
+  //     window.location.reload();
+  //   });
+  // }
 }

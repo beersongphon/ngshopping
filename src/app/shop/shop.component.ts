@@ -1,7 +1,9 @@
 import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { ApiService } from './../shared/api.service';
 import { ProductService } from './../shared/product.service';
+import { environment } from './../../environments/environment';
 
 @Component({
   selector: 'app-shop',
@@ -71,6 +73,18 @@ export class ShopComponent implements OnInit {
           // $txtTitle = "New";
         }
         // console.log(data);
+        this.shop = this.shop.map((item: any) => ({
+          ...item,
+          img_product: environment.imageUrl + item.img_product
+        }));
+        for (let i = 0; i < this.shop.length; i++) {
+          let element = this.shop[i].images;
+          element = element.map((item: any) => ({
+            ...item,
+            img_product: environment.imageUrl + item.img_product,
+          }));
+          this.shop[i] = Object.assign(this.shop[i], { images: element });
+        }
       }
     );
   }
@@ -96,27 +110,34 @@ export class ShopComponent implements OnInit {
       }
     });
 
-    this.productService.getShop(this.checkedIDs).subscribe(
-      (data) => {
+    this.productService.getShop(this.checkedIDs).subscribe({
+      next: (data) => {
         this.shop = data;
-        if (data[0].product_quantity == 0) {
-          // สินค้าหมด
-          this.confirm = "return false;";
-          this.tableClass = "label stockout";
-          this.txtTitle = "สินค้าหมด";
-          // console.log(data);
-          // $txtTitle = "Out Of Stock";
-        } else {
-          // เหลือ > 1 ชิ้น
-          this.confirm = "return true;";
-          this.tableClass = "label stockblue";
-          this.txtTitle = "Sale";
-          // console.log(data);
-          // $txtTitle = "New";
+        this.shop = this.shop.map((item: any) => ({
+          ...item,
+          img_product: environment.imageUrl + item.img_product
+        }));
+        for (let i = 0; i < this.shop.length; i++) {
+          let element = this.shop[i].images;
+          element = element.map((item: any) => ({
+            ...item,
+            img_product: environment.imageUrl + item.img_product,
+          }));
+          this.shop[i] = Object.assign(this.shop[i], { images: element });
         }
-        // console.log(data);
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 
   changeSelection(): void {

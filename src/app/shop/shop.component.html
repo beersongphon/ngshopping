@@ -28,7 +28,7 @@
             <div class="section-title">
               <h2 class="d-block text-left-sm">Shop</h2>
 
-              <div class="heading d-flex justify-content-between mb-5">
+              <!-- <div class="heading d-flex justify-content-between mb-5">
                 <p class="result-count mb-0"> Showing 1–6 of 17 results</p>
                 <form class="ordering " method="get">
                   <select name="orderby" class="orderby form-control" aria-label="Shop order">
@@ -41,7 +41,7 @@
                   </select>
                   <input type="hidden" name="paged" value="1">
                 </form>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -262,7 +262,8 @@
         <!-- color and size -->
         <form class="mb-5">
           <section class="widget widget-sizes mb-5">
-            <h3 class="widget-title h4 mb-4">Shop by Sizes</h3>
+            <!-- <h3 class="widget-title h4 mb-4">Shop by Sizes</h3> -->
+            <h3 class="widget-title h4 mb-4">Shop by Category</h3>
             <div class="custom-control custom-checkbox" *ngFor="let c of category; let i = index;">
               <input type="checkbox" class="custom-control-input" id="size{{i+1}}" name="txtSearch" [value]="c.category_id" [(ngModel)]="c.isChecked" (change)="changeSelection()">
               <label class="custom-control-label" for="size{{i+1}}">{{c.category_name}}</label>

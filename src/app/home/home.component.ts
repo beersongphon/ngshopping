@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 import { ApiService } from './../shared/api.service';
 import { ProductService } from './../shared/product.service';
+import { environment } from './../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import { ProductService } from './../shared/product.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  public isActive: boolean = true;
+
   product: any[] = [];
 
   //Slider settings
@@ -19,14 +20,27 @@ export class HomeComponent implements OnInit {
   constructor(private title: Title, private apiService: ApiService, private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.getProduct();
   }
 
-  getProducts(): void {
+  getProduct(): void {
     let body: any = [];
     this.productService.getShop(body).subscribe(
       (data) => {
         this.product = data;
+        this.product = this.product.map((item) => ({
+          ...item,
+          img_product: environment.imageUrl + item.img_product
+        }));
+        for (let i = 0; i < this.product.length; i++) {
+          let element = this.product[i].images;
+          element = element.map((item: any) => ({
+            ...item,
+            img_product: environment.imageUrl + item.img_product,
+          }));
+          this.product[i] = Object.assign(this.product[i], { images: element });
+        }
+
         // data.sort((a: any,b: any) => a.product_id.localeCompare(b.product_id));
         // for (let i = 0; i < data.length; i++) {
         //   let body = []

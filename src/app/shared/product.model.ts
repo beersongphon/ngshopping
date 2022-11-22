@@ -2,6 +2,7 @@
  * Represents a product available for purchase.
  */
  export interface Product {
+  images: any;
   product_id: number;
   product_name: string;
   img_product: string;

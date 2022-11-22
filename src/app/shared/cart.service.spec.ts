@@ -5,9 +5,44 @@ import { CartService } from './cart.service';
 import { environment } from './../../environments/environment';
 import { of } from 'rxjs';
 
+import { ProductSelection } from './product-selection';
+import { Product } from './product.model';
+
 describe('CartService', () => {
   let serviceMock: CartService;
   let httpMock: HttpTestingController;
+  // define some products to be used in various cart tests.
+  // let product1: any;
+  // product1.id = 1;
+
+  // let product2: any;
+  // product2.id = 2;
+
+  let product: any = {
+    "product_id": "122",
+    "product_name": "product_name",
+    "brand_name": "Louis Vuitton",
+    "category_name": "กระเป๋าสตางค์",
+    "product_date": "2022-11-01 11:55:08",
+    "product_price": "30",
+    "product_quantity": "30",
+    "product_description": "product_description",
+    "img_product": "63674cfad4b8f.png",
+    "images": [
+      {
+        "img_pro_id": "689",
+        "img_product": "63674cfad4b8f.png"
+      },
+      {
+        "img_pro_id": "690",
+        "img_product": "63674cfad7056.png"
+      },
+      {
+        "img_pro_id": "692",
+        "img_product": "63674cfadcc71.png"
+      }
+    ]
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -39,7 +74,7 @@ describe('CartService', () => {
   // }));
 
   // it('should remove', fakeAsync(() => {
-  //   serviceMock.remove({})
+  //   serviceMock.remove(product)
   // }));
 
   it('should empty', fakeAsync(() => {
@@ -77,14 +112,71 @@ describe('CartService', () => {
     // httpMock.verify();
   }));
 
-  it('should getOrder', fakeAsync(() => {
-    serviceMock.getOrder().subscribe((posts: any) => {
-      expect(posts.length).toBe(3);
-    });
-    expect(httpMock.expectOne(environment.apiUrl + '/api_get_order.php').request.method).toBe("GET");
-    flush();
-    // httpMock.verify();
-  }));
+  // it('should getOrder', fakeAsync(() => {
+  //   serviceMock.getOrder().subscribe((posts: any) => {
+  //     expect(posts.length).toBe(3);
+  //   });
+  //   expect(httpMock.expectOne(environment.apiUrl + '/api_get_order.php').request.method).toBe("GET");
+  //   flush();
+  //   // httpMock.verify();
+  // }));
+
+
+  it('should create an instance', () => {
+    expect(serviceMock).toBeTruthy();
+  });
+
+  it('should initially be empty', () => {
+    expect(serviceMock.selections.length).toBe(0);
+  });
+
+  it('should add selections', () => {
+    // const cart = new Cart();
+    serviceMock.add(product, 3);
+    // serviceMock.add(pro, 1);
+    // check property equality, not reference equality.
+    expect(serviceMock.selections).toContain(jasmine.objectContaining({ product: product, quantity: 3 }));
+    // expect(serviceMock.selections).toContain(jasmine.objectContaining({ product: pro, quantity: 1 }));
+  });
+
+  it('should add quantity to existing product selections', () => {
+    // const cart = new Cart();
+    serviceMock.add(product, 3);
+    serviceMock.add(product, 1);
+    expect(serviceMock.selections[0].quantity).toBe(4);
+  });
+
+  it('should change quantity for existing product selection', () => {
+    // const cart = new Cart();
+    serviceMock.add(product, 3);
+    serviceMock.changeQuantity(product, 2);
+    expect(serviceMock.selections[0].quantity).toBe(2);
+  });
+
+  it('should add product when changing quantity for new product', () => {
+    serviceMock.changeQuantity(product, 3);
+    expect(serviceMock.selections[0].quantity).toBe(3);
+  });
+
+  it('should remove selections', () => {
+    const selection: ProductSelection = { product: product, quantity: 3 };
+    serviceMock.remove(product);
+    expect(serviceMock.selections).not.toContain(selection);
+  });
+
+  it('should count all product selections and quantities', () => {
+    serviceMock.add(product, 2);
+    serviceMock.add(product, 1);
+    expect(serviceMock.count()).toBe(3);
+  });
+
+  it('should be emptied', () => {
+    serviceMock.add(product, 2);
+    serviceMock.add(product, 1);
+    serviceMock.empty();
+    expect(serviceMock.selections.length).toBe(0);
+  });
+
 
   // it(`should fetch posts as an Observable`, fakeAsync(inject([HttpTestingController, CartService],
   //   (httpClient: HttpTestingController, serviceMock: CartService) => {

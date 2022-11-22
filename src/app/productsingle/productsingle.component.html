@@ -26,8 +26,8 @@
         <div class="single-product-slider">
           <div class="carousel slide" data-ride="carousel" id="single-product-slider">
             <div class="carousel-inner">
-              <div *ngFor="let img of images; let i = index; first as isFirst" [ngClass]="isFirst ? 'carousel-item active' : 'carousel-item' ">
-                <img [src]="srcImage+img.img_product" alt="" class="img-fluid">
+              <div *ngFor="let img of productService.images; let i = index; first as isFirst" [ngClass]="isFirst ? 'carousel-item active' : 'carousel-item' ">
+                <img [src]="img.img_product" alt="" class="img-fluid">
               </div>
               <!-- <div class="carousel-item active">
                 <img src="assets/images/product-3.jpg" alt="" class="img-fluid">
@@ -41,8 +41,8 @@
             </div>
 
             <ol class="carousel-indicators">
-              <li *ngFor="let img of images; let i = index; let isFirst = first" data-target="#single-product-slider" [attr.data-slide-to]="i" [ngClass]="{'active': i == 0}">
-                <img [src]="srcImage+img.img_product" alt="" class="img-fluid">
+              <li *ngFor="let img of productService.images; let i = index; let isFirst = first" data-target="#single-product-slider" [attr.data-slide-to]="i" [ngClass]="{ 'active': i == 0 }">
+                <img [src]="img.img_product" alt="" class="img-fluid">
               </li>
 
               <!-- <li data-target="#single-product-slider" data-slide-to="0" class="active">
@@ -60,30 +60,31 @@
       </div>
 
       <div class="col-md-7">
-        <div *ngFor="let product of productItem" class="single-product-details mt-5 mt-lg-0">
-          <h2>{{product.product_name}}</h2>
+        <div *ngIf="productService.productItem" class="single-product-details mt-5 mt-lg-0">
+          <h2>{{productService.productItem.product_name}}</h2>
           <div class="sku_wrapper mb-4">
-            SKU: <span class="text-muted">{{product.product_id}} </span>
+            SKU: <span class="text-muted">{{productService.productItem.product_id}} </span>
           </div>
 
           <hr>
 
-          <h3 class="product-price">${{product.product_price | currency:'':''}}
+          <h3 class="product-price">${{productService.productItem.product_price | currency:'':''}}
             <!-- <del>$119.90</del> -->
           </h3>
 
           <p class="product-description my-4 ">
-            {{product.product_description}}
+            {{productService.productItem.product_description}}
           </p>
 
-          <form class="cart" action="#" method="post" #cartForm="ngForm">
+          <!-- <form class="cart" action="#" method="post" #cartForm="ngForm"> -->
+          <form class="cart" #cartForm="ngForm">
             <div class="quantity d-flex align-items-center">
-              <input type="hidden" [(ngModel)]="product.product_id" name="product_id">
-              <input type="hidden" [(ngModel)]="product.product_price" name="cart_price">
+              <input type="hidden" [(ngModel)]="productService.productItem.product_id" name="product_id">
+              <input type="hidden" [(ngModel)]="productService.productItem.product_price" name="cart_price">
               <!-- <input type="number" id="#" class="input-text qty text form-control w-25 mr-3" step="1" min="1" max="9" name="quantity" value="1" title="Qty" size="4"> -->
               <input #quantity type="number" id="#" class="input-text qty text form-control w-25 mr-3" step="1" min="1" max="9" name="cart_quantity" value="1" title="Qty" size="4">
               <!-- <a routerLink="/cart" class="btn btn-main btn-small" id={{item.product_id}} (click)="onCartUpdated($event)">Add to cart</a> -->
-              <button class="btn btn-main btn-small" role="button" (click)="addToCart(product, + quantity.value);">Add to Cart</button>
+              <button class="btn btn-main btn-small" role="button" (click)="addToCart(productService.productItem, + quantity.value);">Add to Cart</button>
             </div>
           </form>
 
