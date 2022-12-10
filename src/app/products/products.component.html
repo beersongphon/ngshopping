@@ -1,10 +1,12 @@
 <div class="product">
   <div class="product-wrap">
     <a [routerLink]="['/product-single', products.product_id, products.product_name]" (click)="click()">
-      <img class="img-fluid w-100 mb-3 img-first" [src]="products.img_product" alt="product-img" />
+      <!-- <img class="img-fluid w-100 mb-3 img-first" [src]="products.img_product" alt="product-img" /> -->
+      <img *ngIf="products.img_product" onError="this.src='./assets/images/img-default.gif'" class="img-fluid w-100 mb-3 img-first" [src]="products.img_product" alt="product-img" />
     </a>
     <a *ngFor="let img of products.images" [routerLink]="['/product-single', products.product_id, products.product_name]" (click)="click()">
       <img class="img-fluid w-100 mb-3" [ngClass]="img.img_product > 0 ? 'img-first' : 'img-second'" [src]="img.img_product" alt="product-img" />
+      <!-- <img *ngIf="img.img_product" onError="this.src='./assets/images/img-default.gif'" class="img-fluid w-100 mb-3" [ngClass]="img.img_product > 0 ? 'img-first' : 'img-second'" [src]="img.img_product" alt="product-img" /> -->
     </a>
     <!-- <a *ngFor="let img of products.images" [routerLink]="['/product-single', products.product_id, products.product_name]">
       <img class="img-fluid w-100 mb-3 img-first" [src]="image+img.img_product" alt="product-img" />
@@ -14,7 +16,8 @@
     </a> -->
   </div>
 
-  <span class="onsale">Sale</span>
+  <!-- <span class="onsale">Sale</span> -->
+  <span *ngIf="products.product_price && products.product_discount > 0" class="onsale">{{products.product_discount}}%</span>
   <div class="product-hover-overlay">
     <a [routerLink]="['/product-single', products.product_id, products.product_name]" (click)="click()">
       <i class="tf-ion-android-cart"></i>
@@ -28,7 +31,12 @@
         {{products.product_name}}
       </a>
     </h2>
-    <span class="price">
+    <span *ngIf="products.product_price && products.product_discount > 0" class="price">
+      <del>${{products.product_price | currency:'':''}}<pre wp-pre-tag-3=""></pre></del>
+      ${{products.product_price * (1 - products.product_discount/100) | currency:'':''}}
+    </span>
+    <span *ngIf="products.product_price && (products.product_discount == 0 || products.product_discount == null)" class="price">
+      <!-- <del>$60<pre wp-pre-tag-3=""></pre></del> -->
       ${{products.product_price | currency:'':''}}
     </span>
   </div>

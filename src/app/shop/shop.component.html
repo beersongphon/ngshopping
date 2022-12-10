@@ -47,7 +47,7 @@
         </div>
 
         <div class="row">
-          <div class="col-lg-4 col-12 col-md-6 col-sm-6 mb-5" *ngFor="let s of shop | paginate: config;">
+          <div class="col-lg-4 col-12 col-md-6 col-sm-6 mb-5" *ngFor="let s of productService.product | paginate: config;">
             <app-products [products]="s"></app-products>
           </div>
 

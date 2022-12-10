@@ -18,6 +18,8 @@ export class ProductService {
 
   productItem: any;
   images: any[] = [];
+  product: Product[] = [];
+  searchProduct: any;
 
   constructor(private http: HttpClient) { }
 
@@ -28,9 +30,66 @@ export class ProductService {
   //     );
   // }
 
-  getShop(formValue: any): Observable<any> {
+
+  getShop(formValue: any): void {
     const apiHeader = { 'Content-Type': 'application/json' };
-    return this.http.post<any>(environment.apiUrl + '/api_get_product_front-end.php', formValue, { headers: apiHeader });
+    this.http.post<any>(environment.apiUrl + '/api_get_product_front-end.php', formValue, { headers: apiHeader }).subscribe({
+      next: (data) => {
+        this.product = data;
+        this.product = this.product.map((item) => ({
+          ...item,
+          img_product: environment.imageUrl + item.img_product
+        }));
+        for (let i = 0; i < this.product.length; i++) {
+          this.product[i].images = this.product[i].images.map((item: any) => ({
+            ...item,
+            img_product: environment.imageUrl + item.img_product,
+          }));
+          this.product[i] = Object.assign(this.product[i], { images: this.product[i].images });
+        }
+
+        // this.product = data;
+        // this.product = this.product.map((item) => ({
+        //   ...item,
+        //   img_product: environment.imageUrl + item.img_product
+        // }));
+
+        // for (let i = 0; i < this.product.length; i++) {
+        //   if (this.product[i].img_product == null) {
+        //     this.product[i] = Object.assign(this.product[i], { img_product: "./assets/images/img-default.gif" });
+        //   } else {
+        //     this.product[i] = Object.assign(this.product[i], { img_product: environment.imageUrl + this.product[i].img_product });
+        //     this.product[i].images = this.product[i].images.map((item: any) => ({
+        //       ...item,
+        //       img_product: environment.imageUrl + item.img_product,
+        //     }));
+        //     this.product[i] = Object.assign(this.product[i], { images: this.product[i].images });
+        //   }
+        // }
+
+        // data.sort((a: any,b: any) => a.product_id.localeCompare(b.product_id));
+        // for (let i = 0; i < data.length; i++) {
+        //   let body = []
+        //   for(let img of data[i].images) {
+        //     console.log(img);
+        //     body.push(img)
+        //     console.log(body);
+
+        //   }
+        // }
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
+      }
+    });
   }
 
   getProduct(formValue: any): Observable<any> {
@@ -168,21 +227,39 @@ export class ProductService {
       // this.productService.getProductDetail(this.id, this.title).subscribe({
       next: (data) => {
         this.productItem = data['data'];
-        this.images = data['data'].images;
-        this.images = this.images.map((item: any) => ({
-          ...item,
-          img_product: environment.imageUrl + item.img_product,
-        }));
-        // this.productItem = Object.assign(this.productItem, { img_product: environment.imageUrl + this.productItem.img_product });
-        // for (let i = 0; i < this.productItem.images.length; i++) {
-        //   let element = this.productItem.images;
-        //   this.images[i] = Object.assign({ img_pro_id: element[i].img_pro_id, img_product: environment.imageUrl + element[i].img_product });
-        // }
-        // this.productItem = Object.assign(this.productItem, { images: this.images });
+        // this.images = this.productItem.images.map((item: any) => ({
+        //   ...item,
+        //   img_product: environment.imageUrl + item.img_product,
+        // }));
+        // this.productItem = Object.assign(this.productItem, { img_product: environment.imageUrl + this.productItem.img_product, images: this.images });
+        if (this.productItem.img_product == null) {
+          this.productItem = Object.assign(this.productItem, { img_product: "./assets/images/img-default.gif", images: [{ img_product: null }] });
+          for (let i = 0; i < this.productItem.images.length; i++) {
+            if (this.productItem.images[i].img_product == null) {
+              this.productItem.images[i] = Object.assign(this.productItem.images[i], { img_product: "./assets/images/img-default.gif" });
+            }
+          }
+          this.images = this.productItem.images.map((item: any) => ({
+            ...item,
+            img_product: "./assets/images/img-default.gif",
+          }));
+          this.productItem = Object.assign(this.productItem, { img_product: "./assets/images/img-default.gif", images: this.images });
+        } else {
+          this.images = this.productItem.images.map((item: any) => ({
+            ...item,
+            img_product: environment.imageUrl + item.img_product,
+          }));
+          this.productItem = Object.assign(this.productItem, { img_product: environment.imageUrl + this.productItem.img_product, images: this.images });
+        }
       }, error: (error) => {
         Swal.fire({
           icon: "error",
-          title: (error),
+          title: (error.name),
+          text: (error.message),
+          // html:
+          //   'You can use <b>bold text</b>, ' +
+          //   '<a href="//sweetalert2.github.io">links</a> ' +
+          //   'and other HTML tags',
           showConfirmButton: false,
           timer: 2000
         }).then((result) => {

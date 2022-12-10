@@ -26,34 +26,36 @@
         <app-sidebar></app-sidebar>
       </div>
       <div class="col-12 col-md-7 col-sm-12 col-lg-9">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">No.</th>
-              <th scope="col" style="width: 7rem;">Product ID</th>
-              <th scope="col">Date</th>
-              <th scope="col">Product Name</th>
-              <th scope="col">Brand</th>
-              <th scope="col">Category</th>
-              <th scope="col">Quantity</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let p of product | paginate: { id:'pagination', itemsPerPage: 10, currentPage: currentPage }; let i= index">
-              <th scope="row">#{{ p.pageNo }}</th>
-              <td>{{ p.product_id }}</td>
-              <td>{{ p.product_date }}</td>
-              <td>{{ p.product_name }}</td>
-              <td>{{ p.brand_name}}</td>
-              <td>{{ p.category_name }}</td>
-              <td>{{ p.product_quantity }}</td>
-            </tr>
-            <tr *ngIf="product.length === 0">
-              <td colspan="7">No data to display.</td>
-            </tr>
-          </tbody>
-        </table>
-        <pagination-controls id="pagination" class="text-center" (pageChange)="currentPage = $event" previousLabel="ก่อนหน้า" nextLabel="ถัดไป" [autoHide]="true"></pagination-controls>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col" style="width: 7rem;">Product ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Category</th>
+                <th scope="col">Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of product | paginate: { id:'pagination', itemsPerPage: 10, currentPage: currentPage }; let i= index">
+                <th scope="row">#{{ p.pageNo }}</th>
+                <td>{{ p.product_id }}</td>
+                <td>{{ p.product_date }}</td>
+                <td>{{ p.product_name }}</td>
+                <td>{{ p.brand_name}}</td>
+                <td>{{ p.category_name }}</td>
+                <td>{{ p.product_quantity }}</td>
+              </tr>
+              <tr *ngIf="product.length === 0">
+                <td colspan="7">No data to display.</td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls id="pagination" class="text-center" (pageChange)="currentPage = $event" previousLabel="ก่อนหน้า" nextLabel="ถัดไป" [autoHide]="true"></pagination-controls>
+        </div>
         <button [disabled]="!product.length" type="button" class="btn btn-primary btn-block" (click)="clickPrint()">Print Report</button>
       </div>
     </div>

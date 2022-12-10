@@ -8,5 +8,6 @@
   img_product: string;
   product_quantity: number;
   product_price: number;
+  product_discount: number;
   product_description: string;
 }

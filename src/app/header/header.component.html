@@ -36,7 +36,7 @@
         </li> -->
         <!-- / Pages -->
 
-        <li *ngIf="loginbtn" class="nav-item">
+        <li *ngIf="loginbtn" class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/shop" routerLinkActive="active">Shop.</a>
         </li>
         <!-- Blog -->
@@ -78,6 +78,17 @@
       <!-- Navbar-collapse -->
       <ul class="top-menu list-inline mb-0 d-lg-block" id="top-menu">
       <!-- <ul class="top-menu list-inline mb-0 d-none d-lg-block" id="top-menu"> -->
+        <li class="list-inline-item">
+          <a href="#" class="search_toggle" id="search-icon" data-toggle="modal" data-target="#search-modal">
+            <i class="tf-ion-android-search"></i>
+          </a>
+        </li>
+        <!-- <div class="coupon-notice " data-toggle="modal" data-target="#search-modal">
+          <div class="bg-light p-3">
+            Have a coupon? <a routerLink="/checkout" class="showcoupon">Click here to enter your code</a>
+          </div>
+        </div> -->
+
         <!-- <li class="list-inline-item">
           <a href="#" class="search_toggle" id="search-icon"><i class="tf-ion-android-search"></i></a>
         </li> -->
@@ -96,7 +107,8 @@
             <div class="media" *ngFor="let selection of cart.selections | slice:0:4; let i = index">
               <a routerLink="/product-single">
                 <!-- <img class="media-object img-fluid mr-3" [src]="srcImage+selection.product.img_product" alt="image" /> -->
-                <img class="media-object img- mr-3" [src]="srcImage+selection.product.img_product" alt="image" />
+                <!-- <img class="media-object img- mr-3" [src]="selection.product.img_product" alt="image" /> -->
+                <img *ngIf="selection.product.img_product" onError="this.src='./assets/images/img-default.gif'" class="media-object img- mr-3" [src]="selection.product.img_product" alt="image" />
               </a>
               <div class="media-body">
                 <h6>{{selection.product.product_name}}</h6>

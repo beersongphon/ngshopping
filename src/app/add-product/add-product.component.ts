@@ -125,16 +125,25 @@ export class AddProductComponent implements OnInit {
           let bodyInsertImage = []
           for (let i = 0; i < this.images.length; i++) {
             let bodyInsert = {
-              img_product: this.images[i],
+              img_product: this.images[i].img_product,
               product_id: product_id
             };
             bodyInsertImage.push(bodyInsert)
           }
-          if (this.images.length == 1) {
+          if (this.images.length > 0) {
             this.productService.insertImageProduct(bodyInsertImage).subscribe({
               next: (data) => {
                 if (data.status == "success") {
-
+                  Swal.fire({
+                    icon: "success",
+                    title: (data.message),
+                    showConfirmButton: false,
+                    timer: 2000
+                  }).then((result) => {
+                    if (result.isDismissed) {
+                      this.router.navigate(['/product']);
+                    }
+                  });
                 } else {
                   Swal.fire({
                     icon: "error",
@@ -160,17 +169,18 @@ export class AddProductComponent implements OnInit {
                 });
               }
             });
+          } else {
+            Swal.fire({
+              icon: "success",
+              title: (data.message),
+              showConfirmButton: false,
+              timer: 2000
+            }).then((result) => {
+              if (result.isDismissed) {
+                this.router.navigate(['/product']);
+              }
+            });
           }
-          Swal.fire({
-            icon: "success",
-            title: (data.message),
-            showConfirmButton: false,
-            timer: 2000
-          }).then((result) => {
-            if (result.isDismissed) {
-              this.router.navigate(['/product']);
-            }
-          });
         } else {
           Swal.fire({
             icon: "error",

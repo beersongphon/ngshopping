@@ -1,0 +1,14 @@
+<div class="modal fade" id="search-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content py-5">
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Enter Search" name="txtSearch" [(ngModel)]="productService.searchProduct">
+          </div>
+          <button type="button" class="btn btn-main btn-small" data-dismiss="modal" (click)="getShop()">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

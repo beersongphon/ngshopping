@@ -11,16 +11,15 @@ import { Product } from './product.model';
 })
 export class CartService {
 
-  constructor(private http: HttpClient) { }
-
   selections: ProductSelection[] = [];
+
+  constructor(private http: HttpClient) { }
 
   add(product: Product, quantity: number): void {
     const existing = this.selections.find(existingSelection => existingSelection.product.product_id === product.product_id);
     if (existing) {
       existing.quantity += quantity;
-    }
-    else {
+    } else {
       this.selections.push({ product: product, quantity: quantity });
     }
   }
@@ -31,8 +30,7 @@ export class CartService {
     const existing = this.selections.find(existingSelection => existingSelection.product.product_id === product.product_id);
     if (existing) {
       existing.quantity = quantity;
-    }
-    else {
+    } else {
       this.selections.push({ product: product, quantity: quantity });
     }
   }

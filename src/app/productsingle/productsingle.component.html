@@ -27,7 +27,8 @@
           <div class="carousel slide" data-ride="carousel" id="single-product-slider">
             <div class="carousel-inner">
               <div *ngFor="let img of productService.images; let i = index; first as isFirst" [ngClass]="isFirst ? 'carousel-item active' : 'carousel-item' ">
-                <img [src]="img.img_product" alt="" class="img-fluid">
+                <!-- <img [src]="img.img_product" alt="" class="img-fluid"> -->
+                <img *ngIf="img.img_product" onError="this.src='./assets/images/img-default.gif'" [src]="img.img_product" alt="" class="img-fluid">
               </div>
               <!-- <div class="carousel-item active">
                 <img src="assets/images/product-3.jpg" alt="" class="img-fluid">
@@ -43,6 +44,7 @@
             <ol class="carousel-indicators">
               <li *ngFor="let img of productService.images; let i = index; let isFirst = first" data-target="#single-product-slider" [attr.data-slide-to]="i" [ngClass]="{ 'active': i == 0 }">
                 <img [src]="img.img_product" alt="" class="img-fluid">
+                <!-- <img *ngIf="img.img_product" onError="this.src='./assets/images/img-default.gif'" [src]="img.img_product" alt="" class="img-fluid"> -->
               </li>
 
               <!-- <li data-target="#single-product-slider" data-slide-to="0" class="active">
@@ -68,8 +70,11 @@
 
           <hr>
 
-          <h3 class="product-price">${{productService.productItem.product_price | currency:'':''}}
-            <!-- <del>$119.90</del> -->
+          <h3 *ngIf="productService.productItem.product_price && productService.productItem.product_discount > 0" class="product-price">${{productService.productItem.product_price * (1 - productService.productItem.product_discount/100) | currency:'':''}}
+            <del>${{productService.productItem.product_price | currency:'':''}}</del>
+          </h3>
+          <h3 *ngIf="productService.productItem.product_price && (productService.productItem.product_discount == 0 || productService.productItem.product_discount == null)" class="product-price">
+            ${{productService.productItem.product_price | currency:'':''}}
           </h3>
 
           <p class="product-description my-4 ">
@@ -77,14 +82,14 @@
           </p>
 
           <!-- <form class="cart" action="#" method="post" #cartForm="ngForm"> -->
-          <form class="cart" #cartForm="ngForm">
+          <form class="cart" #cartForm="ngForm" ngNativeValidate>
             <div class="quantity d-flex align-items-center">
               <input type="hidden" [(ngModel)]="productService.productItem.product_id" name="product_id">
               <input type="hidden" [(ngModel)]="productService.productItem.product_price" name="cart_price">
               <!-- <input type="number" id="#" class="input-text qty text form-control w-25 mr-3" step="1" min="1" max="9" name="quantity" value="1" title="Qty" size="4"> -->
-              <input #quantity type="number" id="#" class="input-text qty text form-control w-25 mr-3" step="1" min="1" max="9" name="cart_quantity" value="1" title="Qty" size="4">
+              <input #quantity type="number" id="#" class="input-text qty text form-control w-25 mr-3" step="1" min="1" [max]="productService.productItem.product_quantity" name="cart_quantity" value="1" title="Qty" size="4" (change)="onQuantityChange(productService.productItem, + quantity.value)" (keyup)="onQuantityChange(productService.productItem, + quantity.value)">
               <!-- <a routerLink="/cart" class="btn btn-main btn-small" id={{item.product_id}} (click)="onCartUpdated($event)">Add to cart</a> -->
-              <button class="btn btn-main btn-small" role="button" (click)="addToCart(productService.productItem, + quantity.value);">Add to Cart</button>
+              <button [disabled]="isDisabledValueLimit" class="btn btn-main btn-small" role="button" (click)="addToCart(productService.productItem, + quantity.value);">Add to Cart</button>
             </div>
           </form>
 
@@ -263,7 +268,7 @@
       </div>
     </div>
     <div class="row">
-      <div *ngFor="let p of product | slice:0:4;" class="col-lg-3 col-6">
+      <div *ngFor="let p of productService.product | slice:0:4;" class="col-lg-3 col-6">
         <app-products [products]="p"></app-products>
       </div>
       <!-- <div class="col-lg-3 col-6">

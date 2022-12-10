@@ -43,32 +43,34 @@
             </div>
           </div>
         </form>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">No.</th>
-              <th scope="col" style="width: 7rem;">Brand ID</th>
-              <th scope="col">Brand Name</th>
-              <th scope="col" style="width: 17rem;">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let b of brand | paginate: { id:'pagination', itemsPerPage: 10, currentPage: currentPage }; let i= index">
-              <th scope="row">#{{ b.pageNo }}</th>
-              <td>{{ b.brand_id }}</td>
-              <td>{{ b.brand_name }}</td>
-              <td>
-                <!-- <a routerLink="/order" class="btn btn-dark btn-small">View</a> | -->
-                <a [routerLink]="['/edit-brand', b.brand_id, b.brand_name]" class="btn btn-warning btn-small">Edit</a> |
-                <a routerLink="/brand" class="btn btn-danger btn-small" (click)="deleteBrand(b.brand_id)">Delete</a>
-              </td>
-            </tr>
-            <tr *ngIf="!brand.length">
-              <td colspan="5">No data to display.</td>
-            </tr>
-          </tbody>
-        </table>
-        <pagination-controls id="pagination" class="text-center" (pageChange)="currentPage = $event" previousLabel="ก่อนหน้า" nextLabel="ถัดไป" [autoHide]="true"></pagination-controls>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col" style="width: 7rem;">Brand ID</th>
+                <th scope="col">Brand Name</th>
+                <th scope="col" style="width: 17rem;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let b of brand | paginate: { id:'pagination', itemsPerPage: 10, currentPage: currentPage }; let i= index">
+                <th scope="row">#{{ b.pageNo }}</th>
+                <td>{{ b.brand_id }}</td>
+                <td>{{ b.brand_name }}</td>
+                <td>
+                  <!-- <a routerLink="/order" class="btn btn-dark btn-small">View</a> | -->
+                  <a [routerLink]="['/edit-brand', b.brand_id, b.brand_name]" class="btn btn-warning btn-small">Edit</a> |
+                  <a routerLink="/brand" class="btn btn-danger btn-small" (click)="deleteBrand(b.brand_id)">Delete</a>
+                </td>
+              </tr>
+              <tr *ngIf="!brand.length">
+                <td colspan="5">No data to display.</td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls id="pagination" class="text-center" (pageChange)="currentPage = $event" previousLabel="ก่อนหน้า" nextLabel="ถัดไป" [autoHide]="true"></pagination-controls>
+        </div>
       </div>
     </div>
   </div>

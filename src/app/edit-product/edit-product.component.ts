@@ -187,8 +187,8 @@ export class EditProductComponent implements OnInit {
       product_quantity: formValue.product_quantity,
       product_description: formValue.product_description
     };
-    this.productService.updateProduct(body).subscribe(
-      (data) => {
+    this.productService.updateProduct(body).subscribe({
+      next: (data) => {
         if (data.status == "success") {
           if (this.bodyDelete.filter(item => item.img_pro_id).length) {
             let bodyDeleteImage = []
@@ -226,7 +226,7 @@ export class EditProductComponent implements OnInit {
                   }
                 });
               }
-            })
+            });
           }
           if (this.images.filter(item => item.img_product).length) {
             let bodyInsertImage = [];
@@ -289,7 +289,18 @@ export class EditProductComponent implements OnInit {
             }
           });
         }
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 }

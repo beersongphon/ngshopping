@@ -16,17 +16,17 @@ export class AddBrandComponent implements OnInit {
   }
 
   insertBrand(formValue: any) {
-    let body = {}
-    body = {
-      brand_id: formValue.brand_id,
-      brand_name: formValue.brand_name
-    }
-    this.productService.insertBrand(body).subscribe({
+    // let body = {}
+    // body = {
+    //   brand_id: formValue.brand_id,
+    //   brand_name: formValue.brand_name
+    // }
+    this.productService.insertBrand(formValue).subscribe({
       next: (data) => {
         if (data.status == "success") {
           Swal.fire({
             icon: "success",
-            title: (data.message),
+            text: (data.message),
             showConfirmButton: false,
             timer: 2000
           }).then((result) => {

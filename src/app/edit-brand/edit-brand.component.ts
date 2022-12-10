@@ -29,7 +29,20 @@ export class EditBrandComponent implements OnInit {
     }
     this.productService.getEditBrand(body).subscribe({
       next: (data) => {
-        this.brand = data;
+        if(data.status == "success"){
+          this.brand = data["data"];
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: (data.status),
+            showConfirmButton: false,
+            timer: 2000
+          }).then((result) => {
+            if (result.isDismissed) {
+              window.history.back;
+            }
+          });
+        }
       }, error: (error) => {
         Swal.fire({
           icon: "error",

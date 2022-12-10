@@ -24,7 +24,7 @@
     <div class="row justify-content-center">
       <div class="col-lg-12">
         <div class="product-list">
-          <form class="cart-form">
+          <form class="cart-form" ngNativeValidate>
             <table class="table shop_table shop_table_responsive cart" cellspacing="0">
               <thead>
                 <tr>
@@ -45,7 +45,8 @@
                 <tr class="cart_item" *ngFor="let selection of cart.selections let i = index">
                   <td class="product-thumbnail" data-title="Thumbnail">
                     <a [routerLink]="['/product-single', selection.product.product_id, selection.product.product_name]">
-                      <img [src]="srcImage+selection.product.img_product" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">
+                      <!-- <img [src]="selection.product.img_product" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt=""> -->
+                      <img *ngIf="selection.product.img_product" onError="this.src='./assets/images/img-default.gif'" [src]="selection.product.img_product" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">
                     </a>
                   </td>
                   <td class="product-name" data-title="Product">
@@ -62,7 +63,7 @@
                   <td class="product-quantity" data-title="Quantity">
                     <div class="quantity">
                       <label class="sr-only">Quantity</label>
-                        <p style="margin: 0 0 0px;"><input #quantity type="number" step="1" min="1" [max]="selection.product.product_quantity" [value]="selection.quantity" title="Qty" size="4" (change)="onQuantityChange(selection, + quantity.value)" /></p>
+                        <p style="margin: 0 0 0px;"><input #quantity type="number" step="1" min="1" [max]="selection.product.product_quantity" [value]="selection.quantity" title="Qty" size="4" (change)="onQuantityChange(selection, + quantity.value)" (keyup)="onQuantityChange(selection, + quantity.value)" /></p>
                         <!-- <input type="number" id="qty" class="input-text qty text" step="1" min="0" max="9" value="1" title="Qty" size="4"> -->
                     </div>
                   </td>
@@ -71,6 +72,7 @@
                       <span class="currencySymbol">
                         <pre wp-pre-tag-3=""></pre>
                         <p>{{selection.product.product_price * +quantity.value | currency}}</p>
+                        <!-- <p>{{selection.product.product_price * +selection.quantity | currency}}</p> -->
                       </span>
                     </span>
                   </td>
@@ -166,7 +168,7 @@
                 <!-- <tr>
                   <td colspan="6" class="actions">
                     <div class="coupon">
-                      <input type="text" name="coupon_code" class="input-text form-control" id="coupon_code" value="" placeholder="Coupon code" style="float: left !important;"> -->
+                      <input type="text" name="coupon_code" class="input-text form-control" id="coupon_code" value="" placeholder="Coupon code" style="float: left !important; height: 48px;"> -->
                       <!-- <input type="text" name="coupon_code" class="input-text form-control" id="coupon_code" value="" placeholder="Coupon code"> -->
                       <!-- <button type="button" class="btn btn-black btn-small" name="apply_coupon" value="Apply coupon">Apply coupon</button>
                       <span class="float-right mt-3 mt-lg-0">
@@ -238,9 +240,10 @@
             </li> -->
           </ul>
           <!-- <a routerLink="/checkout" class="btn btn-main btn-small">Proceed to checkout</a> -->
-          <button [disabled]="!cart.selections.length" routerLink="/checkout" class="btn btn-main btn-small">Proceed to checkout</button>
+          <button [disabled]="!cart.selections.length || isDisabledValueLimit" routerLink="/checkout" class="btn btn-main btn-small">Proceed to checkout</button>
         </div>
       </div>
     </div>
   </div>
 </section>
+<app-footer></app-footer>

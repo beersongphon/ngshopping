@@ -41,7 +41,7 @@ export class ShopComponent implements OnInit {
   selectedItemsList: any = [];
   checkedIDs: any = [];
 
-  constructor(private title: Title, private apiService: ApiService, private productService: ProductService) { }
+  constructor(private title: Title, private apiService: ApiService, public productService: ProductService) { }
 
   ngOnInit(): void {
     this.getShops();
@@ -54,39 +54,12 @@ export class ShopComponent implements OnInit {
 
   getShops(): void {
     let body: any = [];
-    this.productService.getShop(body).subscribe(
-      (data) => {
-        this.shop = data;
-        if (data[0].product_quantity == 0) {
-          // สินค้าหมด
-          this.confirm = "return false;";
-          this.tableClass = "label stockout";
-          this.txtTitle = "สินค้าหมด";
-          // console.log(data);
-          // $txtTitle = "Out Of Stock";
-        } else {
-          // เหลือ > 1 ชิ้น
-          this.confirm = "return true;";
-          this.tableClass = "label stockblue";
-          this.txtTitle = "Sale";
-          // console.log(data);
-          // $txtTitle = "New";
-        }
-        // console.log(data);
-        this.shop = this.shop.map((item: any) => ({
-          ...item,
-          img_product: environment.imageUrl + item.img_product
-        }));
-        for (let i = 0; i < this.shop.length; i++) {
-          let element = this.shop[i].images;
-          element = element.map((item: any) => ({
-            ...item,
-            img_product: environment.imageUrl + item.img_product,
-          }));
-          this.shop[i] = Object.assign(this.shop[i], { images: element });
-        }
-      }
-    );
+    if (this.productService.searchProduct) {
+      body = [{
+        txtSearch: this.productService.searchProduct
+      }];
+    }
+    this.productService.getShop(body);
   }
 
   getCategory(): void {
@@ -110,34 +83,7 @@ export class ShopComponent implements OnInit {
       }
     });
 
-    this.productService.getShop(this.checkedIDs).subscribe({
-      next: (data) => {
-        this.shop = data;
-        this.shop = this.shop.map((item: any) => ({
-          ...item,
-          img_product: environment.imageUrl + item.img_product
-        }));
-        for (let i = 0; i < this.shop.length; i++) {
-          let element = this.shop[i].images;
-          element = element.map((item: any) => ({
-            ...item,
-            img_product: environment.imageUrl + item.img_product,
-          }));
-          this.shop[i] = Object.assign(this.shop[i], { images: element });
-        }
-      }, error: (error) => {
-        Swal.fire({
-          icon: "error",
-          title: (error),
-          showConfirmButton: false,
-          timer: 2000
-        }).then((result) => {
-          if (result.isDismissed) {
-            window.history.back;
-          }
-        });
-      }
-    });
+    this.productService.getShop(this.checkedIDs);
   }
 
   changeSelection(): void {

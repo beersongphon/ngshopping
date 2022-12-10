@@ -14,12 +14,13 @@ import { environment } from './../../environments/environment';
 })
 export class ProductsingleComponent implements OnInit {
 
+  isDisabledValueLimit = false;
   productItem: any;
   id: number = 1;
   title: string = '';
   // productdetail?: any;
   images?: any;
-  srcImage = environment.imageUrl;
+  // srcImage = environment.imageUrl;
 
   productAdded: any | null;
 
@@ -42,62 +43,43 @@ export class ProductsingleComponent implements OnInit {
 
   getProduct(): void {
     let body: any = [];
-    this.productService.getShop(body).subscribe({
-      next: (data) => {
-        this.product = data;
-        this.product = this.product.map((item) => ({
-          ...item,
-          img_product: environment.imageUrl + item.img_product
-        }));
-        for (let i = 0; i < this.product.length; i++) {
-          let element = this.product[i].images;
-          element = element.map((item: any) => ({
-            ...item,
-            img_product: environment.imageUrl + item.img_product,
-          }));
-          this.product[i] = Object.assign(this.product[i], { images: element });
-        }
-      }, error: (error) => {
-        Swal.fire({
-          icon: "error",
-          title: (error),
-          showConfirmButton: false,
-          timer: 2000
-        }).then((result) => {
-          if (result.isDismissed) {
-            window.history.back;
-          }
-        });
-      }
-    });
+    this.productService.getShop(body);
   }
 
   addToCart(product: Product, quantity: number): void {
+    if (product.product_price && product.product_discount > 0) {
+      let discount = product.product_price * (1 - product.product_discount/100);
+      product = Object.assign(product, { product_price: discount.toString() });
+    }
     this.cartService.add(product, quantity);
     this.productAdded = product;
     this.router.navigateByUrl('/cart');
   }
 
-  clearAdd(): void {
-    this.productAdded = null;
+  onQuantityChange(product: Product, quantity: number) {
+    if (quantity > 0) {
+      if (quantity < product.product_quantity || quantity == product.product_quantity) {
+        this.isDisabledValueLimit = false;
+        quantity = quantity;
+        // for (let index = 0; index < this.cartService.selections.length; index++) {
+        //   console.log(quantity, this.cartService.selections[index].quantity);
+        //   if (quantity < this.cartService.selections[index].quantity || quantity == this.cartService.selections[index].quantity) {
+        //     this.isDisabledValueLimit = true;
+        //     const element = this.cartService.selections[index];
+        //     console.log(element);
+        //   }
+        // }
+      } else {
+        quantity = quantity;
+        this.isDisabledValueLimit = true;
+      }
+    } else {
+      this.isDisabledValueLimit = true;
+      quantity = 1;
+    }
   }
 
-  getProductDetailImage(): void {
-    this.productService.getProductDetailImage(this.id).subscribe({
-      next: (data) => {
-        this.images = data['data'];
-      }, error: (error) => {
-        Swal.fire({
-          icon: "error",
-          title: (error),
-          showConfirmButton: false,
-          timer: 2000
-        }).then((result) => {
-          if (result.isDismissed) {
-            window.history.back;
-          }
-        });
-      }
-    });
+  clearAdd(): void {
+    this.productAdded = null;
   }
 }

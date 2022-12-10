@@ -56,7 +56,7 @@
               <div class="form-group mb-4">
                 <label>Product Name </label>
                 <!-- <input type="text" class="form-control" name="product_name" placeholder="Jassa"> -->
-                <input type="text" class="form-control" name="product_name" placeholder="Jassa" ngModel
+                <input type="text" class="form-control" name="product_name" placeholder="Product Name" ngModel
                 #product_name="ngModel" [ngClass]="{'is-invalid': product_name.invalid && (product_name.dirty || product_name.touched)}" required>
               </div>
               <div class="form-group mb-4">
@@ -77,20 +77,27 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label>Price</label>
-                    <input type="text" class="form-control" name="product_price" placeholder="John" ngModel
+                    <input type="text" class="form-control" name="product_price" placeholder="Price" ngModel
                     #product_price="ngModel" [ngClass]="{'is-invalid': product_price.invalid && (product_price.dirty || product_price.touched)}" required>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
+                    <label>Discount</label>
+                    <input type="text" class="form-control" name="product_discount" placeholder="Discount" ngModel
+                    #product_discount="ngModel" [ngClass]="{'is-invalid': product_discount.invalid && (product_discount.dirty || product_discount.touched)}" required>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
                     <label>Product Quantity</label>
-                    <input type="number" class="form-control" name="product_quantity" placeholder="Jas" ngModel
+                    <input type="number" class="form-control" name="product_quantity" placeholder="Product Quantity" ngModel
                     #product_quantity="ngModel" [ngClass]="{'is-invalid': product_quantity.invalid && (product_quantity.dirty || product_quantity.touched)}" required>
                   </div>
                 </div>
               </div>
               <div class="form-group mb-4">
-                <label>description</label>
+                <label>Description</label>
                 <textarea class="form-control" name="product_description" ngModel
                 #product_description="ngModel" [ngClass]="{'is-invalid': product_description.invalid && (product_description.dirty || product_description.touched)}" required></textarea>
               </div>

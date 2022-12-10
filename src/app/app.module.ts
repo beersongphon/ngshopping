@@ -84,6 +84,7 @@ import { PortalModule } from '@angular/cdk/portal';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxPrintModule } from 'ngx-print';
+import { SearchProductComponent } from './search-product/search-product.component';
 
 @NgModule({
   declarations: [
@@ -123,7 +124,8 @@ import { NgxPrintModule } from 'ngx-print';
     ReportSaleComponent,
     PagePrintReportProductComponent,
     PagePrintReportSaleComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    SearchProductComponent
   ],
   imports: [
     BrowserModule,

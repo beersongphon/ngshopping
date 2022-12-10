@@ -43,40 +43,42 @@
             </div>
           </div>
         </form>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">No.</th>
-              <th scope="col" style="width: 7rem;">Product ID</th>
-              <th scope="col" style="width: 7rem;">Image</th>
-              <th scope="col">Product Name</th>
-              <th scope="col">Price</th>
-              <th scope="col">Quantity</th>
-              <th scope="col">Description</th>
-              <th scope="col" style="width: 17rem;">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let p of product | paginate: { id:'pagination', itemsPerPage: 10, currentPage: currentPage }; let i= index">
-              <th scope="row">#{{ p.pageNo }}</th>
-              <td>{{ p.product_id }}</td>
-              <td><img class="img-fluid w-100 mb-3" [src]="srcImage+p.img_product" alt="product-img" /></td>
-              <td>{{ p.product_name }}</td>
-              <td>{{ p.product_price | currency:'':'' }}</td>
-              <td>{{ p.product_quantity }}</td>
-              <td>{{ p.product_description }}</td>
-              <td>
-                <!-- <a routerLink="/order" class="btn btn-dark btn-small">View</a> | -->
-                <a [routerLink]="['/edit-product', p.product_id, p.product_name]" class="btn btn-warning btn-small">Edit</a> |
-                <a routerLink="/product" class="btn btn-danger btn-small" (click)="deleteProduct(p.product_id)">Delete</a>
-              </td>
-            </tr>
-            <tr *ngIf="!product.length">
-              <td colspan="5">No data to display.</td>
-            </tr>
-          </tbody>
-        </table>
-        <pagination-controls id="pagination" class="text-center" (pageChange)="currentPage = $event" previousLabel="ก่อนหน้า" nextLabel="ถัดไป" [autoHide]="true"></pagination-controls>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col" style="width: 7rem;">Product ID</th>
+                <th scope="col" style="width: 7rem;">Image</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Description</th>
+                <th scope="col" style="width: 17rem;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of product | paginate: { id:'pagination', itemsPerPage: 10, currentPage: currentPage }; let i= index">
+                <th scope="row">#{{ p.pageNo }}</th>
+                <td>{{ p.product_id }}</td>
+                <td><img *ngIf="p.img_product" class="img-fluid w-100 mb-3" onError="this.src='./assets/images/img-default.gif'" [src]="srcImage+p.img_product" alt="product-img" /></td>
+                <td>{{ p.product_name }}</td>
+                <td>{{ p.product_price | currency:'':'' }}</td>
+                <td>{{ p.product_quantity }}</td>
+                <td>{{ p.product_description }}</td>
+                <td>
+                  <!-- <a routerLink="/order" class="btn btn-dark btn-small">View</a> | -->
+                  <a [routerLink]="['/edit-product', p.product_id, p.product_name]" class="btn btn-warning btn-small">Edit</a> |
+                  <a routerLink="/product" class="btn btn-danger btn-small" (click)="deleteProduct(p.product_id)">Delete</a>
+                </td>
+              </tr>
+              <tr *ngIf="!product.length">
+                <td colspan="5">No data to display.</td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls id="pagination" class="text-center" (pageChange)="currentPage = $event" previousLabel="ก่อนหน้า" nextLabel="ถัดไป" [autoHide]="true"></pagination-controls>
+        </div>
       </div>
     </div>
   </div>

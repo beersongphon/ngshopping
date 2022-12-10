@@ -9,7 +9,8 @@
             <p class="lead">Don’t have an account? <a routerLink="/signup">Create a free account</a></p>
           </div>
 
-          <form action="#" [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
+          <!-- <form action="#" [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off"> -->
+          <form [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
             <div class="form-group mb-4">
               <label for="#">Enter username</label>
               <input type="text" formControlName="username" class="form-control" placeholder="Enter Username" required autofocus>

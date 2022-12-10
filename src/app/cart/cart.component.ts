@@ -14,15 +14,19 @@ export class CartComponent implements OnInit {
 
   srcImage = environment.imageUrl;
 
-  max: number = 9
+  max: number = 9;
+  isDisabledValueLimit = false;
 
   constructor(public cart: CartService, private cartCalculator: CartCalculator) { }
 
   ngOnInit(): void {
+    for (let index = 0; index < this.cart.selections.length; index++) {
+      this.onQuantityChange(this.cart.selections[index], this.cart.selections[index].quantity)
+    }
   }
 
   checkStock(selection: any) {
-    if (selection== 0) {
+    if (selection == 0) {
       // สินค้าหมด
       // selection.quantity = selection.product.product_quantity
       // console.log(selection.quantity = selection.product.product_quantity);
@@ -51,10 +55,18 @@ export class CartComponent implements OnInit {
   }
 
   onQuantityChange(selection: ProductSelection, quantity: number) {
+    selection = Object.assign(selection, { quantity: quantity });
     if (quantity > 0) {
-      selection.quantity = quantity;
+      if (quantity < selection.product.product_quantity || quantity == selection.product.product_quantity) {
+        this.isDisabledValueLimit = false;
+        selection.quantity = quantity;
+      } else {
+        selection.quantity = quantity;
+        this.isDisabledValueLimit = true;
+      }
     }
     else {
+      this.isDisabledValueLimit = true;
       selection.quantity = 1;
     }
   }

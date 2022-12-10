@@ -70,32 +70,34 @@
             </div>
           </div>
         </form>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">No.</th>
-              <th scope="col" style="width: 7rem;">Order ID</th>
-              <th scope="col">Date</th>
-              <th scope="col">Name</th>
-              <th scope="col">Tel</th>
-              <th scope="col">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let p of product | paginate: { id:'pagination', itemsPerPage: 10, currentPage: currentPage }; let i= index">
-              <th scope="row">#{{ p.pageNo }}</th>
-              <td>{{ p.order_id }}</td>
-              <td>{{ p.order_date }}</td>
-              <td>{{ p.order_name }}</td>
-              <td>{{ p.order_tel}}</td>
-              <td>{{ p.order_total | currency:'':'' }}</td>
-            </tr>
-            <tr *ngIf="!product.length">
-              <td colspan="6">No data to display.</td>
-            </tr>
-          </tbody>
-        </table>
-        <pagination-controls id="pagination" class="text-center" (pageChange)="currentPage = $event" previousLabel="ก่อนหน้า" nextLabel="ถัดไป" [autoHide]="true"></pagination-controls>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col" style="width: 7rem;">Order ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">Name</th>
+                <th scope="col">Tel</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of product | paginate: { id:'pagination', itemsPerPage: 10, currentPage: currentPage }; let i= index">
+                <th scope="row">#{{ p.pageNo }}</th>
+                <td>{{ p.order_id }}</td>
+                <td>{{ p.order_date }}</td>
+                <td>{{ p.order_name }}</td>
+                <td>{{ p.order_tel}}</td>
+                <td>{{ p.order_total | currency:'':'' }}</td>
+              </tr>
+              <tr *ngIf="!product.length">
+                <td colspan="6">No data to display.</td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls id="pagination" class="text-center" (pageChange)="currentPage = $event" previousLabel="ก่อนหน้า" nextLabel="ถัดไป" [autoHide]="true"></pagination-controls>
+        </div>
         <button [disabled]="!product.length" type="button" class="btn btn-primary btn-block" (click)="clickPrint()">Print Report</button>
       </div>
     </div>
