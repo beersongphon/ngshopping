@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from './../shared/product.service';
 import { ApiService } from './../shared/api.service';
+import { Product } from './../shared/product.model';
 
 @Component({
   selector: 'app-products',
@@ -9,7 +10,7 @@ import { ApiService } from './../shared/api.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  @Input() products: any;
+  @Input() products!: Product;
 
   loginbtn: boolean;
   logoutbtn: boolean;

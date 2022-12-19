@@ -54,25 +54,43 @@
                   </td>
                   <td class="product-price" data-title="Price">
                     <span class="amount">
-                      <span class="currencySymbol">
+                      <!-- <span class="currencySymbol">
                         <pre wp-pre-tag-3=""></pre>
-                        <p>{{selection.product.product_price | currency}}</p>
+                        <span>{{selection.product.product_price | currency:'':''}}</span> -->
+                        <!-- <p>{{selection.product.product_price | currency:'':''}}</p> -->
+                      <!-- </span> -->
+                      <span *ngIf="selection.product.product_price && selection.product.product_discount > 0" class="currencySymbol">
+                        <del>${{selection.product.product_price | currency:'':''}}<pre wp-pre-tag-3=""></pre></del>
+                        <span>${{selection.product.product_price * (1 - selection.product.product_discount/100) | currency:'':''}}</span>
+                      </span>
+                      <span *ngIf="selection.product.product_price && (selection.product.product_discount == 0 || selection.product.product_discount == null)" class="currencySymbol">
+                        <!-- <del>$60<pre wp-pre-tag-3=""></pre></del> -->
+                        <span>${{selection.product.product_price | currency:'':''}}</span>
                       </span>
                     </span>
                   </td>
                   <td class="product-quantity" data-title="Quantity">
                     <div class="quantity">
                       <label class="sr-only">Quantity</label>
-                        <p style="margin: 0 0 0px;"><input #quantity type="number" step="1" min="1" [max]="selection.product.product_quantity" [value]="selection.quantity" title="Qty" size="4" (change)="onQuantityChange(selection, + quantity.value)" (keyup)="onQuantityChange(selection, + quantity.value)" /></p>
+                        <!-- <p style="margin: 0 0 0px;"><input #quantity type="number" id="qty" class="input-text qty text" step="1" min="1" [max]="selection.product.product_quantity" [value]="selection.quantity" title="Qty" size="4" (change)="onQuantityChange(selection, + quantity.value)" (keyup)="onQuantityChange(selection, + quantity.value)" /></p> -->
+                        <input #quantity type="number" id="qty" class="input-text qty text" step="1" min="1" [max]="selection.product.product_quantity" [value]="selection.quantity" title="Qty" size="4" (change)="onQuantityChange(selection, + quantity.value)" (keyup)="onQuantityChange(selection, + quantity.value)" />
                         <!-- <input type="number" id="qty" class="input-text qty text" step="1" min="0" max="9" value="1" title="Qty" size="4"> -->
                     </div>
                   </td>
                   <td class="product-subtotal" data-title="Total">
                     <span class="amount">
-                      <span class="currencySymbol">
+                      <!-- <span class="currencySymbol">
                         <pre wp-pre-tag-3=""></pre>
-                        <p>{{selection.product.product_price * +quantity.value | currency}}</p>
-                        <!-- <p>{{selection.product.product_price * +selection.quantity | currency}}</p> -->
+                        <span>${{selection.product.product_price * +quantity.value | currency:'':''}}</span> -->
+                        <!-- <span>{{selection.product.product_price * +selection.quantity | currency:'':''}}</span> -->
+                      <!-- </span> -->
+                      <span *ngIf="selection.product.product_price && selection.product.product_discount > 0" class="currencySymbol">
+                        <del>${{selection.product.product_price * +quantity.value | currency:'':''}}<pre wp-pre-tag-3=""></pre></del>
+                        <span>${{selection.product.product_price * (1 - selection.product.product_discount/100) * +quantity.value | currency:'':''}}</span>
+                      </span>
+                      <span *ngIf="selection.product.product_price && (selection.product.product_discount == 0 || selection.product.product_discount == null)" class="currencySymbol">
+                        <!-- <del>$60<pre wp-pre-tag-3=""></pre></del> -->
+                        <span>${{selection.product.product_price * +quantity.value | currency:'':''}}</span>
                       </span>
                     </span>
                   </td>

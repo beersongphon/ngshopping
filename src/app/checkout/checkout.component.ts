@@ -99,8 +99,8 @@ export class CheckoutComponent implements OnInit {
     let order_id = { order_id: "OR_" + this.datePipe.transform(new Date(), "YYYYMMdd") + "_" + this.datePipe.transform(new Date(), "HHmmss") }
     let body = Object.assign(bodyOrder, order_id);
 
-    this.cart.insertOrder(body).subscribe(
-      (messages) => {
+    this.cart.insertOrder(body).subscribe({
+      next: (messages) => {
         // this.dataSource = users;
         if (messages.status == "success") {
           let bodyOrderDetail = []
@@ -112,8 +112,8 @@ export class CheckoutComponent implements OnInit {
             }, order_id);
             bodyOrderDetail.push(bodyOrderDetails)
           }
-          this.cart.insertOrderDetail(bodyOrderDetail).subscribe(
-            (messages) => {
+          this.cart.insertOrderDetail(bodyOrderDetail).subscribe({
+            next: (messages) => {
               // this.dataSource = users;
               if (messages.status == "success") {
                 let bodySum = []
@@ -123,8 +123,8 @@ export class CheckoutComponent implements OnInit {
                     product_quantity: state[i].product.product_quantity - state[i].quantity
                   })
                 }
-                this.cart.updateCheckStock(bodySum).subscribe(
-                  (messages) => {
+                this.cart.updateCheckStock(bodySum).subscribe({
+                  next: (messages) => {
                     if (messages.status == "success") {
                       Swal.fire({
                         icon: 'success',
@@ -149,8 +149,19 @@ export class CheckoutComponent implements OnInit {
                         }
                       });
                     }
+                  }, error: (error) => {
+                    Swal.fire({
+                      icon: "error",
+                      title: (error),
+                      showConfirmButton: false,
+                      timer: 2000
+                    }).then((result) => {
+                      if (result.isDismissed) {
+                        window.history.back;
+                      }
+                    });
                   }
-                );
+                });
               } else {
                 Swal.fire({
                   icon: 'error',
@@ -163,8 +174,19 @@ export class CheckoutComponent implements OnInit {
                   }
                 });
               }
+            }, error: (error) => {
+              Swal.fire({
+                icon: "error",
+                title: (error),
+                showConfirmButton: false,
+                timer: 2000
+              }).then((result) => {
+                if (result.isDismissed) {
+                  window.history.back;
+                }
+              });
             }
-          );
+          });
         } else {
           Swal.fire({
             icon: 'error',
@@ -179,8 +201,19 @@ export class CheckoutComponent implements OnInit {
         }
         // alert(messages.message);
         // this.getStudents();
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 
   subTotal(): number {

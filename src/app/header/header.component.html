@@ -78,7 +78,12 @@
       <!-- Navbar-collapse -->
       <ul class="top-menu list-inline mb-0 d-lg-block" id="top-menu">
       <!-- <ul class="top-menu list-inline mb-0 d-none d-lg-block" id="top-menu"> -->
-        <li class="list-inline-item">
+        <li *ngIf="loginbtn" class="list-inline-item">
+          <a href="#" class="search_toggle" id="search-icon" data-toggle="modal" data-target="#search-modal">
+            <i class="tf-ion-android-search"></i>
+          </a>
+        </li>
+        <li *ngIf="(isLogin() && isCustommer())" class="list-inline-item">
           <a href="#" class="search_toggle" id="search-icon" data-toggle="modal" data-target="#search-modal">
             <i class="tf-ion-android-search"></i>
           </a>

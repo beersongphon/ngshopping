@@ -47,10 +47,10 @@ export class ProductsingleComponent implements OnInit {
   }
 
   addToCart(product: Product, quantity: number): void {
-    if (product.product_price && product.product_discount > 0) {
-      let discount = product.product_price * (1 - product.product_discount/100);
-      product = Object.assign(product, { product_price: discount.toString() });
-    }
+    // if (product.product_price && product.product_discount > 0) {
+    //   let discount = product.product_price * (1 - product.product_discount/100);
+    //   product = Object.assign(product, { product_price: discount.toString() });
+    // }
     this.cartService.add(product, quantity);
     this.productAdded = product;
     this.router.navigateByUrl('/cart');

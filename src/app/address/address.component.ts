@@ -54,7 +54,6 @@ export class AddressComponent implements OnInit {
     }
   }
 
-  //แบ่งสิทธิ์สำหรับลูกค้า
   isCustommer() {
     if (this.apiService.getUserlevel() == '3') {
       return true

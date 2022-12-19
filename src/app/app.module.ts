@@ -43,6 +43,8 @@ import { ReportProductComponent } from './report-product/report-product.componen
 import { ReportSaleComponent } from './report-sale/report-sale.component';
 import { PagePrintReportProductComponent } from './report-product/page-print-report-product/page-print-report-product.component';
 import { PagePrintReportSaleComponent } from './report-sale/page-print-report-sale/page-print-report-sale.component';
+import { SearchProductComponent } from './search-product/search-product.component';
+import { OrderComponent } from './order/order.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -84,7 +86,6 @@ import { PortalModule } from '@angular/cdk/portal';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxPrintModule } from 'ngx-print';
-import { SearchProductComponent } from './search-product/search-product.component';
 
 @NgModule({
   declarations: [
@@ -124,8 +125,9 @@ import { SearchProductComponent } from './search-product/search-product.componen
     ReportSaleComponent,
     PagePrintReportProductComponent,
     PagePrintReportSaleComponent,
-    PagenotfoundComponent,
-    SearchProductComponent
+    SearchProductComponent,
+    OrderComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,

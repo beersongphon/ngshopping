@@ -32,7 +32,7 @@ export class CartComponent implements OnInit {
       // console.log(selection.quantity = selection.product.product_quantity);
     } else if (selection <= 2) {
       // สินค้ากำลังจะหมด
-      2
+
       // selection.product.product_quantity = selection.product.product_quantity
       // console.log(selection.product.product_quantity = selection.quantity);
     } else {

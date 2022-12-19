@@ -42,7 +42,7 @@
               <th scope="row">#{{ o.order_id }}</th>
               <td>{{ o.order_date }}</td>
               <td>{{ o.status_name }}</td>
-              <td>{{ o.order_total | currency:'':''  }}</td>
+              <td>{{ o.order_total | currency:'':'' }}</td>
               <td>
                 <a *ngIf="o.status_name == 'รอการชำระ'" routerLink="/payment" class="btn btn-dark btn-small">Payment</a>
                 <a *ngIf="o.status_name == 'ชำระเงินแล้ว'" routerLink="/order" class="btn btn-dark btn-small" (click)="clickPrint(i)">View</a>
@@ -51,34 +51,6 @@
             <tr *ngIf="!order.length">
               <td colspan="5">No data to display.</td>
             </tr>
-            <!-- <tr>
-              <th scope="row">#1012</th>
-              <td>June 11, 2019 </td>
-              <td>Completed</td>
-              <td>30</td>
-              <td><a routerLink="/order" class="btn btn-dark btn-small">View</a></td>
-            </tr>
-            <tr>
-              <th scope="row">#2214</th>
-              <td>March 10, 2019</td>
-              <td>Completed</td>
-              <td>50</td>
-              <td><a routerLink="/order" class="btn btn-dark btn-small">View</a></td>
-            </tr>
-            <tr>
-              <th scope="row">#3434</th>
-              <td>February 11, 2019</td>
-              <td>Pending</td>
-              <td>25</td>
-              <td><a routerLink="/order" class="btn btn-dark btn-small">View</a></td>
-            </tr>
-            <tr>
-              <th scope="row">#5312</th>
-              <td>July 11, 2019</td>
-              <td>Processsing</td>
-              <td>56</td>
-              <td><a routerLink="/order" class="btn btn-dark btn-small">View</a></td>
-            </tr> -->
           </tbody>
         </table>
       </div>

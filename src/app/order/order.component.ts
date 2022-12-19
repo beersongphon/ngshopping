@@ -6,26 +6,45 @@ import { CartService } from './../shared/cart.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-orders',
-  templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css']
+  selector: 'app-order',
+  templateUrl: './order.component.html',
+  styleUrls: ['./order.component.css']
 })
-export class OrdersComponent implements OnInit, OnDestroy {
+export class OrderComponent implements OnInit, OnDestroy {
 
   order: any[] = [];
   pageNo: object = {};
   sub: Subscription | undefined;
   sentToPrint: Subject<object> = new Subject<object>();
+  diffDays: any;
+  config = {
+    id: 'custom',
+    itemsPerPage: 10,
+    currentPage: 1,
+    totalItems: this.order.length
+  };
 
-  constructor(private apiService: ApiService, private cartService: CartService) { }
+  public maxSize: number = 7;
+  public directionLinks: boolean = true;
+  public autoHide: boolean = false;
+  public responsive: boolean = true;
+  public labels: any = {
+    previousLabel: '<--',
+    nextLabel: '-->',
+    screenReaderPaginationLabel: 'Pagination',
+    screenReaderPageLabel: 'page',
+    screenReaderCurrentLabel: `You're on page`
+  };
+
+  constructor(private apiService: ApiService, private cartService: CartService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.getOrder();
   }
 
   getOrder(): void {
-    let body = { user_id: localStorage.getItem('token') };
-    this.sub = this.cartService.getOrder(body).subscribe({
+    let body = {};
+    this.sub = this.cartService.getOrderUser(body).subscribe({
       next: (data) => {
         // this.product = products;
         this.order = this.addPageNo(data);
@@ -54,7 +73,16 @@ export class OrdersComponent implements OnInit, OnDestroy {
       this.pageNo = {
         "pageNo": i + 1
       }
-      item[i] = Object.assign(item[i], this.pageNo);
+      const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+      const firstDate: any = new Date(item[i].order_date);
+      const secondDate: any = new Date()
+      this.diffDays = Math.round(Math.abs((firstDate - secondDate)) / oneDay);
+      if (this.diffDays > 3) {
+
+      } else {
+
+      }
+      item[i] = Object.assign(item[i], this.pageNo, { "diffDays": this.diffDays });
     }
     return item;
   }
@@ -75,6 +103,38 @@ export class OrdersComponent implements OnInit, OnDestroy {
       });
     } else {
       this.sentToPrint.next(listToPrints);
+    }
+  }
+
+  isLogin() {
+    if (this.apiService.isLoggedIn()) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  isAdmin() {
+    if (this.apiService.getUserlevel() == '1') {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  isStaff() {
+    if (this.apiService.getUserlevel() == '2') {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  isCustomer() {
+    if (this.apiService.getUserlevel() == '3') {
+      return true
+    } else {
+      return false
     }
   }
 

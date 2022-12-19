@@ -4,7 +4,7 @@
       <!-- <img class="img-fluid w-100 mb-3 img-first" [src]="products.img_product" alt="product-img" /> -->
       <img *ngIf="products.img_product" onError="this.src='./assets/images/img-default.gif'" class="img-fluid w-100 mb-3 img-first" [src]="products.img_product" alt="product-img" />
     </a>
-    <a *ngFor="let img of products.images" [routerLink]="['/product-single', products.product_id, products.product_name]" (click)="click()">
+    <a *ngFor="let img of products.images | slice:0:2;" [routerLink]="['/product-single', products.product_id, products.product_name]" (click)="click()">
       <img class="img-fluid w-100 mb-3" [ngClass]="img.img_product > 0 ? 'img-first' : 'img-second'" [src]="img.img_product" alt="product-img" />
       <!-- <img *ngIf="img.img_product" onError="this.src='./assets/images/img-default.gif'" class="img-fluid w-100 mb-3" [ngClass]="img.img_product > 0 ? 'img-first' : 'img-second'" [src]="img.img_product" alt="product-img" /> -->
     </a>

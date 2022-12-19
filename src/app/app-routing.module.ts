@@ -28,6 +28,7 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { ReportProductComponent } from './report-product/report-product.component';
 import { ReportSaleComponent } from './report-sale/report-sale.component';
+import { OrderComponent } from './order/order.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { AuthGuard } from './shared/auth.guard';
 
@@ -59,6 +60,7 @@ const routes: Routes = [
   { path: 'edit-category/:id/:title', component: EditCategoryComponent, canActivate: [AuthGuard] },
   { path: 'report-product', component: ReportProductComponent, canActivate: [AuthGuard] },
   { path: 'report-sale', component: ReportSaleComponent, canActivate: [AuthGuard] },
+  { path: 'orders', component: OrderComponent, canActivate: [AuthGuard] },
   { path: '**', component: PagenotfoundComponent }
 ];
 

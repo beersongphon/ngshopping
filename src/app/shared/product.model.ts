@@ -1,13 +1,18 @@
 /**
  * Represents a product available for purchase.
  */
- export interface Product {
-  images: any;
+export interface Image {
+  img_pro_id: any;
+  img_product: any;
+}
+
+export interface Product {
   product_id: number;
+  img_product: any;
   product_name: string;
-  img_product: string;
-  product_quantity: number;
   product_price: number;
   product_discount: number;
+  product_quantity: number;
   product_description: string;
+  images: Image[];
 }
