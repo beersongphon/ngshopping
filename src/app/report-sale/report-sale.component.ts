@@ -44,14 +44,25 @@ export class ReportSaleComponent implements OnInit, OnDestroy {
       this.order_date_to = '';
       this.product = [];
     }
-    this.sub = this.productService.getReportSale(body).subscribe(
-      (products) => {
-        if (products.status == "success") {
-          this.product = this.addPageNo(products['data']);
-          this.products = Object.assign({ total: products['total'], data: this.addPageNo(products['data']) });
+    this.sub = this.productService.getReportSale(body).subscribe({
+      next: (data) => {
+        if (data.status == "success") {
+          this.product = this.addPageNo(data['data']);
+          this.products = Object.assign({ total: data['total'], data: this.addPageNo(data['data']) });
         }
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 
   addPageNo(item: any) {
@@ -102,9 +113,7 @@ export class ReportSaleComponent implements OnInit, OnDestroy {
     }
   }
 
-
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
   }
-
 }

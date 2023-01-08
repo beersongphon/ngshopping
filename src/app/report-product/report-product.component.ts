@@ -11,13 +11,12 @@ import Swal from 'sweetalert2';
 })
 export class ReportProductComponent implements OnInit, OnDestroy {
 
-
   sentToPrint: Subject<object> = new Subject<object>();
 
   product: any[] = [];
   products: any;
   image: any[] = [];
-  pageNo: object | undefined;
+  pageNo: object = {};
   sub: Subscription | undefined;
 
   search: string = "";
@@ -31,15 +30,26 @@ export class ReportProductComponent implements OnInit, OnDestroy {
   }
 
   getReportProduct(): void {
-    this.sub = this.productService.getReportProduct({}).subscribe(
-      (products) => {
-        if (products.status == "success") {
-          this.product = products['data'];
+    this.sub = this.productService.getReportProduct({}).subscribe({
+      next: (data) => {
+        if (data.status == "success") {
+          this.product = data['data'];
           this.product = this.addPageNo(this.product);
-          this.products = Object.assign({ total: products['total'], data: this.addPageNo(products['data']) });
+          this.products = Object.assign({ total: data['total'], data: this.addPageNo(data['data']) });
         }
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 
   addPageNo(item: any) {
@@ -94,5 +104,4 @@ export class ReportProductComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
   }
-
 }

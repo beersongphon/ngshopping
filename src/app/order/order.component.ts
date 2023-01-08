@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { ApiService } from './../shared/api.service';
 import { CartService } from './../shared/cart.service';
+import { ProductService } from './../shared/product.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -36,7 +38,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     screenReaderCurrentLabel: `You're on page`
   };
 
-  constructor(private apiService: ApiService, private cartService: CartService, private datePipe: DatePipe) { }
+  constructor(private apiService: ApiService, private cartService: CartService, private productService: ProductService, private router: Router, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.getOrder();
@@ -104,6 +106,91 @@ export class OrderComponent implements OnInit, OnDestroy {
     } else {
       this.sentToPrint.next(listToPrints);
     }
+  }
+
+  clickDelete(id: any) {
+    let body = {
+      order_id: id,
+    }
+    Swal.fire({
+      title: "คุณแน่ใจหรือไม่?",
+      text: "คุณจะไม่สามารถเปลี่ยนกลับได้!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "OK"
+    }).then((result) => {
+      if (result.value) {
+        this.productService.deleteOrderDetail(body).subscribe({
+          next: (data) => {
+            if (data.status == "success") {
+              this.productService.deleteOrder(body).subscribe({
+                next: (data) => {
+                  if (data.status == "success") {
+                    Swal.fire({
+                      icon: "success",
+                      title: (data.message),
+                      showConfirmButton: false,
+                      timer: 2000
+                    }).then((result) => {
+                      if (result.isDismissed) {
+                        this.router.navigate(['/orders']);
+                        this.getOrder();
+                      }
+                    });
+                  } else {
+                    Swal.fire({
+                      icon: "error",
+                      title: (data.message),
+                      showConfirmButton: false,
+                      timer: 2000
+                    }).then((result) => {
+                      if (result.isDismissed) {
+                        window.history.back;
+                      }
+                    });
+                  }
+                }, error: (error) => {
+                  Swal.fire({
+                    icon: "error",
+                    title: (error),
+                    showConfirmButton: false,
+                    timer: 2000
+                  }).then((result) => {
+                    if (result.isDismissed) {
+                      window.history.back;
+                    }
+                  });
+                }
+              });
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: (data.message),
+                showConfirmButton: false,
+                timer: 2000
+              }).then((result) => {
+                if (result.isDismissed) {
+                  window.history.back;
+                }
+              });
+            }
+          }, error: (error) => {
+            Swal.fire({
+              icon: "error",
+              title: (error),
+              showConfirmButton: false,
+              timer: 2000
+            }).then((result) => {
+              if (result.isDismissed) {
+                window.history.back;
+              }
+            });
+          }
+        });
+      }
+    })
   }
 
   isLogin() {

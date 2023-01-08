@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
   srcImage = environment.imageUrl;
 
-  constructor(private apiService: ApiService, public cart: CartService, private cartCalculator: CartCalculator, private router: Router) {
+  constructor(private apiService: ApiService, public cart: CartService, private cartCalculator: CartCalculator, public router: Router) {
     apiService.getLoggedInName.subscribe(
       name => this.changeName(name)
     );

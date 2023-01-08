@@ -66,11 +66,22 @@ export class ShopComponent implements OnInit {
     let body = {
       txtSearch: ''
     }
-    this.productService.getCategory(body).subscribe(
-      (data) => {
+    this.productService.getCategory(body).subscribe({
+      next: (data) => {
         this.category = data;
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 
   getShop(): void {

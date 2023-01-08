@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { encode, decode } from 'js-base64';
 import { ApiService } from './../shared/api.service';
@@ -23,15 +24,15 @@ export class ProfileDetailComponent implements OnInit {
   user_new_password: string = "";
   user_confirm_password: string = "";
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.getUser();
   }
 
   getUser(): void {
-    this.apiService.getUser().subscribe(
-      (data) => {
+    this.apiService.getUser().subscribe({
+      next: (data) => {
         this.user = data;
         this.user_id = data.user_id;
         this.user_firstname = data.user_firstname;
@@ -41,8 +42,19 @@ export class ProfileDetailComponent implements OnInit {
         this.user_tel = data.user_tel;
         this.user_password = data.user_password;
         this.permission_id = data.permission_id;
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 
   updateUser(): void {
@@ -53,23 +65,23 @@ export class ProfileDetailComponent implements OnInit {
     // if (this.validateSubmit()) return;
     if (this.user_old_password == '') {
       let bodyUpdate = Object.assign(body, { user_firstname: this.user_firstname, user_lastname: this.user_lastname, user_email: this.user_email, action_type: "A" });
-      this.apiService.updateUser(bodyUpdate).subscribe(
-        (messages) => {
-          if (messages.status == "success") {
+      this.apiService.updateUser(bodyUpdate).subscribe({
+        next: (data) => {
+          if (data.status == "success") {
             Swal.fire({
               icon: 'success',
-              title: (messages.message),
+              title: (data.message),
               showConfirmButton: false,
               timer: 1500
             }).then((result) => {
               if (result.isDismissed) {
-                // this.router.navigateByUrl('/cart');
+                this.router.navigateByUrl('/profile-details');
               }
             });
           } else {
             Swal.fire({
               icon: 'error',
-              title: (messages.message),
+              title: (data.message),
               showConfirmButton: false,
               timer: 1500
             }).then((result) => {
@@ -78,28 +90,39 @@ export class ProfileDetailComponent implements OnInit {
               }
             });
           }
+        }, error: (error) => {
+          Swal.fire({
+            icon: "error",
+            title: (error),
+            showConfirmButton: false,
+            timer: 2000
+          }).then((result) => {
+            if (result.isDismissed) {
+              window.history.back;
+            }
+          });
         }
-      );
+      });
     } else if (this.user_old_password) {
       let bodyUpdate = Object.assign(body, { user_firstname: this.user_firstname, user_lastname: this.user_lastname, user_email: this.user_email, user_password: this.user_new_password, old_password: this.user_old_password, confirm_password: this.user_confirm_password, action_type: "B" });
       if (this.validateSubmitPassword()) return;
-      this.apiService.updateUser(bodyUpdate).subscribe(
-        (messages) => {
-          if (messages.status == "success") {
+      this.apiService.updateUser(bodyUpdate).subscribe({
+        next: (data) => {
+          if (data.status == "success") {
             Swal.fire({
               icon: 'success',
-              title: (messages.message),
+              title: (data.message),
               showConfirmButton: false,
               timer: 1500
             }).then((result) => {
               if (result.isDismissed) {
-                // this.router.navigateByUrl('/cart');
+                this.router.navigateByUrl('/profile-details');
               }
             });
           } else {
             Swal.fire({
               icon: 'error',
-              title: (messages.message),
+              title: (data.message),
               showConfirmButton: false,
               timer: 1500
             }).then((result) => {
@@ -108,8 +131,19 @@ export class ProfileDetailComponent implements OnInit {
               }
             });
           }
+        }, error: (error) => {
+          Swal.fire({
+            icon: "error",
+            title: (error),
+            showConfirmButton: false,
+            timer: 2000
+          }).then((result) => {
+            if (result.isDismissed) {
+              window.history.back;
+            }
+          });
         }
-      );
+      });
     }
   }
 

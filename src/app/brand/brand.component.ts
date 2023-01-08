@@ -13,12 +13,31 @@ export class BrandComponent implements OnInit, OnDestroy {
 
   brand: any[] = [];
   image: any[] = [];
-  pageNo: object | undefined;
+  pageNo: object = {};
   sub: Subscription | undefined;
 
   search: string = "";
 
   currentPage: number = 1;
+
+  config = {
+    id: 'custom',
+    itemsPerPage: 10,
+    currentPage: 1,
+    totalItems: this.brand.length
+  };
+
+  public maxSize: number = 7;
+  public directionLinks: boolean = true;
+  public autoHide: boolean = false;
+  public responsive: boolean = true;
+  public labels: any = {
+    previousLabel: '<--',
+    nextLabel: '-->',
+    screenReaderPaginationLabel: 'Pagination',
+    screenReaderPageLabel: 'page',
+    screenReaderCurrentLabel: `You're on page`
+  };
 
   constructor(private productService: ProductService, private router: Router, ) { }
 
@@ -57,8 +76,7 @@ export class BrandComponent implements OnInit, OnDestroy {
   }
 
   deleteBrand(id: any) {
-    let body = {}
-    body = {
+    let body = {
       brand_id: id,
     }
     Swal.fire({

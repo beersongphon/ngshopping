@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
 
   user: any[] = [];
   image: any[] = [];
-  pageNo: object | undefined;
+  pageNo: object = {};
   sub: Subscription | undefined;
 
   search: string = "";

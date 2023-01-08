@@ -14,7 +14,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   category: any[] = [];
   image: any[] = [];
-  pageNo: object | undefined;
+  pageNo: object = {};
   sub: Subscription | undefined;
 
   search: string = "";

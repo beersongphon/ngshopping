@@ -47,18 +47,19 @@
     <div class='order-head'>
       <div class='order-date'>
         <b>เลขที่ใบเสร็จ</b>
-        <span class='order-underline'>{{printLabelList.order_id}}</span><br />
+        <span class='order-underline'> {{printLabelList.order_id}}</span><br />
         <b>วันที่สั่งซื้อ</b>
-        <span class='order-underline'>{{printLabelList.order_date | date: 'dd/MM/yyyy'}}</span>
+        <span class='order-underline'> {{printLabelList.order_date | date: 'dd/MM/yyyy'}}</span>
       </div>
-      <div class='order-customer'> <b>ชื่อ-สกุล</b>
-        <span class='order-underline'>{{printLabelList.order_name}}</span><br />
+      <div class='order-customer'>
+        <b>ชื่อ-สกุล</b>
+        <span class='order-underline'> {{printLabelList.order_name}}</span><br />
         <b>ที่อยู่</b>
-        <span class='order-underline'>{{printLabelList.order_address}}</span><br />
+        <span class='order-underline'> {{printLabelList.order_address}}</span><br />
         <b>เบอร์โทรศัพท์</b>
-        <span class='order-underline'>{{printLabelList.order_tel}}</span><br />
+        <span class='order-underline'> {{printLabelList.order_tel}}</span><br />
         <b>อีเมล</b>
-        <span class='order-underline'>{{printLabelList.order_email}}</span>
+        <span class='order-underline'> {{printLabelList.order_email}}</span>
       </div>
     </div>
     <div class='clear'></div>

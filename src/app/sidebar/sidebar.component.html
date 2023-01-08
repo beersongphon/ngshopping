@@ -19,9 +19,6 @@
 <div *ngIf="isLogin() && (isAdmin() || isStaff())" class="nav flex-column nav-pills">
   <a class="nav-link" routerLink="/orders" routerLinkActive="active">Order</a>
 </div>
-<div *ngIf="isLogin() && (isCustommer())" class="nav flex-column nav-pills">
-  <a class="nav-link" routerLink="/order-history" routerLinkActive="active">Orders History</a>
-</div>
 <div *ngIf="isLogin() && (isAdmin() || isStaff())" class="nav flex-column nav-pills">
   <a class="nav-link" routerLink="/report-product" routerLinkActive="active">Report Product</a>
 </div>

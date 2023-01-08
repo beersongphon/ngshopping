@@ -68,38 +68,45 @@ fdescribe('AddBrandComponent', () => {
   //       message: 'บันทึกข้อมูลสำเร็จ'
   //     }
   //   }));
-  //   fixture.detectChanges();
-  //   component.insertBrand({
+  //   let mockBody = {
   //     brand_name: 'test'
-  //   });
+  //   };
+  //   fixture.detectChanges();
+  //   component.insertBrand(mockBody);
   //   tick(50);
 
   //   expect(Swal.getTitle()?.textContent).toEqual('บันทึกข้อมูลเรียบร้อย');
-  //   flush();
-  // }));
-
-  // it('Click Submit New MIO Update fail', fakeAsync(() => {
-  //   mockService.insertBrand.and.returnValue(of({
-  //     body: {
-  //       status: 'error',
-  //       message: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล'
-  //     }
-  //   }));
-  //   fixture.detectChanges();
-  //   component.insertBrand({});
-  //   tick(50);
-
-  //   expect(Swal.getTitle()?.textContent).toEqual('CANNOT UPDATE DATACase ID : Test01');
   //   Swal.clickConfirm();
   //   flush();
   // }));
 
+  it('Click Submit New MIO Update fail', fakeAsync(() => {
+    mockService.insertBrand.and.returnValue(of({
+      body: {
+        status: 'error',
+        message: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล'
+      }
+    }));
+    fixture.detectChanges();
+    component.insertBrand({});
+    tick(50);
+
+    expect(Swal.getTitle()?.textContent).toEqual('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+    Swal.clickConfirm();
+    flush();
+  }));
+
   it('Click Submit New MIO Update error', fakeAsync(() => {
     mockService.insertBrand.and.callFake(() => {
-      return throwError({
+      let body = {
         status: 'error',
         message: 'REQUEST_METHOD ผิดพลาด'
-      });
+      }
+      return throwError(() => body)
+      // return throwError({
+      //   status: 'error',
+      //   message: 'REQUEST_METHOD ผิดพลาด'
+      // });
     });
     fixture.detectChanges();
     component.insertBrand({});

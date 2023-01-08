@@ -349,9 +349,17 @@
         </form>
 
         <!-- popular product -->
-        <!-- <section class="widget widget-popular mb-5">
+        <section class="widget widget-popular mb-5">
           <h3 class="widget-title mb-4 h4">Popular Products</h3>
-          <a class="popular-products-item media" routerLink="/product-single">
+          <a *ngFor="let s of productService.product | slice:0:3;" class="popular-products-item media" [routerLink]="['/product-single', s.product_id, s.product_name]">
+            <img *ngIf="s.img_product" onError="this.src='./assets/images/img-default.gif'" [src]="s.img_product" alt="" class="img-fluid mr-4">
+            <div class="media-body">
+              <h6>{{s.product_name}} <br>{{s.category_name}}</h6>
+              <span class="price">${{ s.product_price | currency:'':'' }}</span>
+            </div>
+          </a>
+
+          <!-- <a class="popular-products-item media" routerLink="/product-single">
             <img src="assets/images/p-1.jpg" alt="" class="img-fluid mr-4">
             <div class="media-body">
               <h6>Contrast <br>Backpack</h6>
@@ -373,8 +381,8 @@
               <h6>Traveller<br>Backpack</h6>
               <span class="price">$45</span>
             </div>
-          </a>
-        </section> -->
+          </a> -->
+        </section>
       </div>
     </div>
   </div>

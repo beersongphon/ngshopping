@@ -122,7 +122,7 @@
                   <span>{{selection.product.product_price * selection.quantity | currency:'':''}}</span>
                 </div>
               </div>
-              <a (click)="remove(selection.product)" class="remove">
+              <a [routerLink]="router.routerState.snapshot.url" (click)="remove(selection.product)" class="remove">
                 <i class="tf-ion-close"></i>
               </a>
               <!-- <a href="#" class="remove">
@@ -189,7 +189,7 @@
             <i class="tf-ion-ios-person mr-3"></i>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
-            <li *ngIf="logoutbtn"><a routerLink="/dashboard">Dahsboard</a></li>
+            <li *ngIf="(isLogin() && isAdmin())"><a routerLink="/dashboard">Dahsboard</a></li>
             <li *ngIf="logoutbtn"><a routerLink="/profile-details">Profile Details</a></li>
             <li *ngIf="loginbtn"><a routerLink="/login">Login Page</a></li>
             <li *ngIf="loginbtn"><a routerLink="/signup">SignUp Page</a></li>

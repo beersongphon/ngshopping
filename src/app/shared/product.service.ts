@@ -279,4 +279,14 @@ export class ProductService {
     const apiHeader = { 'Content-Type': 'application/json' };
     return this.http.post<any>(environment.apiUrl + '/api_get_product_detail_image.php', param, { headers: apiHeader });
   }
+
+  deleteOrder(formValue: any): Observable<any> {
+    const apiHeader = { 'Content-Type': 'application/json' };
+    return this.http.post<any>(environment.apiUrl + '/api_delete_order.php', formValue, { headers: apiHeader });
+  }
+
+  deleteOrderDetail(formValue: any): Observable<any> {
+    const apiHeader = { 'Content-Type': 'application/json' };
+    return this.http.post<any>(environment.apiUrl + '/api_delete_order_detail.php', formValue, { headers: apiHeader });
+  }
 }

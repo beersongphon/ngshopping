@@ -26,7 +26,7 @@ export class AddBrandComponent implements OnInit {
         if (data.status == "success") {
           Swal.fire({
             icon: "success",
-            text: (data.message),
+            text: 'บันทึกข้อมูลสำเร็จ',
             showConfirmButton: false,
             timer: 2000
           }).then((result) => {
@@ -37,7 +37,7 @@ export class AddBrandComponent implements OnInit {
         } else {
           Swal.fire({
             icon: "error",
-            title: (data.message),
+            title: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล',
             showConfirmButton: false,
             timer: 2000
           }).then((result) => {

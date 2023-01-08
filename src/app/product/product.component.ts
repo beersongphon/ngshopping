@@ -15,7 +15,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   product: any[] = [];
   image: any[] = [];
-  pageNo: object | undefined;
+  pageNo: object = {};
   sub: Subscription | undefined;
 
   srcImage = environment.imageUrl;
@@ -23,6 +23,25 @@ export class ProductComponent implements OnInit, OnDestroy {
   search: string = "";
 
   currentPage: number = 1;
+
+  config = {
+    id: 'custom',
+    itemsPerPage: 10,
+    currentPage: 1,
+    totalItems: this.product.length
+  };
+
+  public maxSize: number = 7;
+  public directionLinks: boolean = true;
+  public autoHide: boolean = false;
+  public responsive: boolean = true;
+  public labels: any = {
+    previousLabel: '<--',
+    nextLabel: '-->',
+    screenReaderPaginationLabel: 'Pagination',
+    screenReaderPageLabel: 'page',
+    screenReaderCurrentLabel: `You're on page`
+  };
 
   constructor(private productService: ProductService, private router: Router) { }
 

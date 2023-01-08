@@ -64,8 +64,7 @@ export class CartComponent implements OnInit {
         selection.quantity = quantity;
         this.isDisabledValueLimit = true;
       }
-    }
-    else {
+    } else {
       this.isDisabledValueLimit = true;
       selection.quantity = 1;
     }

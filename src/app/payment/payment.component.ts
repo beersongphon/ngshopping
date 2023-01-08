@@ -138,20 +138,20 @@ export class PaymentComponent implements OnInit {
       pay_tel: order.user_tel,
       image: this.imageSrc
     }
-    this.cart.insertPayment(body).subscribe(
-      (messages) => {
-        if (messages.status == "success") {
+    this.cart.insertPayment(body).subscribe({
+      next: (data) => {
+        if (data.status == "success") {
           let bodys = {
             order_name: order.user_firstname + ' ' + order.user_lastname,
             order_address: order.user_address,
             order_id: this.order_ids,
           };
-          this.cart.updatePayment(bodys).subscribe(
-            (messages) => {
-              if (messages.status == "success") {
+          this.cart.updatePayment(bodys).subscribe({
+            next: (data) => {
+              if (data.status == "success") {
                 Swal.fire({
                   icon: 'success',
-                  title: (messages.message),
+                  title: (data.message),
                   showConfirmButton: false,
                   timer: 1500
                 }).then((result) => {
@@ -162,7 +162,7 @@ export class PaymentComponent implements OnInit {
               } else {
                 Swal.fire({
                   icon: 'error',
-                  title: (messages.message),
+                  title: (data.message),
                   showConfirmButton: false,
                   timer: 1500
                 }).then((result) => {
@@ -171,12 +171,23 @@ export class PaymentComponent implements OnInit {
                   }
                 });
               }
+            }, error: (error) => {
+              Swal.fire({
+                icon: "error",
+                title: (error),
+                showConfirmButton: false,
+                timer: 2000
+              }).then((result) => {
+                if (result.isDismissed) {
+                  window.history.back;
+                }
+              });
             }
-          );
+          });
         } else {
           Swal.fire({
             icon: 'error',
-            title: (messages.message),
+            title: (data.message),
             showConfirmButton: false,
             timer: 1500
           }).then((result) => {
@@ -185,17 +196,33 @@ export class PaymentComponent implements OnInit {
             }
           });
         }
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error.name),
+          text: (error.message),
+          // html:
+          //   'You can use <b>bold text</b>, ' +
+          //   '<a href="//sweetalert2.github.io">links</a> ' +
+          //   'and other HTML tags',
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 
   getOrderUser(): void {
     let body = { user_id: localStorage.getItem('token') };
-    this.cart.getOrderUser(body).subscribe(
-      (orders) => {
-        if (orders.status == "success") {
+    this.cart.getOrderUser(body).subscribe({
+      next: (value) => {
+        if (value.status == "success") {
           // this.product = products;
-          this.order = this.addPageNo(orders.data);
+          this.order = this.addPageNo(value.data);
           this.isDisableOrderID = false;
           // let bodys = Object.assign(body, { order_id: this.order_ids });
           // this.cart.getOrderUser(bodys).subscribe(
@@ -211,8 +238,19 @@ export class PaymentComponent implements OnInit {
         } else {
           this.isDisableOrderID = true;
         }
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
   }
 
   addPageNo(item: any) {
@@ -230,11 +268,10 @@ export class PaymentComponent implements OnInit {
     let body = {
       "order_id": order_id
     }
-    this.cart.getPayment(body).subscribe(
-      (payments) => {
-
+    this.cart.getPayment(body).subscribe({
+      next: (data) => {
         // this.product = products;
-        this.payment = payments;
+        this.payment = data;
         this.isDisableOrderID = false;
         // for (let i = 0; i < this.payment.length; i++) {
         //   $("#pay_total").append(`'<option value="${this.payment[i].order_total}">${parseFloat(this.payment[i].order_total)}</option>'`);
@@ -251,9 +288,19 @@ export class PaymentComponent implements OnInit {
         //     }
         //   }
         // );
-
+      }, error: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: (error),
+          showConfirmButton: false,
+          timer: 2000
+        }).then((result) => {
+          if (result.isDismissed) {
+            window.history.back;
+          }
+        });
       }
-    );
+    });
     // $.ajax({
     //   url: "http://localhost/api_shopping/get_payment.php",
     //   data: {
@@ -274,6 +321,4 @@ export class PaymentComponent implements OnInit {
     //   this.totalChange();
     // });
   }
-
-
 }

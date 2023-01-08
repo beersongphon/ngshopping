@@ -5,12 +5,12 @@
     <div class="row justify-content-center">
       <div class="col-lg-6">
         <div class="content text-center">
-          <h1 class="mb-3">Order</h1>
-          <p>Order</p>
+          <h1 class="mb-3">Orders</h1>
+          <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent justify-content-center">
               <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Order</li>
+              <li class="breadcrumb-item active" aria-current="page">Orders</li>
             </ol>
           </nav>
         </div>
@@ -51,8 +51,8 @@
               <td>{{ o.order_total | currency:'':'' }}</td>
               <td>
                 {{ o.diffDays }}<br>
-                <a *ngIf="diffDays > 3 && (o.status_id == '1')" routerLink="/order" class="btn btn-danger btn-small" style="padding: 2px 2px;">Cancel</a>
-                <label *ngIf="(diffDays < 3 || (diffDays > 3 && (o.status_id == '2')))" for="diffDays">-</label>
+                <a *ngIf="diffDays > 15 && (o.status_id == '1')" routerLink="/order" class="btn btn-danger btn-small" style="padding: 2px 2px;" (click)="clickDelete(o.order_id)">Cancel</a>
+                <label *ngIf="((diffDays < 15 || diffDays > 15) && (o.status_id == '2'))" for="diffDays">-</label>
               </td>
               <td>
                 <a routerLink="/orders" class="btn btn-dark btn-small" (click)="clickPrint(i)">View</a>

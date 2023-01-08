@@ -177,20 +177,11 @@ export class EditProductComponent implements OnInit {
 
   // เพิ่มสินค้า
   updateProduct(formValue: any) {
-    let body = {};
-    body = {
-      product_id: this.id,
-      product_name: formValue.product_name,
-      brand_id: formValue.brand_id,
-      category_id: formValue.category_id,
-      product_price: formValue.product_price,
-      product_quantity: formValue.product_quantity,
-      product_description: formValue.product_description
-    };
-    this.productService.updateProduct(body).subscribe({
+    formValue = Object.assign(formValue, { product_id: this.id });
+    this.productService.updateProduct(formValue).subscribe({
       next: (data) => {
         if (data.status == "success") {
-          if (this.bodyDelete.filter(item => item.img_pro_id).length) {
+          if (this.bodyDelete.length > 0) {
             let bodyDeleteImage = []
             for (let i = 0; i < this.bodyDelete.length; i++) {
               let bodyUpdate = {
@@ -201,7 +192,16 @@ export class EditProductComponent implements OnInit {
             this.productService.deleteImageProduct(bodyDeleteImage).subscribe({
               next: (data) => {
                 if (data.status == "success") {
-
+                  Swal.fire({
+                    icon: "success",
+                    title: (data.message),
+                    showConfirmButton: false,
+                    timer: 2000
+                  }).then((result) => {
+                    if (result.isDismissed) {
+                      this.router.navigate(['/product']);
+                    }
+                  });
                 } else {
                   Swal.fire({
                     icon: "error",
@@ -228,7 +228,7 @@ export class EditProductComponent implements OnInit {
               }
             });
           }
-          if (this.images.filter(item => item.img_product).length) {
+          if (this.images.length > 0) {
             let bodyInsertImage = [];
             for (let i = 0; i < this.images.length; i++) {
               let bodyInsert = {
@@ -240,7 +240,16 @@ export class EditProductComponent implements OnInit {
             this.productService.insertImageProduct(bodyInsertImage).subscribe({
               next: (data) => {
                 if (data.status == "success") {
-
+                  Swal.fire({
+                    icon: "success",
+                    title: (data.message),
+                    showConfirmButton: false,
+                    timer: 2000
+                  }).then((result) => {
+                    if (result.isDismissed) {
+                      this.router.navigate(['/product']);
+                    }
+                  });
                 } else {
                   Swal.fire({
                     icon: "error",
@@ -267,16 +276,6 @@ export class EditProductComponent implements OnInit {
               }
             });
           }
-          Swal.fire({
-            icon: "success",
-            title: (data.message),
-            showConfirmButton: false,
-            timer: 2000
-          }).then((result) => {
-            if (result.isDismissed) {
-              this.router.navigate(['/product']);
-            }
-          });
         } else {
           Swal.fire({
             icon: "error",
